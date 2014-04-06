@@ -5,6 +5,7 @@
 /checkouts
 /dev-resources/public/js/*
 /out
+/public
 pom.xml
 *.jar
 *.class
