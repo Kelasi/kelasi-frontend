@@ -7,11 +7,13 @@
   ;; We need to add src/cljs too, because cljsbuild does not add its
   ;; source-paths to the project source-paths
   :source-paths ["src/clj" "src/cljs"]
+  :resources-paths ["dev-resources/public/vendor"]
 
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-2138"]]
+                 [org.clojure/clojurescript "0.0-2202"]
+                 [om "0.6.2"]]
 
-  :plugins [[lein-cljsbuild "1.0.1"]
+  :plugins [[lein-cljsbuild "1.0.3"]
             [lein-bower "0.4.0"]]
 
   :hooks [leiningen.cljsbuild]
@@ -33,5 +35,9 @@
              ;; Compilation Options
              :compiler
              {:output-to "dev-resources/public/js/kelasi_frontend.js"
+              :preamble ["react/react.min.js"]
+              :externs ["dev-resources/public/vendor/react/react.js"]
+              :closure-warnings  {:externs-validation :off
+                                  :non-standard-jsdoc :off}
               :optimizations :advanced
               :pretty-print false}}}})
