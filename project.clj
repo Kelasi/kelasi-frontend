@@ -11,9 +11,13 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/clojurescript "0.0-2138"]]
 
-  :plugins [[lein-cljsbuild "1.0.1"]]
+  :plugins [[lein-cljsbuild "1.0.1"]
+            [lein-bower "0.4.0"]]
 
   :hooks [leiningen.cljsbuild]
+
+  :bower  {:directory  "dev-resources/public/vendor"}
+  :bower-dependencies [["react" "~0.10.0"]]
 
   :cljsbuild
   {:builds {;; This build is only used for including any cljs source

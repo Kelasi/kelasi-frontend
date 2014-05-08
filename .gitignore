@@ -4,6 +4,7 @@
 /classes
 /checkouts
 /dev-resources/public/js/*
+/dev-resources/public/vendor/*
 /out
 /public
 pom.xml
@@ -16,5 +17,6 @@ pom.xml
 .lein-repl*
 .crossover-cljs
 .repl
+.nrepl-port
 .ruby-version
 .ruby-gemset
