@@ -53,5 +53,11 @@
                        {:source-paths ["test/cljs"]
                         :compiler
                         {:optimizations :advanced
-                         :pretty-print false}}}}}]}
+                         :pretty-print false}}}}}]
+ :production {:cljsbuild
+              {:builds {:kelasi-frontend
+                        {:compiler
+                         {:output-to "public/js/app.js"
+                          :optimizations :advanced
+                          :pretty-print false}}}}}}
 
