@@ -4,14 +4,18 @@
 
   :min-lein-version "2.3.4"
 
+  :jvm-opts  ["-Xmx1g"]
+
   ;; We need to add src/cljs too, because cljsbuild does not add its
   ;; source-paths to the project source-paths
   :source-paths ["src/clj" "src/cljs"]
   :resources-paths ["dev-resources/public/vendor"]
 
-  :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-2202"]
-                 [om "0.6.2"]]
+  :dependencies [[org.clojure/clojure "1.6.0"]
+                 [org.clojure/clojurescript "0.0-2234"]
+                 [om "0.6.4"]
+                 [prismatic/schema  "0.2.4"]
+                 [prismatic/om-tools  "0.2.2"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-bower "0.4.0"]]

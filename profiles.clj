@@ -39,7 +39,8 @@
                               'cemerick.austin.repls)
                      (defn browser-repl []
                        (cemerick.austin.repls/cljs-repl (reset! cemerick.austin.repls/browser-repl-env
-                                                                (cemerick.austin/repl-env))))]}]
+                                                                (cemerick.austin/repl-env))))
+                     (defn brepl-env [] (deref cemerick.austin.repls/browser-repl-env))]}]
  ;; simple profile.
  :simple [:shared
           {:cljsbuild
