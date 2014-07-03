@@ -15,7 +15,8 @@
                  [org.clojure/clojurescript "0.0-2234"]
                  [om "0.6.4"]
                  [prismatic/schema  "0.2.4"]
-                 [prismatic/om-tools  "0.2.2"]]
+                 [prismatic/om-tools  "0.2.2"]
+                 [secretary  "1.2.0"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-bower "0.4.0"]]
