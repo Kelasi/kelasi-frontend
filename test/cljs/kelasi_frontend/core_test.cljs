@@ -1,14 +1,17 @@
-;;; This namespace is used for testing purpose. It use the
-;;; clojurescript.test lib.
 (ns kelasi-frontend.core-test
-  (:require-macros [cemerick.cljs.test :as m :refer (deftest testing are)])
+  (:require-macros [cemerick.cljs.test :as m :refer (deftest testing is done)])
   (:require [cemerick.cljs.test :as t]
-            [kelasi-frontend.core :refer (foo)]))
+            [kelasi-frontend.core :as k]))
 
-(deftest foo-test
-  (testing "I don't do a lot\n"
-    (testing "Edge cases\n"
-      (testing "(foo str)"
-        (are [expected actual] (= expected actual)
-             "ClojureScript!" (foo "")
-             "Hello, ClojureScript!" (foo nil))))))
+(defn- after [time-in-ms callback]
+  (js/setTimeout callback time-in-ms))
+
+(deftest ^:async rtcomp
+  (testing "'Hello World' should be rendered to screan"
+    (after
+      0
+      (fn []
+        (let [comp-text (.. js/document (querySelector "#test") -innerText)]
+          (is (= "Hello World!" comp-text)))
+        (done)))))
+

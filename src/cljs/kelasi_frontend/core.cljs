@@ -12,7 +12,7 @@
 
 (ot/defcomponentk rtcomp [[:data text] :- Text]
   (render [_]
-          (dom/h1 text)))
+          (dom/h1 {:id "test"} text)))
 
 (om/root rtcomp app-state
-  {:target (.getElementById js/document "app")})
+  {:target js/document.body})

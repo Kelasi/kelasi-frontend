@@ -13,7 +13,7 @@
 {:shared {:clean-targets ["out" :target-path]
           :test-paths ["test/clj" "test/cljs"]
           :resources-paths ["dev-resources"]
-          :plugins [[com.cemerick/clojurescript.test "0.2.1"]]
+          :plugins [[com.cemerick/clojurescript.test "0.3.1"]]
           :cljsbuild
           {:builds {:kelasi-frontend
                     {:source-paths ["test/cljs"]
@@ -21,7 +21,7 @@
                      {:output-dir "dev-resources/public/js"
                       :source-map "dev-resources/public/js/kelasi_frontend.js.map"}}}
            :test-commands {"phantomjs"
-                           ["phantomjs" :runner "dev-resources/public/js/kelasi_frontend.js"]}}}
+                           ["phantomjs" :runner "dev-resources/public/phantomjs-shims.js" "dev-resources/public/js/kelasi_frontend.js"]}}}
  :dev [:shared
        {:source-paths ["dev-resources/tools/http" "dev-resources/tools/repl"]
         :dependencies [[ring "1.2.1"]

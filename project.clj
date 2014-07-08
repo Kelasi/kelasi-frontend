@@ -12,7 +12,7 @@
   :resources-paths ["dev-resources/public/vendor"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2234"]
+                 [org.clojure/clojurescript "0.0-2261"]
                  [om "0.6.4"]
                  [prismatic/schema  "0.2.4"]
                  [prismatic/om-tools  "0.2.2"]
