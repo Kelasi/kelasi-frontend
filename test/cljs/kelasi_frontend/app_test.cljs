@@ -1,7 +1,7 @@
-(ns kelasi-frontend.core-test
+(ns kelasi-frontend.app-test
   (:require-macros [cemerick.cljs.test :as m :refer (deftest testing is done)])
   (:require [cemerick.cljs.test :as t]
-            [kelasi-frontend.core :as k]))
+            [kelasi-frontend.app :as k]))
 
 (defn- after [time-in-ms callback]
   (js/setTimeout callback time-in-ms))
