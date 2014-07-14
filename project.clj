@@ -13,6 +13,7 @@
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2261"]
+                 [org.clojure/core.async  "0.1.303.0-886421-alpha"]
                  [om "0.6.4"]
                  [prismatic/schema  "0.2.4"]
                  [prismatic/om-tools  "0.2.2"]
