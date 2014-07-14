@@ -6,7 +6,7 @@
 (defn- after [time-in-ms callback]
   (js/setTimeout callback time-in-ms))
 
-(deftest ^:async rtcomp
+#_(deftest ^:async root
   (testing "'Hello World' should be rendered to screan"
     (after
       0
