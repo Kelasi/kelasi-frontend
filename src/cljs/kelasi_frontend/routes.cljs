@@ -1,7 +1,10 @@
 (ns kelasi-frontend.routes
+  (:require-macros [cljs.core.async.macros :refer (go)]
+                   [secretary.core :refer (defroute)])
   (:require
-    [secretary.core :as secretary :include-macros true :refer  [defroute]]
-    [goog.events :as events]
+    [secretary.core :as secretary]
+    [kelasi-frontend.utilities :refer (listen)]
+    [cljs.core.async :refer (<!)]
     [goog.history.EventType :as EventType])
   (:import goog.history.Html5History
            goog.Uri))
@@ -19,14 +22,19 @@
   (.setPathPrefix "")
   (.setEnabled true))
 
-(events/listen history EventType/NAVIGATE
-                    #(secretary/dispatch! (.-token %)))
+(go (-> (listen history EventType/NAVIGATE)
+        <!
+        .-token
+        secretary/dispatch!))
 
-(events/listen js/document "click"
-               (fn [e]
-                 (let [path (->> (.. e -target -href) (.parse Uri) (.getPath))
-                       title (.. e -target -title)]
-                   (when (secretary/locate-route path)
-                     (.setToken history path title)
-                     (.preventDefault e)))))
 
+(let [func (fn [e]
+             (let [path (->> (.. e -target -href)
+                             (.parse Uri)
+                             (.getPath))
+                   title (.. e -target -title)]
+               (when (secretary/locate-route path)
+                 (.setToken history path title)
+                 (.preventDefault e))))]
+  (go (<! (listen js/document "click"
+                  :transform func))))
