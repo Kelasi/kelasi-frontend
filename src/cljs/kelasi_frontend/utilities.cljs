@@ -3,9 +3,17 @@
             [goog.events :as events]))
 
 
-(defn listen [elem evt]
+(defn listen [elem evt & {:keys [prevent-default transform]
+                          :or {prevent-default false
+                               transform nil}}]
   (let [out (chan)]
     (events/listen elem (name evt)
-                   #(put! out %))
+                   (fn [e]
+                     (when prevent-default
+                       (.preventDefault e))
+                     (put! out
+                           (if (ifn? transform)
+                             (transform e)
+                             e))))
     out))
 
