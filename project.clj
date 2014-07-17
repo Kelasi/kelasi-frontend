@@ -25,7 +25,8 @@
   :hooks [leiningen.cljsbuild]
 
   :bower  {:directory  "dev-resources/public/vendor"}
-  :bower-dependencies [["react" "~0.10.0"]]
+  :bower-dependencies [["react" "0.10.0"]
+                       ["mocha" "1.20.1"]]
 
   :cljsbuild
   {:builds {;; This build is only used for including any cljs source
