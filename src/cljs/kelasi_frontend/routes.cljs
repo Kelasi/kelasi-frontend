@@ -35,6 +35,7 @@
                    title (.. e -target -title)]
                (when (secretary/locate-route path)
                  (.setToken history path title)
-                 (.preventDefault e))))]
+                 (.preventDefault e))
+               e))]
   (go (<! (listen js/document "click"
                   :transform func))))
