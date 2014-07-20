@@ -5,6 +5,7 @@
             [compojure.route :refer  (resources)]
             [compojure.core :refer (GET defroutes)]
             [ring.adapter.jetty :as jetty]
+            [mocha-tester.core :as mocha]
             [clojure.java.io :as io]))
 
 ;;; We use enlive lib to add to the body of the index.html page the
@@ -29,5 +30,5 @@
   "Run the ring server. It defines the server symbol with defonce."
   []
   (defonce server
-    (jetty/run-jetty #'site {:port 3000 :join? false}))
+    (jetty/run-jetty (mocha/wrap #'site) {:port 3000 :join? false}))
   server)

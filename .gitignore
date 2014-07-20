@@ -4,6 +4,7 @@
 /classes
 /checkouts
 /dev-resources/public/js/*
+/dev-resources/public/js_test/*
 /out
 /public
 pom.xml

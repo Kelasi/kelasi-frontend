@@ -6,8 +6,6 @@
 
   :jvm-opts  ["-Xmx1g"]
 
-  ;; We need to add src/cljs too, because cljsbuild does not add its
-  ;; source-paths to the project source-paths
   :source-paths ["src/clj" "src/cljs"]
   :resources-paths ["dev-resources/public/vendor"]
 
@@ -17,6 +15,7 @@
                  [om "0.6.4"]
                  [prismatic/schema  "0.2.4"]
                  [prismatic/om-tools  "0.2.2"]
+                 [org.clojars.mkhoeini/mocha-tester "0.1.0-SNAPSHOT"]
                  [secretary  "1.2.0"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
@@ -29,22 +28,27 @@
                        ["mocha" "1.20.1"]]
 
   :cljsbuild
-  {:builds {;; This build is only used for including any cljs source
-            ;; in the packaged jar when you issue lein jar command and
-            ;; any other command that depends on it
-            :kelasi-frontend
+  {:builds {:kelasi-frontend
             {:source-paths ["src/cljs"]
-             ;; The :jar true option is not needed to include the CLJS
-             ;; sources in the packaged jar. This is because we added
-             ;; the CLJS source codebase to the Leiningen
-             ;; :source-paths
-             ;:jar true
-             ;; Compilation Options
              :compiler
              {:output-to "dev-resources/public/js/kelasi_frontend.js"
-              :preamble ["react/react.min.js"]
+              :output-dir "dev-resources/public/js"
+              :source-map "dev-resources/public/js/kelasi_frontend.js.map"
               :externs ["dev-resources/public/vendor/react/react.js"]
+              :preamble ["react/react.min.js"]
+              :closure-warnings  {:externs-validation :off
+                                  :non-standard-jsdoc :off}}}
+
+            :kelasi-frontend-test
+            {:source-paths ["src/cljs" "test/cljs"]
+             :compiler
+             {:output-to "dev-resources/public/js_test/kelasi_frontend.js"
+              :output-dir "dev-resources/public/js_test"
+              :source-map "dev-resources/public/js_test/kelasi_frontend.js.map"
+              :externs ["dev-resources/public/vendor/react/react.js"]
+              :preamble ["react/react.min.js"]
               :closure-warnings  {:externs-validation :off
                                   :non-standard-jsdoc :off}
-              :optimizations :advanced
-              :pretty-print false}}}})
+              :optimizations :whitespace
+              :pretty-print false}}
+            }})
