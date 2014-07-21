@@ -1,4 +1,3 @@
-;;; This namespace is used for development and testing purpose only.
 (ns ring.server
   (:require [cemerick.austin.repls :refer (browser-connected-repl-js)]
             [net.cgrand.enlive-html :as enlive]
@@ -8,24 +7,24 @@
             [mocha-tester.core :as mocha]
             [clojure.java.io :as io]))
 
-;;; We use enlive lib to add to the body of the index.html page the
-;;; script tag containing the JS code which activates the bREPL
-;;; connection.
 (enlive/deftemplate page
   (io/resource "public/index.html")
   []
   [:body] (enlive/append
             (enlive/html [:script (browser-connected-repl-js)])))
 
-;;; defroutes macro defines a function that chains individual route
-;;; functions together. The request map is passed to each function in
-;;; turn, until a non-nil response is returned.
+(enlive/deftemplate test-page
+  (io/resource "public/index.html")
+  []
+  [:body [:script (enlive/attr= :src "/js/kelasi_frontend.js")]]
+    (enlive/do-> (enlive/remove-attr :src)
+                 (enlive/set-attr :src "/js_test/kelasi_frontend.js")))
+
 (defroutes site
   (resources "/")
+  (GET "/mocha-test" req (test-page))
   (GET "/*" req (page)))
 
-;;; To run the jetty server. The server symbol is not private to
-;;; allows to start and stop thejetty server from the repl.
 (defn run
   "Run the ring server. It defines the server symbol with defonce."
   []
