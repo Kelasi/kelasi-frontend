@@ -1,17 +1,18 @@
 (ns kelasi-frontend.app-test
-  (:require-macros [cemerick.cljs.test :as m :refer (deftest testing is done)])
-  (:require [cemerick.cljs.test :as t]
-            [kelasi-frontend.app :as k]))
+  (:require-macros [mocha-tester.core :refer (describe it)]
+                   [chaiify.core :refer (expect)])
+  (:require [kelasi-frontend.app :as k]))
+
+
 
 (defn- after [time-in-ms callback]
   (js/setTimeout callback time-in-ms))
 
-#_(deftest ^:async root
-  (testing "'Hello World' should be rendered to screan"
-    (after
-      0
-      (fn []
-        (let [comp-text (.. js/document (querySelector "#test") -innerText)]
-          (is (= "Hello World!" comp-text)))
-        (done)))))
 
+(describe "index page"
+  (it "'{}' should be rendered to screan" [done]
+    (after 0
+      (fn []
+        (let [comp-text (.. js/document (querySelector "#test") -innerHTML)]
+          (expect comp-text :to-equal "{}"))
+        (done)))))

@@ -1,18 +1,13 @@
 (ns kelasi-frontend.dispatcher-test
-  (:require-macros [cljs.core.async.macros :refer (go)])
+  (:require-macros [cljs.core.async.macros :refer (go)]
+                   [mocha-tester.core :refer (describe it)]
+                   [chaiify.core :refer (expect)])
   (:require [kelasi-frontend.dispatcher :as dis]
-            [cljs.core.async :as async :refer (>! <! chan)]
-            [cemerick.cljs.test :include-macros true
-             :refer (deftest testing is done)]))
+            [cljs.core.async :refer (>! <! chan)]))
 
-(deftest ^:async create-chan
-  (let [finish (chan)]
-
-    (testing "should create chans which recieve when calling dispatch"
-      (let [disp (dis/create-chan)]
-        (dis/dispatch 10)
-        (go (is (= 10 (<! disp)))
-            (>! finish true))))
-
-    (go (repeatedly 1 #(<! chan))
-        (done))))
+(describe "create-chan"
+  (it "should create chans which recieve when calling dispatch" [done]
+    (let [disp (dis/create-chan)]
+      (dis/dispatch 10)
+        (go (expect (<! disp) :to-equal 10)
+            (done)))))

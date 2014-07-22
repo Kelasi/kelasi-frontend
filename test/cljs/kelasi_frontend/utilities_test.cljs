@@ -1,54 +1,51 @@
 (ns kelasi-frontend.utilities-test
-  (:require-macros [cljs.core.async.macros :refer (go)])
+  (:require-macros [cljs.core.async.macros :refer (go)]
+                   [mocha-tester.core :refer (describe it)]
+                   [chaiify.core :refer (expect)])
   (:require [kelasi-frontend.utilities :as u]
             [cljs.core.async :refer (<! >! chan timeout)]
             [cemerick.cljs.test :include-macros true
              :refer (deftest testing is done)]))
 
 
-(deftest ^:async listen
+(describe "listen"
 
-  (let [finished (chan)]
+  (it "should properly handle ui events" [done]
+    (let [button (.createElement js/document "button")
+          clicks (u/listen button "click")]
+      (.click button)
+      (go (let [c (<! clicks)]
+            (expect (.-target c) :to-equal button)
+            (done)))))
 
-    (testing "It should properly handle ui events"
-      (let [button (.createElement js/document "button")
-            clicks (u/listen button "click")]
-        (.click button)
-        (go (let [c (<! clicks)]
-              (is (= (.-target c) button))
-              (>! finished true)))))
+  (it "should not preventDefault by default" [done]
+    (let [link (.createElement js/document "a")
+          click-evt (.createEvent js/document "MouseEvent")
+          clicks (u/listen link "click")]
+      (aset link "href" "#")
+      (.initEvent click-evt "click" true true)
+      (.dispatchEvent link click-evt)
+      (go (let [e (<! clicks)]
+            (expect (.-defaultPrevented e) :to-be-false)
+            (done)))))
 
-    (testing "should not preventDefault by default"
-      (let [link (.createElement js/document "a")
-            click-evt (.createEvent js/document "MouseEvent")
-            clicks (u/listen link "click")]
-        (aset link "href" "/some-path")
-        (.initEvent click-evt "click")
-        (.dispatchEvent link click-evt)
-        (go (let [e (<! clicks)]
-              (is (= false (aget e "defaultPrevented")))
-              (>! finished true)))))
+  (it "should be able to preventDefault" [done]
+    (let [link (.createElement js/document "a")
+          click-evt (.createEvent js/document "MouseEvent")
+          clicks (u/listen link "click"
+                           :prevent-default true)]
+      (aset link "href" "#")
+      (.initEvent click-evt "click" true true)
+      (.dispatchEvent link click-evt)
+      (go (let [e (<! clicks)]
+            (expect (.-defaultPrevented e) :to-be-true)
+            (done)))))
 
-    (testing "should be able to preventDefault"
-      (let [link (.createElement js/document "a")
-            click-evt (.createEvent js/document "MouseEvent")
-            clicks (u/listen link "click"
-                             :prevent-default true)]
-        (aset link "href" "/some-path")
-        (.initEvent click-evt "click")
-        (.dispatchEvent link click-evt)
-        (go (let [e (<! clicks)]
-              (is (= true (aget e "defaultPrevented")))
-              (>! finished true)))))
-
-    (testing "should be able to transform the event through a fn"
-      (let [bt (.createElement js/document "button")
-            trans #(.-target %)
-            clicks (u/listen bt "click" :transform trans)]
-        (.click bt)
-        (go (let [e (<! clicks)]
-              (is (= e bt))
-              (>! finished true)))))
-
-    (go (repeatedly 4 (<! (timeout 1000)))
-        (done))))
+  (it "should be able to transform the event through a fn" [done]
+    (let [bt (.createElement js/document "button")
+          trans #(.-target %)
+          clicks (u/listen bt "click" :transform trans)]
+      (.click bt)
+      (go (let [e (<! clicks)]
+            (expect e :to-equal bt)
+            (done))))))

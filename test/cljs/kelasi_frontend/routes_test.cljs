@@ -1,15 +1,15 @@
 (ns kelasi-frontend.routes-test
-  (:require-macros [cemerick.cljs.test :refer (deftest testing is done)])
-  (:require [cemerick.cljs.test :as t]
-            [kelasi-frontend.routes :as routes]))
+  (:require-macros [mocha-tester.core :refer (describe it)]
+                   [chaiify.core :refer (expect)])
+  (:require [kelasi-frontend.routes :as routes]))
 
 
-(deftest home-path
-  (testing "We should have it, and pointing to '/'"
-    (is (= "/" (routes/home-path)))))
+(describe "home-path"
+  (it "should point to '/'"
+    (expect (routes/home-path) :to-equal "/")))
 
 
-(deftest sub-path
-  (testing "It should be available"
-    (is (= "/test" (routes/sub-path {:path "test"})))))
+(describe "sub-path"
+  (it "should be available"
+    (expect (routes/sub-path {:path "test"}) :to-equal "/test")))
 
