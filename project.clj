@@ -16,6 +16,7 @@
                  [prismatic/schema  "0.2.4"]
                  [prismatic/om-tools  "0.2.2"]
                  [org.clojars.mkhoeini/mocha-tester "0.1.0-SNAPSHOT"]
+                 [org.clojars.mkhoeini/chaiify "0.1.0-SNAPSHOT"]
                  [secretary  "1.2.0"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
@@ -48,6 +49,6 @@
               :preamble ["react/react.min.js"]
               :closure-warnings  {:externs-validation :off
                                   :non-standard-jsdoc :off}
-              :optimizations :whitespace
-              :pretty-print false}}
+              :optimizations :none
+              :pretty-print true}}
             }})

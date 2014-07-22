@@ -5,6 +5,7 @@
             [compojure.core :refer (GET defroutes)]
             [ring.adapter.jetty :as jetty]
             [mocha-tester.core :as mocha]
+            [chaiify.core :as chai]
             [clojure.java.io :as io]))
 
 (enlive/deftemplate page
@@ -17,8 +18,11 @@
   (io/resource "public/index.html")
   []
   [:body [:script (enlive/attr= :src "/js/kelasi_frontend.js")]]
-    (enlive/do-> (enlive/remove-attr :src)
-                 (enlive/set-attr :src "/js_test/kelasi_frontend.js")))
+    (enlive/substitute (enlive/html [:script {:src "/js_test/goog/base.js"}]
+                                    [:script {:src "/vendor/react/react.js"}]
+                                    [:script {:src "/js_test/kelasi_frontend.js"}]
+                                    [:script "goog.require('kelasi_frontend.app');
+                                              goog.require('kelasi_frontend.all_tests');"])))
 
 (defroutes site
   (resources "/")
@@ -29,5 +33,8 @@
   "Run the ring server. It defines the server symbol with defonce."
   []
   (defonce server
-    (jetty/run-jetty (mocha/wrap #'site) {:port 3000 :join? false}))
+    (jetty/run-jetty (-> #'site
+                         (mocha/wrap)
+                         (chai/wrap "/mocha-test"))
+                     {:port 3000 :join? false}))
   server)
