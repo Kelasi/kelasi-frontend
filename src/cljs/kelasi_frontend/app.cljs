@@ -6,4 +6,4 @@
 (enable-console-print!)
 
 (om/root root app-state
-  {:target js/document.body})
+  {:target (.getElementById js/document "app")})
