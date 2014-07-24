@@ -5,6 +5,7 @@
 /checkouts
 /dev-resources/public/js/*
 /dev-resources/public/js_test/*
+/dev-resources/public/devcards/js/*
 /out
 /public
 pom.xml

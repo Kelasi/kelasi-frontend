@@ -17,6 +17,7 @@
                  [prismatic/om-tools  "0.2.2"]
                  [org.clojars.mkhoeini/mocha-tester "0.1.0-SNAPSHOT"]
                  [org.clojars.mkhoeini/chaiify "0.1.0-SNAPSHOT"]
+                 [devcards "0.1.1-SNAPSHOT"]
                  [secretary  "1.2.0"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
@@ -50,5 +51,18 @@
               :closure-warnings  {:externs-validation :off
                                   :non-standard-jsdoc :off}
               :optimizations :none
+              :pretty-print true}}
+
+            :kelasi-frontend-devcards
+            {:source-paths ["src/cljs" "devcards/cljs"]
+             :compiler
+             {:output-to "dev-resources/public/devcards/js/kelasi_frontend.js"
+              :output-dir "dev-resources/public/devcards/js"
+              :source-map "dev-resources/public/devcards/js/kelasi_frontend.js.map"
+              :externs ["dev-resources/public/vendor/react/react.js"]
+              :preamble ["react/react.min.js"]
+              :closure-warnings  {:externs-validation :off
+                                  :non-standard-jsdoc :off}
+              :optimizations :whitespace
               :pretty-print true}}
             }})
