@@ -10,14 +10,16 @@
   :resources-paths ["dev-resources/public/vendor"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2261"]
+                 [org.clojure/clojurescript "0.0-2268"]
                  [org.clojure/core.async  "0.1.303.0-886421-alpha"]
                  [om "0.6.4"]
                  [prismatic/schema  "0.2.4"]
-                 [prismatic/om-tools  "0.2.2"]
+                 [prismatic/om-tools  "0.2.2"
+                   :exclusions [org.clojure/clojure]]
                  [org.clojars.mkhoeini/mocha-tester "0.1.0-SNAPSHOT"]
                  [org.clojars.mkhoeini/chaiify "0.1.0-SNAPSHOT"]
                  [devcards "0.1.1-SNAPSHOT"]
+                 [shoreleave/shoreleave-remote "0.3.0"]
                  [secretary  "1.2.0"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]

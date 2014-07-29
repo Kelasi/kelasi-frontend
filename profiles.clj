@@ -2,9 +2,9 @@
         :test-paths ["test/clj" "test/cljs"]
         :resources-paths ["dev-resources"]
         :clean-targets ["out" :target-path]
-        :dependencies [[ring "1.2.1"]
-                       [compojure "1.1.6"]
-                       [enlive "1.1.4"]]
+        :dependencies [[ring "1.2.2"]
+                       [compojure "1.1.7"]
+                       [enlive "1.1.5"]]
         :plugins [[com.cemerick/austin "0.1.3"]
                   [com.cemerick/clojurescript.test "0.3.1"]]
 
