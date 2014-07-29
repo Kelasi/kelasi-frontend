@@ -17,3 +17,5 @@
                              e))))
     out))
 
+(defn after [time-in-ms callback]
+  (js/setTimeout callback time-in-ms))

@@ -1,12 +1,9 @@
 (ns kelasi-frontend.app-test
   (:require-macros [mocha-tester.core :refer (describe it)]
                    [chaiify.core :refer (expect)])
-  (:require [kelasi-frontend.app :as k]))
+  (:require [kelasi-frontend.app :as k]
+            [kelasi-frontend.utilities :refer (after)]))
 
-
-
-(defn- after [time-in-ms callback]
-  (js/setTimeout callback time-in-ms))
 
 
 (describe "index page"
