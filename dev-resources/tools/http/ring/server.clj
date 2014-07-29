@@ -20,6 +20,7 @@
   [:body [:script (enlive/attr= :src "/js/kelasi_frontend.js")]]
     (enlive/substitute (enlive/html [:script {:src "/js_test/goog/base.js"}]
                                     [:script {:src "/vendor/react/react.js"}]
+                                    [:script {:src "/vendor/sinon-1.10.3.js"}]
                                     [:script {:src "/js_test/kelasi_frontend.js"}]
                                     [:script "goog.require('kelasi_frontend.app');
                                               goog.require('kelasi_frontend.all_tests');"])))
