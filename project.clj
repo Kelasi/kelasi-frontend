@@ -25,8 +25,6 @@
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-bower "0.4.0"]]
 
-  :hooks [leiningen.cljsbuild]
-
   :bower  {:directory  "dev-resources/public/vendor"}
   :bower-dependencies [["react" "0.10.0"]]
 
