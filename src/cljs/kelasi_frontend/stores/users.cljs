@@ -23,6 +23,18 @@
          assoc-in (cons :users (seq subpath))
          value))
 
+(defn- set-user
+  [id user]
+  (swap! app-state
+         assoc-in [:users :all-users id]
+         user))
+
+
+
+;; State extractions
+
+(defn get-user [id]
+  (get-in @app-state [:users :all-users id]))
 
 
 ;; Action response functions
@@ -33,6 +45,11 @@
   (set-in [:current_user] :loading)
   (session/login user-name password))
 
+(defn- do-load-user
+  "load-user action has been received."
+  [{:keys [id] :as user}]
+  (set-user id user))
+
 
 
 ;; Listen for actions (main loop)
@@ -41,4 +58,5 @@
       (let [action (<! actions-chan)]
         (condp = (:action action)
           :try-login (do-try-login (:payload action))
+          :load-user (do-load-user (:payload action))
           nil))))

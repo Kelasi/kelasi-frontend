@@ -2,7 +2,7 @@
   (:require-macros [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)])
   (:require [kelasi-frontend.stores.users :as users]
-            [kelasi-frontend.actions :refer (try-login)]
+            [kelasi-frontend.actions :refer (try-login load-user)]
             [kelasi-frontend.backend.session :refer (login)]
             [kelasi-frontend.utilities :as utils]))
 
@@ -22,4 +22,15 @@
       (fn []
         (expect (.-calledOnce login) :to-be-true)
         (expect (.calledWithExactly login "John" "BlahBlah") :to-be-true)
+        (done)))))
+
+(def user-data {:id "123"})
+
+(describe "load-user action"
+  (it "should put the id of logged-in user under users" [done]
+    (load-user :test user-data)
+
+    (utils/after 50
+      (fn []
+        (expect (users/get-user (:id user-data)) :to-equal user-data)
         (done)))))

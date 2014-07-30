@@ -9,3 +9,10 @@
   (dispatch/dispatch {:source  src
                       :action  :try-login
                       :payload payload}))
+
+(defn load-user
+  "Backend - When server send back a logged in user"
+  [src payload]
+  (dispatch/dispatch {:source src
+                      :action :load-user
+                      :payload payload}))
