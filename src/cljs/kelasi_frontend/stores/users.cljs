@@ -24,17 +24,10 @@
          value))
 
 (defn- set-user
-  [id user]
-  (swap! app-state
-         assoc-in [:users :all-users id]
-         user))
+  "Set the user under the all-users of app-state"
+  [{id :id :as user}]
+  (set-in [:all-users id] user))
 
-
-
-;; State extractions
-
-(defn get-user [id]
-  (get-in @app-state [:users :all-users id]))
 
 
 ;; Action response functions
@@ -47,8 +40,8 @@
 
 (defn- do-load-user
   "load-user action has been received."
-  [{:keys [id] :as user}]
-  (set-user id user))
+  [user]
+  (set-user user))
 
 
 

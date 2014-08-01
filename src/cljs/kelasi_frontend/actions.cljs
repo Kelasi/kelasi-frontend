@@ -11,7 +11,7 @@
                       :payload payload}))
 
 (defn load-user
-  "Backend - When server send back a logged in user"
+  "Backend - When the server send user"
   [src payload]
   (dispatch/dispatch {:source src
                       :action :load-user

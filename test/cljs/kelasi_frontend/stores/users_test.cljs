@@ -4,7 +4,8 @@
   (:require [kelasi-frontend.stores.users :as users]
             [kelasi-frontend.actions :refer (try-login load-user)]
             [kelasi-frontend.backend.session :refer (login)]
-            [kelasi-frontend.utilities :as utils]))
+            [kelasi-frontend.utilities :as utils]
+            [kelasi-frontend.state :refer (app-state)]))
 
 (def login-data {:user-name "John" :password "BlahBlah"})
 
@@ -27,10 +28,10 @@
 (def user-data {:id "123"})
 
 (describe "load-user action"
-  (it "should put the id of logged-in user under users" [done]
+  (it "should put the id of a user under users/all-users" [done]
     (load-user :test user-data)
 
     (utils/after 50
       (fn []
-        (expect (users/get-user (:id user-data)) :to-equal user-data)
+        (expect (get-in @app-state [:users :all-users (:id user-data)]) :to-equal user-data)
         (done)))))
