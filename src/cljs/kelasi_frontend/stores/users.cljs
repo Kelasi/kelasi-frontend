@@ -30,6 +30,20 @@
 
 
 
+;; Local aggregation functions
+
+(defn- getin
+  "Get a value from local state"
+  [subpath]
+  (get-in (:users @app-state) subpath))
+
+(defn- get-user
+  "Get the user with specified id from under all-users key"
+  [id]
+  (getin [:all-users id]))
+
+
+
 ;; Action response functions
 
 (defn- do-try-login
@@ -43,6 +57,10 @@
   [{:keys [user]}]
   (set-user user))
 
+(defn- do-login
+  "login action has been received."
+  [{:keys [user-id]}]
+  (set-in [:current-user] (get-user user-id)))
 
 
 ;; Listen for actions (main loop)
@@ -52,4 +70,5 @@
         (condp = (:action action)
           :try-login (do-try-login action)
           :load-user (do-load-user action)
+          :login     (do-login     action)
           nil))))
