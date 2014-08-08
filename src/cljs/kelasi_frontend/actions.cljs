@@ -1,18 +1,28 @@
 (ns kelasi-frontend.actions
-  (:require [kelasi-frontend.dispatcher :as dispatch]))
+  (:require [kelasi-frontend.dispatcher :as dispatch]
+            [schema.core :as s]))
 
 
+
+(def try-login-schema
+  {:source   s/Keyword
+   :username s/Str
+   :password s/Str})
 
 (defn try-login
   "View - When user submits login box"
-  [src payload]
-  (dispatch/dispatch {:source  src
-                      :action  :try-login
-                      :payload payload}))
+  [& {:as params}]
+  (s/validate try-login-schema params)
+  (dispatch/dispatch (merge params {:action :try-login})))
+
+
+
+(def load-user-schema
+  {:source s/Keyword
+   :user   {s/Any s/Any}})
 
 (defn load-user
   "Backend - When the server send user"
-  [src payload]
-  (dispatch/dispatch {:source src
-                      :action :load-user
-                      :payload payload}))
+  [& {:as params}]
+  (s/validate load-user-schema params)
+  (dispatch/dispatch (merge params {:action :load-user})))

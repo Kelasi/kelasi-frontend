@@ -4,9 +4,6 @@
             [om-tools.dom :as dom :include-macros true]))
 
 
-(comment
-  (def Text {:text s/Str})
-  )
 
 (ot/defcomponentk root [data :- s/Any]
   (render [_]

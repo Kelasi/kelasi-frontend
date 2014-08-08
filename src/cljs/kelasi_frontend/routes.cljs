@@ -6,8 +6,8 @@
     [kelasi-frontend.utilities :refer (listen)]
     [cljs.core.async :refer (<!)]
     [goog.history.EventType :as EventType])
-  (:import goog.history.Html5History
-           goog.Uri))
+  (:import [goog.history Html5History]
+           [goog Uri]))
 
 (defroute home-path "/" []
   (js/console.log "We are at home!"))

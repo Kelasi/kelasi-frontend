@@ -10,7 +10,7 @@
   [data owner state]
   (init-state
    [_]
-   {:user-name   ""
+   {:username    ""
     :password    ""
     :remember-me false})
   (render
@@ -19,9 +19,9 @@
     (dom/p "User name"
            (dom/input
             {:type "text"
-             :value (:user-name @state)
+             :value (:username @state)
              :on-change #(swap! state
-                                assoc :user-name
+                                assoc :username
                                 (.. % -target -value))}))
     (dom/p "Password"
            (dom/input
@@ -37,5 +37,7 @@
     (dom/p "Remember me!")
     (dom/button
      {:type "button"
-      :on-click #(try-login ::login-box @state)}
+      :on-click #(try-login :source   ::login-box
+                            :username (:username @state)
+                            :password (:password @state))}
      "Login"))))

@@ -7,7 +7,9 @@
             [kelasi-frontend.utilities :as utils]
             [kelasi-frontend.state :refer (app-state)]))
 
-(def login-data {:user-name "John" :password "BlahBlah"})
+
+
+(def login-data {:username "John" :password "BlahBlah"})
 
 (describe "try-login action"
   (before
@@ -17,7 +19,9 @@
     (.restore login))
 
   (it "should call backend.session/login with username and password" [done]
-    (try-login :test login-data)
+    (try-login :source ::try-login-test
+               :username (:username login-data)
+               :password (:password login-data))
 
     (utils/after 50
       (fn []
@@ -29,7 +33,8 @@
 
 (describe "load-user action"
   (it "should put the id of a user under users/all-users" [done]
-    (load-user :test user-data)
+    (load-user :source ::load-user-test
+               :user   user-data)
 
     (utils/after 50
       (fn []

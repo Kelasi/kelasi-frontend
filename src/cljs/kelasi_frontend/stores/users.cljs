@@ -34,13 +34,13 @@
 
 (defn- do-try-login
   "try_login action has been received."
-  [{:keys [user-name password]}]
-  (set-in [:current_user] :loading)
-  (session/login user-name password))
+  [{:keys [username password]}]
+  (set-in [:current-user] :loading)
+  (session/login username password))
 
 (defn- do-load-user
   "load-user action has been received."
-  [user]
+  [{:keys [user]}]
   (set-user user))
 
 
@@ -50,6 +50,6 @@
 (go (while true
       (let [action (<! actions-chan)]
         (condp = (:action action)
-          :try-login (do-try-login (:payload action))
-          :load-user (do-load-user (:payload action))
+          :try-login (do-try-login action)
+          :load-user (do-load-user action)
           nil))))

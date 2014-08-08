@@ -13,7 +13,7 @@
                  [org.clojure/clojurescript "0.0-2268"]
                  [org.clojure/core.async  "0.1.303.0-886421-alpha"]
                  [om "0.6.4"]
-                 [prismatic/schema  "0.2.4"]
+                 [prismatic/schema  "0.2.6"]
                  [prismatic/om-tools  "0.2.2"
                    :exclusions [org.clojure/clojure]]
                  [org.clojars.mkhoeini/mocha-tester "0.1.0-SNAPSHOT"]
