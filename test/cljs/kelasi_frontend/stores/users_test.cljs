@@ -48,9 +48,9 @@
 (describe "login action"
   (it "should put the user under users/current-user" [done]
     (action/load-user :source ::login-test
-               :user   user-data)
-    (action/login :source ::login-test
-           :user-id (:id user-data))
+                      :user   user-data)
+    (action/login :source  ::login-test
+                  :user-id (:id user-data))
 
     (utils/after 50
       (fn []

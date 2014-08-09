@@ -1,15 +1,26 @@
 (ns kelasi-frontend.app-test
-  (:require-macros [mocha-tester.core :refer (describe it)]
+  (:require-macros [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)])
   (:require [kelasi-frontend.app :as k]
-            [kelasi-frontend.utilities :refer (after)]))
+            [kelasi-frontend.state :refer (app-state)]
+            [kelasi-frontend.utilities :as utils]))
 
 
 
 (describe "index page"
-  (it "'{}' should be rendered to screan" [done]
-    (after 0
+  (def state (atom nil))
+
+  (before
+   (reset! state @app-state))
+
+  (after
+   (reset! app-state @state))
+
+  (it "should render state to screan" [done]
+    (reset! app-state {:test 123})
+
+    (utils/after 50
       (fn []
         (let [comp-text (.. js/document (querySelector "#test") -innerHTML)]
-          (expect comp-text :to-equal "{}"))
+          (expect comp-text :to-equal "{:test 123}"))
         (done)))))
