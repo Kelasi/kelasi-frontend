@@ -20,10 +20,10 @@
 
   (it "should call backend.session/login with username and password" [done]
     (action/try-login :source ::try-login-test
-               :username (:username login-data)
-               :password (:password login-data))
+                      :username (:username login-data)
+                      :password (:password login-data))
 
-    (utils/after 50
+    (utils/after 0
       (fn []
         (expect (.-calledOnce login) :to-be-true)
         (expect (.calledWithExactly login "John" "BlahBlah") :to-be-true)
@@ -38,7 +38,7 @@
     (action/load-user :source ::load-user-test
                :user   user-data)
 
-    (utils/after 50
+    (utils/after 0
       (fn []
         (expect (get-in @app-state [:users :all-users (:id user-data)]) :to-equal user-data)
         (done)))))
@@ -52,7 +52,7 @@
     (action/login :source  ::login-test
                   :user-id (:id user-data))
 
-    (utils/after 50
+    (utils/after 0
       (fn []
         (expect (get-in @app-state [:users :current-user]) :to-equal user-data)
         (done)))))

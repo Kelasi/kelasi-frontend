@@ -16,10 +16,10 @@
   (after
    (reset! app-state @state))
 
-  (it "should render state to screan" [done]
+  (it "should render state to screen" [done]
     (reset! app-state {:test 123})
 
-    (utils/after 50
+    (utils/after 500
       (fn []
         (let [comp-text (.. js/document (querySelector "#test") -innerHTML)]
           (expect comp-text :to-equal "{:test 123}"))
