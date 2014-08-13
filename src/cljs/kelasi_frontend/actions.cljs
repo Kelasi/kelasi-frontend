@@ -38,3 +38,14 @@
   [& {:as params}]
   (s/validate login-schema params)
   (dispatch/dispatch (merge params {:action :login})))
+
+
+
+(def wrong-login-schema
+  {:source s/Keyword})
+
+(defn wrong-login
+  "Backend - When username/password is wrong"
+  [& {:as params}]
+  (s/validate wrong-login-schema params)
+  (dispatch/dispatch (merge params {:action :wrong-login})))

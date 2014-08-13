@@ -73,6 +73,10 @@
   [{:keys [user-id]}]
   (set-in [:current-user] (get-user user-id)))
 
+(defmethod action-response :wrong-login
+  [_]
+  (set-in [:current-user] nil))
+
 
 ;; Listen for actions (main loop)
 

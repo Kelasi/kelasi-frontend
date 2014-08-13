@@ -1,11 +1,13 @@
 (ns kelasi-frontend.stores.users-test
   (:require-macros [mocha-tester.core :refer (describe it before after)]
-                   [chaiify.core :refer (expect)])
+                   [chaiify.core :refer (expect)]
+                   [cljs.core.async.macros :refer (go)])
   (:require [kelasi-frontend.stores.users :as users]
             [kelasi-frontend.actions :as action]
             [kelasi-frontend.backend.session :refer (login)]
             [kelasi-frontend.utilities :as utils]
-            [kelasi-frontend.state :refer (app-state)]))
+            [kelasi-frontend.state :refer (app-state)]
+            [cljs.core.async :refer (chan tap untap <!)]))
 
 
 
@@ -56,3 +58,18 @@
       (fn []
         (expect (get-in @app-state [:users :current-user]) :to-equal user-data)
         (done)))))
+
+
+
+(describe "wrong-login action"
+  (it "should put nil under users/current-user" [done]
+    (swap! app-state assoc-in [:users :current-user] :some-value)
+
+    (go (let [ch (chan)]
+          (tap users/done ch)
+          (action/wrong-login :source ::wrong-login-test)
+          (<! ch)
+          (expect (get-in @app-state [:users :current-user])
+                  :to-not-exist)
+          (untap users/done ch)
+          (done)))))
