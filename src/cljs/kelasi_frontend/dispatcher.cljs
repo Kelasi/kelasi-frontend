@@ -1,19 +1,28 @@
 (ns kelasi-frontend.dispatcher
-  (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [cljs.core.async :refer (>! alts! chan)]))
+  (:require [cljs.core.async :refer (put! chan mult tap untap)]))
 
 
-(def listening-channels (atom #{}))
 
-(defn create-chan []
+(def actions-chan
+  "The channel to distribute actions"
+  (chan))
+
+(def actions-mult
+  "The mult(iplication) of actions-chan"
+  (mult actions-chan))
+
+
+(defn create-chan
+  "Create a subscription channel to listen to actions"
+  []
   (let [ch (chan)]
-    (swap! listening-channels conj ch)
+    (tap actions-mult ch)
     ch))
 
-(defn drop-chan [ch]
-  (swap! listening-channels disj ch)
-  ch)
+(defn drop-chan
+  "Removes the channel from mult"
+  [ch]
+  (untap actions-mult ch))
 
 (defn dispatch [data]
-  (doseq [ch @listening-channels]
-    (go (>! ch data))))
+  (put! actions-chan data))
