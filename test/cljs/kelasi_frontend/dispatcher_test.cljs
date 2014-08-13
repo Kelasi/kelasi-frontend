@@ -2,20 +2,20 @@
   (:require-macros [cljs.core.async.macros :refer (go)]
                    [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)])
-  (:require [kelasi-frontend.dispatcher :as dis]
-            [cljs.core.async :refer (>! <! chan)]))
+  (:require [kelasi-frontend.dispatcher :as dispatch]
+            [cljs.core.async :refer (<! chan tap untap)]))
 
 (describe "create-chan"
-  (def disp-chan (atom nil))
+  (def disp-chan (chan))
 
   (before
-    (reset! disp-chan (dis/create-chan)))
+    (tap dispatch/actions disp-chan))
 
   (after
-    (dis/drop-chan @disp-chan))
+    (untap dispatch/actions disp-chan))
 
   (it "should create chans which recieve when calling dispatch" [done]
-    (dis/dispatch 10)
+    (dispatch/dispatch 10)
 
-    (go (expect (<! @disp-chan) :to-equal 10)
+    (go (expect (<! disp-chan) :to-equal 10)
         (done))))

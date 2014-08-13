@@ -1,15 +1,16 @@
 (ns kelasi-frontend.stores.users
   (:require-macros [cljs.core.async.macros :refer (go-loop)])
   (:require [kelasi-frontend.state :refer (app-state)]
-            [kelasi-frontend.dispatcher :refer (create-chan)]
+            [kelasi-frontend.dispatcher :refer (actions)]
             [kelasi-frontend.backend.session :as session]
-            [cljs.core.async :refer (<!)]))
+            [cljs.core.async :refer (<! chan tap)]))
 
 
 
 ;; All actions come through this channel
 
-(def actions-chan (create-chan))
+(def actions-chan (chan))
+(tap actions actions-chan)
 
 
 
