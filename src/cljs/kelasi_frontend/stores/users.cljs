@@ -3,7 +3,7 @@
   (:require [kelasi-frontend.state :refer (app-state)]
             [kelasi-frontend.dispatcher :refer (actions)]
             [kelasi-frontend.backend.session :as session]
-            [cljs.core.async :refer (<! chan tap)]))
+            [cljs.core.async :refer (<! >! chan tap mult)]))
 
 
 
@@ -11,6 +11,13 @@
 
 (def actions-chan (chan))
 (tap actions actions-chan)
+
+
+
+;; We put processed actions in this channel
+
+(def ^:private done-ch (chan))
+(def done (mult done-ch))
 
 
 
@@ -69,6 +76,7 @@
 
 ;; Listen for actions (main loop)
 
-(go-loop []
-  (action-response (<! actions-chan))
-  (recur))
+(go-loop [action (<! actions-chan)]
+  (action-response action)
+  (>! done-ch action)
+  (recur (<! actions-chan)))
