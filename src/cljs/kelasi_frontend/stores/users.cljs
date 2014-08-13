@@ -1,5 +1,5 @@
 (ns kelasi-frontend.stores.users
-  (:require-macros [cljs.core.async.macros :refer (go)])
+  (:require-macros [cljs.core.async.macros :refer (go-loop)])
   (:require [kelasi-frontend.state :refer (app-state)]
             [kelasi-frontend.dispatcher :refer (create-chan)]
             [kelasi-frontend.backend.session :as session]
@@ -46,29 +46,28 @@
 
 ;; Action response functions
 
-(defn- do-try-login
-  "try_login action has been received."
+(defmulti action-response :action)
+
+(defmethod action-response :default
+  [_]
+  nil)
+
+(defmethod action-response :try-login
   [{:keys [username password]}]
   (set-in [:current-user] :loading)
   (session/login username password))
 
-(defn- do-load-user
-  "load-user action has been received."
+(defmethod action-response :load-user
   [{:keys [user]}]
   (set-user user))
 
-(defn- do-login
-  "login action has been received."
+(defmethod action-response :login
   [{:keys [user-id]}]
   (set-in [:current-user] (get-user user-id)))
 
 
 ;; Listen for actions (main loop)
 
-(go (while true
-      (let [action (<! actions-chan)]
-        (condp = (:action action)
-          :try-login (do-try-login action)
-          :load-user (do-load-user action)
-          :login     (do-login     action)
-          nil))))
+(go-loop []
+  (action-response (<! actions-chan))
+  (recur))
