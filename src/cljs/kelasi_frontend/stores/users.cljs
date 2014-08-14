@@ -1,7 +1,6 @@
 (ns kelasi-frontend.stores.users
   (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.state :refer (app-state)]
-            [kelasi-frontend.stores.core :refer (process store set-in!)]
+  (:require [kelasi-frontend.stores.core :refer (process store set-in!)]
             [kelasi-frontend.backend.session :as session]
             [cljs.core.async :refer (mult)]))
 

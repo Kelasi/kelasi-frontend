@@ -5,7 +5,6 @@
   (:require [kelasi-frontend.stores.users :as users]
             [kelasi-frontend.actions :as action]
             [kelasi-frontend.backend.session :refer (login)]
-            [kelasi-frontend.utilities :as utils]
             [kelasi-frontend.state :refer (app-state)]
             [cljs.core.async :refer (chan tap untap <!)]))
 
