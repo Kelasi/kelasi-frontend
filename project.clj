@@ -29,7 +29,7 @@
             [lein-bower "0.4.0"]]
 
   :bower  {:directory  "resources/public/vendor"}
-  :bower-dependencies [["react" "0.10.0"]]
+  :bower-dependencies [["react" "0.11.1"]]
 
   :cljsbuild
   {:builds {:kelasi-frontend
