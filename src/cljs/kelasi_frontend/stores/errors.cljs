@@ -24,6 +24,11 @@
   (set-in! errors [:login] :wrong-login)
   (go nil))
 
+(defmethod responce :net-error
+  [{:keys [orig]}]
+  (set-in! errors [:net-error] orig)
+  (go nil))
+
 
 
 ;; Main loop

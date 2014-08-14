@@ -49,3 +49,15 @@
   [& {:as params}]
   (s/validate wrong-login-schema params)
   (dispatch/dispatch (merge params {:action :wrong-login})))
+
+
+
+(def net-error-schema
+  {:source s/Keyword
+   :orig   s/Any})
+
+(defn net-error
+  "Backend - Whenever something goes wrong with a request"
+  [& {:as params}]
+  (s/validate net-error-schema params)
+  (dispatch/dispatch (merge params {:action :net-error})))
