@@ -1,54 +1,33 @@
 (ns kelasi-frontend.stores.users
-  (:require-macros [cljs.core.async.macros :refer (go-loop)])
+  (:require-macros [cljs.core.async.macros :refer (go)])
   (:require [kelasi-frontend.state :refer (app-state)]
-            [kelasi-frontend.dispatcher :refer (actions)]
+            [kelasi-frontend.stores.core :refer (process store set-in!)]
             [kelasi-frontend.backend.session :as session]
-            [cljs.core.async :refer (<! >! chan tap mult)]))
+            [cljs.core.async :refer (mult)]))
 
 
 
-;; All actions come through this channel
+;; Store
 
-(def actions-chan (chan))
-(tap actions actions-chan)
-
-
-
-;; We put processed actions in this channel
-
-(def ^:private done-ch (chan))
-(def done (mult done-ch))
+(def users (store [:users]))
 
 
 
 ;; State manipulation functions
 
-(defn- set-in
-  "Set the value in the subpath of app-state"
-  [subpath value]
-  (assert (vector? subpath))
-  (swap! app-state
-         assoc-in (cons :users (seq subpath))
-         value))
-
 (defn- set-user
   "Set the user under the all-users of app-state"
   [{id :id :as user}]
-  (set-in [:all-users id] user))
+  (set-in! users [:all-users id] user))
 
 
 
 ;; Local aggregation functions
 
-(defn- getin
-  "Get a value from local state"
-  [subpath]
-  (get-in (:users @app-state) subpath))
-
 (defn- get-user
   "Get the user with specified id from under all-users key"
   [id]
-  (getin [:all-users id]))
+  (get-in @users [:all-users id]))
 
 
 
@@ -58,29 +37,33 @@
 
 (defmethod action-response :default
   [_]
-  nil)
+  (go nil))
 
 (defmethod action-response :try-login
   [{:keys [username password]}]
-  (set-in [:current-user] :loading)
-  (session/login username password))
+  (set-in! users [:current-user] :loading)
+  (session/login username password)
+  (go nil))
 
 (defmethod action-response :load-user
   [{:keys [user]}]
-  (set-user user))
+  (set-user user)
+  (go nil))
 
 (defmethod action-response :login
   [{:keys [user-id]}]
-  (set-in [:current-user] (get-user user-id)))
+  (set-in! users [:current-user] (get-user user-id))
+  (go nil))
 
 (defmethod action-response :wrong-login
   [_]
-  (set-in [:current-user] nil))
+  (set-in! users [:current-user] nil)
+  (go nil))
 
 
-;; Listen for actions (main loop)
 
-(go-loop [action (<! actions-chan)]
-  (action-response action)
-  (>! done-ch action)
-  (recur (<! actions-chan)))
+;; The main loop to listen to actions
+
+(def done
+  "The mult of processed actions"
+  (mult (process action-response)))

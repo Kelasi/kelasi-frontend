@@ -21,14 +21,17 @@
     (.restore login))
 
   (it "should call backend.session/login with username and password" [done]
-    (action/try-login :source ::try-login-test
-                      :username (:username login-data)
-                      :password (:password login-data))
+      (go (let [ch (chan)]
+            (tap users/done ch)
 
-    (utils/after 30
-      (fn []
-        (expect (.-calledOnce login) :to-be-true)
-        (expect (.calledWithExactly login "John" "BlahBlah") :to-be-true)
+            (action/try-login :source ::try-login-test
+                              :username (:username login-data)
+                              :password (:password login-data))
+            (<! ch)
+
+            (expect (.-calledOnce login) :to-be-true)
+            (expect (.calledWithExactly login "John" "BlahBlah") :to-be-true)
+            (untap users/done ch)
         (done)))))
 
 
@@ -37,27 +40,36 @@
 
 (describe "load-user action"
   (it "should put the id of a user under users/all-users" [done]
-    (action/load-user :source ::load-user-test
-                      :user   user-data)
+    (go (let [ch (chan)]
+          (tap users/done ch)
 
-    (utils/after 30
-      (fn []
-        (expect (get-in @app-state [:users :all-users (:id user-data)]) :to-equal user-data)
-        (done)))))
+          (action/load-user :source ::load-user-test
+                            :user   user-data)
+          (<! ch)
+
+          (expect (get-in @app-state [:users :all-users (:id user-data)])
+                  :to-equal user-data)
+          (untap users/done ch)
+          (done)))))
 
 
 
 (describe "login action"
   (it "should put the user under users/current-user" [done]
-    (action/load-user :source ::login-test
-                      :user   user-data)
-    (action/login :source  ::login-test
-                  :user-id (:id user-data))
+    (go (let [ch (chan)]
+          (tap users/done ch)
 
-    (utils/after 30
-      (fn []
-        (expect (get-in @app-state [:users :current-user]) :to-equal user-data)
-        (done)))))
+          (action/load-user :source ::login-test
+                            :user   user-data)
+          (<! ch)
+          (action/login :source  ::login-test
+                        :user-id (:id user-data))
+          (<! ch)
+
+          (expect (get-in @app-state [:users :current-user])
+                  :to-equal user-data)
+          (untap users/done ch)
+          (done)))))
 
 
 

@@ -1,16 +1,15 @@
 (ns kelasi-frontend.stores.routes
   (:require-macros [cljs.core.async.macros :refer (go-loop go)])
   (:require [kelasi-frontend.state :refer (app-state)]
-            [kelasi-frontend.dispatcher :refer (actions)]
+            [kelasi-frontend.stores.core :refer (process store set-in!)]
             [kelasi-frontend.stores.users :as users]
-            [cljs.core.async :refer (<! >! chan tap)]))
+            [cljs.core.async :refer (<! >! chan tap mult)]))
 
 
 
-;; Actions will be received through this channel
+;; Store
 
-(def actions-chan (chan))
-(tap actions actions-chan)
+(def routes (store [:routes]))
 
 
 
@@ -31,40 +30,31 @@
 
 
 
-;; State manipulation functions
-
-(defn- set-in
-  "Set the value under routes subpath"
-  [subpath value]
-  (assert (vector? subpath))
-  (swap! app-state
-         update-in [:routes]
-         assoc-in subpath
-         value))
-
-
-
 ;; response function
 
 (defmulti response :action)
 
-(defmethod response :default [_] nil)
+(defmethod response :default
+  [_]
+  (go nil))
 
-(defmethod response :login [action]
+(defmethod response :login
+  [action]
   (go (let [wait-for-user (<! users-done)
             user-id (:user-id action)
             path [:users :all-users user-id :profile-name]
             profile-name (get-in @app-state path)]
-        (when (not= wait-for-user action)
+        (when (not= (dissoc wait-for-user :result) action)
           (.error js/console (str "Users and routes stores are out of sync:"
                                   "Users action:" action
                                   "Routes action:" wait-for-user)))
-        (set-in [:current] (str "/profile/" profile-name)))))
+        (set-in! routes [:current] (str "/profile/" profile-name)))
+      nil))
 
 
 
 ;; Listen for actions (main loop)
 
-(go-loop []
-  (response (<! actions-chan))
-  (recur))
+(def done
+  "Processed actions channel"
+  (mult (process response)))

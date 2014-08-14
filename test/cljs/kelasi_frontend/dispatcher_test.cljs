@@ -15,7 +15,7 @@
     (untap dispatch/actions disp-chan))
 
   (it "should create chans which recieve when calling dispatch" [done]
-    (dispatch/dispatch 10)
+    (dispatch/dispatch {:test 10})
 
-    (go (expect (<! disp-chan) :to-equal 10)
+    (go (expect (:test (<! disp-chan)) :to-equal 10)
         (done))))
