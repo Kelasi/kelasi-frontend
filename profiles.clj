@@ -7,17 +7,6 @@
         :plugins [[com.cemerick/austin "0.1.3"]
                   [com.cemerick/clojurescript.test "0.3.1"]]
 
-        :cljsbuild
-        {:builds {:kelasi-frontend
-                 {:source-paths ["resources/tools/repl"]
-                  :compiler
-                  {:optimizations :whitespace
-                   :pretty-print true}}}
-         :test-commands {"phantomjs"
-                         ["phantomjs" :runner
-                          "resources/public/vendor/phantomjs-shims.js"
-                          "resources/public/js/kelasi_frontend.js"]}}
-
         :injections [(require '[ring.server :as http :refer [run]]
                               'cemerick.austin.repls)
                      (defn browser-repl []
@@ -26,8 +15,13 @@
                      (defn brepl-env [] (deref cemerick.austin.repls/browser-repl-env))]}
 
  :production {:cljsbuild
-              {:builds {:kelasi-frontend
-                        {:compiler
+              {:builds [{:id "kelasi-frontend-production"
+                         :source-paths ["src/cljs"]
+                         :compiler
                          {:output-to "public/js/app.js"
+                          :externs ["resources/public/vendor/react/react.js"]
+                          :preamble ["react/react.min.js"]
+                          :closure-warnings {:externs-validation :off
+                                             :non-standard-jsdoc :off}
                           :optimizations :advanced
-                          :pretty-print false}}}}}}
+                          :pretty-print false}}]}}}

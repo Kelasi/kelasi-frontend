@@ -21,51 +21,54 @@
                  [org.clojars.mkhoeini/chaiify "0.1.0-SNAPSHOT"]
                  [devcards "0.1.1-SNAPSHOT"
                    :exclusions [org.clojure/clojurescript]]
+                 [figwheel "0.1.4-SNAPSHOT"]
                  [shoreleave/shoreleave-remote "0.3.0"]
                  [secretary  "1.2.0"
                    :exclusions [org.clojure/clojurescript]]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
+            [lein-figwheel "0.1.4-SNAPSHOT"]
             [lein-bower "0.4.0"]]
 
   :bower  {:directory  "resources/public/vendor"}
   :bower-dependencies [["react" "0.11.1"]]
 
   :cljsbuild
-  {:builds {:kelasi-frontend
-            {:source-paths ["src/cljs"]
+  {:builds [{:id "kelasi-frontend"
+             :source-paths ["src/cljs" "resources/tools/repl"]
              :compiler
              {:output-to "resources/public/js/kelasi_frontend.js"
               :output-dir "resources/public/js"
               :source-map "resources/public/js/kelasi_frontend.js.map"
               :externs ["resources/public/vendor/react/react.js"]
               :preamble ["react/react.min.js"]
-              :closure-warnings  {:externs-validation :off
-                                  :non-standard-jsdoc :off}}}
+              :closure-warnings {:externs-validation :off
+                                 :non-standard-jsdoc :off}
+              :optimizations :whitespace
+              :pretty-print true}}
 
-            :kelasi-frontend-test
-            {:source-paths ["src/cljs" "test/cljs"]
+            {:id "mocha-tests"
+             :source-paths ["src/cljs" "test/cljs"]
              :compiler
              {:output-to "resources/public/js_test/kelasi_frontend.js"
               :output-dir "resources/public/js_test"
               :source-map "resources/public/js_test/kelasi_frontend.js.map"
               :externs ["resources/public/vendor/react/react.js"]
               :preamble ["react/react.min.js"]
-              :closure-warnings  {:externs-validation :off
-                                  :non-standard-jsdoc :off}
+              :closure-warnings {:externs-validation :off
+                                 :non-standard-jsdoc :off}
               :optimizations :none
               :pretty-print true}}
 
-            :kelasi-frontend-devcards
-            {:source-paths ["src/cljs" "devcards/cljs"]
+            {:id "devcards"
+             :source-paths ["src/cljs" "devcards/cljs"]
              :compiler
              {:output-to "resources/public/devcards/js/kelasi_frontend.js"
               :output-dir "resources/public/devcards/js"
               :source-map "resources/public/devcards/js/kelasi_frontend.js.map"
               :externs ["resources/public/vendor/react/react.js"]
               :preamble ["react/react.min.js"]
-              :closure-warnings  {:externs-validation :off
-                                  :non-standard-jsdoc :off}
+              :closure-warnings {:externs-validation :off
+                                 :non-standard-jsdoc :off}
               :optimizations :none
-              :pretty-print true}}
-            }})
+              :pretty-print true}}]})
