@@ -66,6 +66,6 @@
               :preamble ["react/react.min.js"]
               :closure-warnings  {:externs-validation :off
                                   :non-standard-jsdoc :off}
-              :optimizations :whitespace
+              :optimizations :none
               :pretty-print true}}
             }})
