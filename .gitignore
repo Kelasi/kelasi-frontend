@@ -3,9 +3,9 @@
 /lib
 /classes
 /checkouts
-/dev-resources/public/js/*
-/dev-resources/public/js_test/*
-/dev-resources/public/devcards/js/*
+/resources/public/js/*
+/resources/public/js_test/*
+/resources/public/devcards/js/*
 /out
 /public
 pom.xml
