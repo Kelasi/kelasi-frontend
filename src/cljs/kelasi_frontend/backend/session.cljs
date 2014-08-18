@@ -1,11 +1,16 @@
 (ns kelasi-frontend.backend.session
-  (:require [shoreleave.remote :refer (request)]))
+  (:require-macros [cljs.core.async.macros :refer (go)])
+  (:require [kelasi-frontend.backend.core :refer (send)]
+            [cljs.core.async :refer (<!)]))
 
 
 
-(defn login [username password]
-  (request [:post (str "/session")]
-           :content {:username username
-                     :password password}
-           :on-success (.-log js/console)
-           :on-error   (.-log js/console)))
+(defn login
+  "Try to login with server"
+  [username password]
+  (go (let [request (send "POST"
+                          "/api_/session.json"
+                          {:username username
+                           :password password})
+            respond (<! request)]
+        (print respond))))

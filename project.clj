@@ -22,7 +22,6 @@
                  [devcards "0.1.1-SNAPSHOT"
                    :exclusions [org.clojure/clojurescript]]
                  [figwheel "0.1.4-SNAPSHOT"]
-                 [shoreleave/shoreleave-remote "0.3.0"]
                  [secretary  "1.2.0"
                    :exclusions [org.clojure/clojurescript]]]
 
@@ -61,7 +60,7 @@
               :pretty-print true}}
 
             {:id "devcards"
-             :source-paths ["src/cljs" "devcards/cljs"]
+             :source-paths ["src/cljs" "devcards/cljs" "test/cljs"]
              :compiler
              {:output-to "resources/public/devcards/js/kelasi_frontend.js"
               :output-dir "resources/public/devcards/js"
