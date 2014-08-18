@@ -13,7 +13,7 @@
   "View - When user submits login box"
   [& {:as params}]
   (s/validate try-login-schema params)
-  (dispatch/dispatch (merge params {:action :try-login})))
+  (dispatch/dispatch (assoc params :action :try-login)))
 
 
 
@@ -25,7 +25,7 @@
   "Backend - When the server send user"
   [& {:as params}]
   (s/validate load-user-schema params)
-  (dispatch/dispatch (merge params {:action :load-user})))
+  (dispatch/dispatch (assoc params :action :load-user)))
 
 
 
@@ -37,7 +37,7 @@
   "Backend - When user logs in with the backend"
   [& {:as params}]
   (s/validate login-schema params)
-  (dispatch/dispatch (merge params {:action :login})))
+  (dispatch/dispatch (assoc params :action :login)))
 
 
 
@@ -48,7 +48,7 @@
   "Backend - When username/password is wrong"
   [& {:as params}]
   (s/validate wrong-login-schema params)
-  (dispatch/dispatch (merge params {:action :wrong-login})))
+  (dispatch/dispatch (assoc params :action :wrong-login)))
 
 
 
@@ -60,4 +60,4 @@
   "Backend - Whenever something goes wrong with a request"
   [& {:as params}]
   (s/validate net-error-schema params)
-  (dispatch/dispatch (merge params {:action :net-error})))
+  (dispatch/dispatch (assoc params :action :net-error)))
