@@ -1,4 +1,5 @@
-(ns mocks.server)
+(ns mocks.server
+  (:require [mocks.user :as user]))
 
 
 (def ^:private server
@@ -42,16 +43,17 @@
   #js [200 #js {"Content-Type" "application/json"}
        (.stringify js/JSON (clj->js obj))])
 
+
 (def routes
   "Hash of routes to responses"
-  {(POST "session") #js [200 #js {"Content-Type" "application/text"} "Testing it"]
+  {(POST "session") (response-json user/user1)
    })
 
 (defn fake
   "Fake the given or all available routes"
   ([] (apply fake (keys routes)))
   ([& to-fake]
-   (doseq [[method uri :as k] to-fake]
-     (.respondWith server method uri (get routes k)))))
+   (doseq [[method uri resp :as k] to-fake]
+     (.respondWith server method uri (or resp (get routes k))))))
 
 (fake)
