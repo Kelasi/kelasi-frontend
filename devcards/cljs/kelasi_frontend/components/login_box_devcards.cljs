@@ -9,3 +9,6 @@
 
 (defcard login-box-component
   (dc/om-root-card login-box {}))
+
+(defcard login-box-component-wrong-login-state
+  (dc/om-root-card login-box {:errors {:login :wrong-login}}))

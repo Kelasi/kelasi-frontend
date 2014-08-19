@@ -7,7 +7,7 @@
 
 (omtool/defcomponentk login-box
   "First page's login box"
-  [data owner state]
+  [[:data {errors {}}] owner state]
   (init-state
    [_]
    {:username    ""
@@ -16,6 +16,13 @@
   (render
    [_]
    (dom/div
+    (cond
+     (= (get errors :login) :wrong-login)
+     (dom/p "Wrong username/password")
+
+     (get errors :network)
+     (dom/p "Request failed. retry!"))
+
     (dom/p "User name"
            (dom/input
             {:type "text"
