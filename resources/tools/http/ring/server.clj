@@ -1,5 +1,5 @@
 (ns ring.server
-  (:require [cemerick.austin.repls :refer (browser-connected-repl-js)]
+  (:require [simple-brepl.service :refer (brepl-js)]
             [net.cgrand.enlive-html :as enlive]
             [compojure.route :refer  (resources)]
             [compojure.core :refer (GET defroutes)]
@@ -11,8 +11,8 @@
 (enlive/deftemplate page
   (io/resource "public/index.html")
   []
-  [:body] (enlive/append
-            (enlive/html [:script (browser-connected-repl-js)])))
+  [:head] (enlive/append
+            (enlive/html [:script (brepl-js)])))
 
 (enlive/deftemplate test-page
   (io/resource "public/index.html")

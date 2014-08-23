@@ -3,9 +3,7 @@
                    [mocha-tester.core :refer (describe it)]
                    [chaiify.core :refer (expect)])
   (:require [kelasi-frontend.utilities :as u]
-            [cljs.core.async :refer (<! >! chan timeout)]
-            [cemerick.cljs.test :include-macros true
-             :refer (deftest testing is done)]))
+            [cljs.core.async :refer (<! >! chan timeout)]))
 
 
 (describe "listen"

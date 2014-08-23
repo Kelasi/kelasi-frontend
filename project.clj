@@ -26,6 +26,7 @@
                    :exclusions [org.clojure/clojurescript]]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
+            [jarohen/simple-brepl "0.1.1"]
             [lein-figwheel "0.1.4-SNAPSHOT"]
             [lein-bower "0.4.0"]]
 
