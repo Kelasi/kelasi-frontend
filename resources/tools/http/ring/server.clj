@@ -1,18 +1,17 @@
 (ns ring.server
-  (:require [simple-brepl.service :refer (brepl-js)]
+  (:require [weasel.repl.websocket :as weasel]
+            [cemerick.piggieback :as piggieback]
             [net.cgrand.enlive-html :as enlive]
             [compojure.route :refer  (resources)]
             [compojure.core :refer (GET defroutes)]
-            [ring.adapter.jetty :as jetty]
+            [frodo.web :refer (App)]
             [mocha-tester.core :as mocha]
             [chaiify.core :as chai]
             [clojure.java.io :as io]))
 
 (enlive/deftemplate page
   (io/resource "public/index.html")
-  []
-  [:head] (enlive/append
-            (enlive/html [:script (brepl-js)])))
+  [])
 
 (enlive/deftemplate test-page
   (io/resource "public/index.html")
@@ -30,12 +29,20 @@
   (GET "/mocha-test" req (test-page))
   (GET "/*" req (page)))
 
-(defn run
-  "Run the ring server. It defines the server symbol with defonce."
+
+(defn start-brepl
+  "To start a brepl session in the repl"
   []
-  (defonce server
-    (jetty/run-jetty (-> #'site
-                         (mocha/wrap)
-                         (chai/wrap "/mocha-test"))
-                     {:port 3000 :join? false}))
-  server)
+  (piggieback/cljs-repl
+   :repl-env (weasel/repl-env
+              :ip "127.0.0.1"
+              :port 9001)))
+
+(def app
+  (reify App
+    (start! [_]
+      {:frodo/handler (-> #'site
+                          (mocha/wrap)
+                          (chai/wrap "/mocha-test"))})
+    (stop! [_ _]
+      nil)))

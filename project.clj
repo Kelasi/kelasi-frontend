@@ -10,7 +10,10 @@
   :resources-paths ["resources"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2307"]
+                 [org.clojure/clojurescript "0.0-2311"]
+                 [org.clojure/data.json "0.2.5"]
+                 [com.cemerick/piggieback "0.1.3"]
+                 [weasel "0.4.0-SNAPSHOT"]
                  [org.clojure/core.async  "0.1.319.0-6b1aca-alpha"]
                  [om "0.7.1"]
                  [prismatic/schema  "0.2.6"]
@@ -26,9 +29,13 @@
                    :exclusions [org.clojure/clojurescript]]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
-            [jarohen/simple-brepl "0.1.1"]
+            [jarohen/lein-frodo "0.4.1"]
             [lein-figwheel "0.1.4-SNAPSHOT"]
             [lein-bower "0.4.0"]]
+
+  :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+
+  :frodo/config-resource "config/nomad.edn"
 
   :bower  {:directory  "resources/public/vendor"}
   :bower-dependencies [["react" "0.11.1"]]

@@ -1,0 +1,3 @@
+{:frodo/config {:nrepl {:port 7888}
+                :web {:port 3000
+                      :app ring.server/app}}}
