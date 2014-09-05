@@ -28,6 +28,7 @@
             [kelasi-frontend.components.profile-about-box-devcards]
             [kelasi-frontend.components.timeline-about-box-devcards]
             [kelasi-frontend.components.new-post-box-devcards]
+            [kelasi-frontend.components.mini-timeline-box-devcards]
 
             ; Stores
             [kelasi-frontend.stores.users]
