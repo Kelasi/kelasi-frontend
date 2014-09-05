@@ -31,3 +31,18 @@
   (it "should put profile_name into routes/current"
     (expect (get-in @app-state [:routes :current])
             :to-equal "/profile/johnGalt")))
+
+(describe "go-to-timeline action"
+  (before [done]
+    (tap routes/done done-ch)
+
+    (action/go-to-timeline :source ::go-to-timeline-test
+                           :timeline-id 123)
+
+    (take! done-ch (fn [_] (done))))
+
+  (after (untap routes/done done-ch))
+
+  (it "should put timeline_id under routes/current"
+    (expect (get-in @app-state [:routes :current])
+            :to-equal "/timeline/123")))
