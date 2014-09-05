@@ -51,6 +51,12 @@
         (set-in! routes [:current] (str "/profile/" profile-name)))
       nil))
 
+(defmethod response :go-to-timeline
+  [action]
+  (go (let [timeline-id (:timeline-id action)]
+        (set-in! routes [:current] (str "/timeline/" timeline-id)))
+      nil))
+
 
 
 ;; Listen for actions (main loop)
