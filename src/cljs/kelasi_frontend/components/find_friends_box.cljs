@@ -1,7 +1,7 @@
 (ns kelasi-frontend.components.find-friends-box
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
-            #_[kelasi-frontend.actions :refer (try-login)]))
+            [kelasi-frontend.actions :refer (search-introducer)]))
 
 
 
@@ -44,10 +44,8 @@
 
      (dom/button
        {:type "button"
-        :on-click #(prn % @state)}
-       "Search")
-
-     (dom/button
-       {:type "button"
-        :on-click #(prn % @state)}
-       "Cancel"))))
+        :on-click #(search-introducer :source     ::find-friends-box
+                                      :firstname  (:firstname  @state)
+                                      :lastname   (:lastname   @state)
+                                      :university (:university @state))}
+       "Search"))))

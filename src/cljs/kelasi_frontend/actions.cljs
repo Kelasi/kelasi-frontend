@@ -61,3 +61,17 @@
   [& {:as params}]
   (s/validate net-error-schema params)
   (dispatch/dispatch (assoc params :action :net-error)))
+
+
+
+(def search-introducer-schema
+  {:source     s/Keyword
+   :firstname  s/Str
+   :lastname   s/Str
+   :university s/Str})
+
+(defn search-introducer
+  "View - When during registration user searches for somebody familiar"
+  [& {:as params}]
+  (s/validate search-introducer-schema params)
+  (dispatch/dispatch (assoc params :action :search-introducer)))
