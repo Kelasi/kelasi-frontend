@@ -8,6 +8,7 @@
             ; Component devcards
             [kelasi-frontend.components.root-devcards]
             [kelasi-frontend.components.login-box-devcards]
+            [kelasi-frontend.components.find-friends-box-devcards]
 
             ; Stores
             [kelasi-frontend.stores.users]
