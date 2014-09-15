@@ -10,22 +10,22 @@
   :resources-paths ["resources"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2311"]
+                 [org.clojure/clojurescript "0.0-2322"]
                  [org.clojure/data.json "0.2.5"]
                  [com.cemerick/piggieback "0.1.3"]
                  [weasel "0.4.0-SNAPSHOT"]
-                 [org.clojure/core.async  "0.1.319.0-6b1aca-alpha"]
-                 [om "0.7.1"]
+                 [org.clojure/core.async  "0.1.338.0-5c5012-alpha"]
+                 [om "0.7.3"]
                  [prismatic/schema  "0.2.6"]
-                 [prismatic/om-tools  "0.2.2"
+                 [prismatic/om-tools  "0.3.2"
                    :exclusions [org.clojure/clojure
                                 org.clojure/clojurescript]]
                  [org.clojars.mkhoeini/mocha-tester "0.1.0-SNAPSHOT"]
                  [org.clojars.mkhoeini/chaiify "0.1.0-SNAPSHOT"]
-                 [devcards "0.1.1-SNAPSHOT"
+                 [devcards "0.1.2-SNAPSHOT"
                    :exclusions [org.clojure/clojurescript]]
                  [figwheel "0.1.4-SNAPSHOT"]
-                 [secretary  "1.2.0"
+                 [secretary  "1.2.1"
                    :exclusions [org.clojure/clojurescript]]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
