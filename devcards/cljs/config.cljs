@@ -12,6 +12,7 @@
 
             ; Stores
             [kelasi-frontend.stores.users]
+            [kelasi-frontend.stores.search]
             [kelasi-frontend.stores.routes]
             [kelasi-frontend.stores.errors]
             ))

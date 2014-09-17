@@ -9,21 +9,16 @@
 (defn people
   "Search for people in server"
   [firstname lastname university]
-  )
-#_(defn login
-  "Try to login with server"
-  [username password]
   (go (let [request (send "POST"
-                          "/api_/session.json"
-                          {:username username
-                           :password password})
+                          "/api_/search/people.json"
+                          {:fname   firstname
+                           :lname   lastname
+                           :uniname university})
             respond (<! request)]
         (condp = ((juxt first second) respond)
-          [:success 200] (let [user (respond 2)]
-                     (actions/load-user :source ::login
-                                        :user   user)
-                     (actions/login :source  ::login
-                                    :user-id (:id user)))
-          [:error 401] (actions/wrong-login :source ::login)
-          (actions/net-error :source ::login
-                             :orig   `(login ~username ~password))))))
+          [:success 200] (let [result (respond 2)]
+                           (pr result))
+          (actions/net-error :source ::people
+                             :orig   `(people ~firstname
+                                              ~lastname
+                                              ~university))))))
