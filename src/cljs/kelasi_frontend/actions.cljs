@@ -75,3 +75,16 @@
   [& {:as params}]
   (s/validate search-introducer-schema params)
   (dispatch/dispatch (assoc params :action :search-introducer)))
+
+
+
+(def load-search-result-schema
+  {:source s/Keyword
+   :category s/Keyword
+   :result [s/Str]})
+
+(defn load-search-result
+  "Backend - When a search result comes in"
+  [& {:as params}]
+  (s/validate load-search-result-schema params)
+  (dispatch/dispatch (assoc params :action :load-search-result)))

@@ -16,8 +16,15 @@
                            :uniname university})
             respond (<! request)]
         (condp = ((juxt first second) respond)
-          [:success 200] (let [result (respond 2)]
-                           (pr result))
+          [:success 200] (let [result (respond 2)
+                               ids (for [user result]
+                                     (do
+                                       (actions/load-user :source ::people
+                                                          :user   user)
+                                       (:id user)))]
+                           (actions/load-search-result :source   ::people
+                                                       :category :people
+                                                       :result   ids))
           (actions/net-error :source ::people
                              :orig   `(people ~firstname
                                               ~lastname
