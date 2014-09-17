@@ -6,7 +6,7 @@
             [kelasi-frontend.actions :as action]
             [kelasi-frontend.backend.search :refer (people)]
             [kelasi-frontend.state :refer (app-state)]
-            [cljs.core.async :refer (chan tap untap take! put!)]))
+            [cljs.core.async :refer (chan tap untap take!)]))
 
 
 
@@ -36,3 +36,19 @@
   (it "should call backend.search/people with provided data"
     (expect (.-calledOnce people) :to-be-true)
     (expect (.calledWithExactly people "John" "Doe" "Taashkand") :to-be-true)))
+
+
+
+(describe "load-search-result action"
+  (before [done]
+    (tap search/done done-ch)
+    (action/load-search-result :source ::load-search-result-test
+                                :category :people
+                                :result '("2" "3" "4"))
+    (take! done-ch (fn [_] (done))))
+
+  (after (untap search/done done-ch))
+
+  (it "should put search results in app-state"
+    (expect (get-in @app-state [:search :people])
+            :to-eql '("2" "3" "4"))))

@@ -25,6 +25,11 @@
   (search/people firstname lastname university)
   (go nil))
 
+(defmethod response :load-search-result
+  [{:keys [category result]}]
+  (set-in! search [category] result)
+  (go nil))
+
 
 
 ;; The main loop to listen to actions
