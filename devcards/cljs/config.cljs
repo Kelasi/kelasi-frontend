@@ -10,6 +10,7 @@
             [kelasi-frontend.components.login-box-devcards]
             [kelasi-frontend.components.find-friends-box-devcards]
             [kelasi-frontend.components.mini-user-card-devcards]
+            [kelasi-frontend.components.found-friends-box-devcards]
 
             ; Stores
             [kelasi-frontend.stores.users]
