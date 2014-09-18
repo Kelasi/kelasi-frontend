@@ -3,7 +3,7 @@
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
             [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]
-            #_[kelasi-frontend.actions :refer (signup)]))
+            [kelasi-frontend.actions :refer (signup)]))
 
 
 
@@ -69,5 +69,10 @@
                                   (.. % -target -value))}))
      (dom/button
        {:type "button"
-        :on-click #(pr @state)}
+        :on-click #(apply signup (-> @state
+                                     (select-keys [:username :firstname
+                                                   :lastname :university
+                                                   :password])
+                                     (assoc :source ::signup-final-box)
+                                     ((partial mapcat identity))))}
        "Singup!"))))

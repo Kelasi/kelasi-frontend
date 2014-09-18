@@ -88,3 +88,19 @@
   [& {:as params}]
   (s/validate load-search-result-schema params)
   (dispatch/dispatch (assoc params :action :load-search-result)))
+
+
+
+(def signup-schema
+  {:source s/Keyword
+   :username s/Str
+   :firstname s/Str
+   :lastname s/Str
+   :university s/Str
+   :password s/Str})
+
+(defn signup
+  "View - When user tries to signup"
+  [& {:as params}]
+  (s/validate signup-schema params)
+  (dispatch/dispatch (assoc params :action :signup)))
