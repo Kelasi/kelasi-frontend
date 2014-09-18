@@ -8,4 +8,4 @@
   (dc/edn-card @app-state))
 
 (defcard find-friends-box-component
-  (dc/om-root-card find-friends-box {}))
+  (dc/om-root-card find-friends-box {:on-search (fn [f l u] (pr "searching for:" f l u))}))
