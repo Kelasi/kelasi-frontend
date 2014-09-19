@@ -25,7 +25,10 @@
 
   (it "should not call backend.timeline/get-one when the timeline is already loaded" [done]
     (go
-      (swap! app-state assoc-in [:timelines :all-timelines (:id timeline-data)] timeline-data)
+      (action/load-timeline :source ::go-to-timeline-test
+                            :timeline timeline-data)
+
+      (<! ch)
 
       (action/go-to-timeline :source ::go-to-timeline-test
                              :timeline-id (:id timeline-data))
