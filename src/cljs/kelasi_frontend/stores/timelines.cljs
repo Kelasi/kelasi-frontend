@@ -12,6 +12,15 @@
 
 
 
+;; State manupulation functions
+
+(defn set-timeline
+  "Set the timeline under timelines/all-timelines of app-state"
+  [{id :id :as timeline}]
+  (set-in! timelines [:all-timelines id] timeline))
+
+
+
 ;; Action response functions
 
 (defmulti action-response :action)
@@ -24,6 +33,11 @@
   [{:keys [timeline-id]}]
   (when-not (get-in @timelines [:all-timelines timeline-id])
     (get-one))
+  (go nil))
+
+(defmethod action-response :load-timeline
+  [{:keys [timeline]}]
+  (set-timeline timeline)
   (go nil))
 
 

@@ -46,3 +46,20 @@
       (expect (.-calledOnce get-one) :to-be-true)
 
       (done))))
+
+
+
+(describe "load-timeline action"
+  (it "should put the timeline under timelines/all-timelines" [done]
+    (go
+      (tap timelines/done ch)
+
+      (action/load-timeline :source ::load-timeline-test
+                            :timeline timeline-data)
+
+      (<! ch)
+
+      (expect (get-in @app-state [:timelines :all-timelines (:id timeline-data)]) :to-equal timeline-data)
+
+      (untap timelines/done ch)
+      (done))))
