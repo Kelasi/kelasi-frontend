@@ -100,3 +100,16 @@
   [& {:as params}]
   (s/validate go-to-timeline-schema params)
   (dispatch/dispatch (assoc params :action :go-to-timeline)))
+
+
+
+
+(def load-timeline-schema
+  {:source s/Keyword
+   :timeline {s/Any s/Any}})
+
+(defn load-timeline
+  "Backend - When the server send a timeline"
+  [& {:as params}]
+  (s/validate load-timeline-schema params)
+  (dispatch/dispatch (assoc params :action :load-timeline)))
