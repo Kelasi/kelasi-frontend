@@ -6,81 +6,80 @@
             [kelasi-frontend.actions :as action]
             [kelasi-frontend.backend.session :refer (login)]
             [kelasi-frontend.state :refer (app-state)]
-            [cljs.core.async :refer (chan tap untap <!)]))
+            [cljs.core.async :refer (chan tap untap take!)]))
 
 
+
+(def done-ch (chan))
 
 (def login-data {:username "John" :password "BlahBlah"})
 
 (describe "try-login action"
-  (before
-    (.stub js/sinon kelasi-frontend.backend.session "login"))
+  (before [done]
+    (.stub js/sinon kelasi-frontend.backend.session "login")
+    (tap users/done done-ch)
+    (action/try-login :source ::try-login-test
+                      :username (:username login-data)
+                      :password (:password login-data))
+    (take! done-ch #(done)))
 
   (after
-    (.restore login))
+    (.restore login)
+    (untap users/done done-ch))
 
-  (it "should call backend.session/login with username and password" [done]
-      (go (let [ch (chan)]
-            (tap users/done ch)
-
-            (action/try-login :source ::try-login-test
-                              :username (:username login-data)
-                              :password (:password login-data))
-            (<! ch)
-
-            (expect (.-calledOnce login) :to-be-true)
-            (expect (.calledWithExactly login "John" "BlahBlah") :to-be-true)
-            (untap users/done ch)
-        (done)))))
+  (it "should call backend.session/login with username and password"
+    (expect (.-calledOnce login) :to-be-true)
+    (expect (.calledWithExactly login "John" "BlahBlah") :to-be-true)))
 
 
 
 (def user-data {:id "123"})
 
 (describe "load-user action"
-  (it "should put the id of a user under users/all-users" [done]
-    (go (let [ch (chan)]
-          (tap users/done ch)
+  (before [done]
+    (tap users/done done-ch)
+    (action/load-user :source ::load-user-test
+                      :user   user-data)
+    (take! done-ch #(done)))
 
-          (action/load-user :source ::load-user-test
-                            :user   user-data)
-          (<! ch)
+  (after
+    (untap users/done done-ch))
 
-          (expect (get-in @app-state [:users :all-users (:id user-data)])
-                  :to-equal user-data)
-          (untap users/done ch)
-          (done)))))
+  (it "should put the id of a user under users/all-users"
+    (expect (get-in @app-state [:users :all-users (:id user-data)])
+            :to-equal user-data)))
 
 
 
 (describe "login action"
-  (it "should put the user under users/current-user" [done]
-    (go (let [ch (chan)]
-          (tap users/done ch)
+  (before [done]
+    (tap users/done done-ch)
+    (action/load-user :source ::login-test
+                      :user   user-data)
+    (take! done-ch identity)
+    (action/login :source  ::login-test
+                  :user-id (:id user-data))
+    (take! done-ch #(done)))
 
-          (action/load-user :source ::login-test
-                            :user   user-data)
-          (<! ch)
-          (action/login :source  ::login-test
-                        :user-id (:id user-data))
-          (<! ch)
+  (after
+    (untap users/done done-ch))
 
-          (expect (get-in @app-state [:users :current-user])
-                  :to-equal user-data)
-          (untap users/done ch)
-          (done)))))
+  (it "should put the user under users/current-user"
+    (expect (get-in @app-state [:users :current-user])
+            :to-equal user-data)))
 
 
 
 (describe "wrong-login action"
-  (it "should put nil under users/current-user" [done]
+  (before [done]
     (swap! app-state assoc-in [:users :current-user] :some-value)
+    (tap users/done done-ch)
+    (action/wrong-login :source ::wrong-login-test)
+    (take! done-ch #(done)))
 
-    (go (let [ch (chan)]
-          (tap users/done ch)
-          (action/wrong-login :source ::wrong-login-test)
-          (<! ch)
-          (expect (get-in @app-state [:users :current-user])
-                  :to-not-exist)
-          (untap users/done ch)
-          (done)))))
+  (after
+    (untap users/done done-ch))
+
+  (it "should put nil under users/current-user"
+    (expect (get-in @app-state [:users :current-user])
+            :to-not-exist)))
