@@ -5,6 +5,7 @@
   (:require [kelasi-frontend.stores.users :as users]
             [kelasi-frontend.actions :as action]
             [kelasi-frontend.backend.session :refer (login)]
+            [kelasi-frontend.backend.users   :refer (create)]
             [kelasi-frontend.state :refer (app-state)]
             [cljs.core.async :refer (chan tap untap take!)]))
 
@@ -83,3 +84,26 @@
   (it "should put nil under users/current-user"
     (expect (get-in @app-state [:users :current-user])
             :to-not-exist)))
+
+
+
+(describe "signup action"
+  (before [done]
+    (.stub js/sinon kelasi-frontend.backend.users "create")
+    (tap users/done done-ch)
+    (action/signup :source ::signup-test
+                   :username "johndoe"
+                   :firstname "John"
+                   :lastname "Doe"
+                   :university "Taashkand"
+                   :password "123")
+    (take! done-ch #(done)))
+
+  (after
+    (.restore create)
+    (untap users/done done-ch))
+
+  (it "should call backend.users/create with appropriate parameters"
+    (expect (.-calledOnce create) :to-be-true)
+    (expect (.calledWithExactly create "johndoe" "John" "Doe" "Taashkand" "123")
+            :to-be-true)))
