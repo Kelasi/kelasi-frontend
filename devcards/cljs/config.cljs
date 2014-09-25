@@ -5,6 +5,9 @@
             ; Fake server
             [mocks.server :as server]
 
+            ; Echo store
+            [mocks.echo-store]
+
             ; Component devcards
             [kelasi-frontend.components.root-devcards]
             [kelasi-frontend.components.login-box-devcards]
