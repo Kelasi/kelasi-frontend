@@ -93,11 +93,12 @@
 
 (def signup-schema
   {:source s/Keyword
-   :username s/Str
    :firstname s/Str
    :lastname s/Str
    :university s/Str
-   :password s/Str})
+   :email s/Str
+   :password s/Str
+   :introducer-id s/Str})
 
 (defn signup
   "View - When user tries to signup"

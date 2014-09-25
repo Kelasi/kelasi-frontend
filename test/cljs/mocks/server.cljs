@@ -48,6 +48,7 @@
   "Hash of routes to responses"
   {(POST "session") (response-json user/user1)
    (POST "search/people") (response-json [user/user1])
+   (POST "users") (response-json user/user1)
    })
 
 (defn fake

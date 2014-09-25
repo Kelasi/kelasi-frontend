@@ -2,7 +2,7 @@
   (:require-macros [cljs.core.async.macros :refer (go)])
   (:require [kelasi-frontend.stores.core :refer (process store set-in!)]
             [kelasi-frontend.backend.session :as session]
-            [kelasi-frontend.backend.users   :as users]
+            [kelasi-frontend.backend.users   :as users-be]
             [cljs.core.async :refer (mult)]))
 
 
@@ -61,8 +61,13 @@
   (go nil))
 
 (defmethod action-response :signup
-  [{:keys [username firstname lastname university password]}]
-  (users/create username firstname lastname university password)
+  [{:keys [firstname
+           lastname
+           university
+           email
+           password
+           introducer-id]}]
+  (users-be/create firstname lastname university email password introducer-id)
   (go nil))
 
 

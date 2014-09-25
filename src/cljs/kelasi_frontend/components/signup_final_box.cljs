@@ -12,10 +12,10 @@
   [[:data introducer] owner state]
   (init-state
    [_]
-   {:username    ""
-    :firstname   ""
+   {:firstname   ""
     :lastname    ""
     :university  ""
+    :email       ""
     :password    ""
     :re-password ""})
   (render
@@ -25,13 +25,6 @@
             (om/build mini-user-card {:selected false
                                       :user introducer
                                       :on-click identity}))
-     (dom/p "User name"
-            (dom/input
-              {:type "text"
-               :value (:username @state)
-               :on-change #(swap! state
-                                  assoc :username
-                                  (.. % -target -value))}))
      (dom/p "First name"
             (dom/input
               {:type "text"
@@ -53,6 +46,13 @@
                :on-change #(swap! state
                                   assoc :university
                                   (.. % -target -value))}))
+     (dom/p "Email"
+            (dom/input
+              {:type "text"
+               :value (:email @state)
+               :on-change #(swap! state
+                                  assoc :email
+                                  (.. % -target -value))}))
      (dom/p "Password"
             (dom/input
               {:type "password"
@@ -70,9 +70,10 @@
      (dom/button
        {:type "button"
         :on-click #(apply signup (-> @state
-                                     (select-keys [:username :firstname
-                                                   :lastname :university
+                                     (select-keys [:firstname :lastname
+                                                   :university :email
                                                    :password])
-                                     (assoc :source ::signup-final-box)
+                                     (assoc :source ::signup-final-box
+                                            :introducer-id (:id @introducer))
                                      ((partial mapcat identity))))}
        "Singup!"))))
