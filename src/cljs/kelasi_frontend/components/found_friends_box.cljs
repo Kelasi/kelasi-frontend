@@ -9,22 +9,23 @@
 
 (omtool/defcomponentk found-friends-box
   "Second step of registration."
-  [[:data friends on-select] owner state]
+  [[:data ids people on-select] owner state]
   (init-state
-   [_]
-   {:selected 0})
+    [_]
+    {:selected nil})
   (render
-   [_]
-   (dom/div
-     (dom/p "Select your friend:")
+    [_]
+    (dom/div
+      (dom/p "Select your friend:")
 
-     (for [fi (range (count friends))
-           :let [f (nth friends fi)]]
-       (om/build mini-user-card {:selected (= fi (:selected @state))
-                                 :user f
-                                 :on-click #(swap! state assoc :selected fi)}))
+      (for [fid ids
+            :let [f (get people fid)]]
+        (om/build mini-user-card {:selected (= f (:selected @state))
+                                  :user f
+                                  :on-click #(swap! state assoc :selected f)}))
 
-     (dom/button
-       {:type "button"
-        :on-click #(on-select (nth @friends (:selected @state)))}
-       "Select"))))
+      (when (:selected @state)
+        (dom/button
+          {:type "button"
+           :on-click #(on-select @(:selected @state))}
+          "Select")))))

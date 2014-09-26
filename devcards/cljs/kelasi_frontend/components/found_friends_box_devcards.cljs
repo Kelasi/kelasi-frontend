@@ -8,7 +8,9 @@
 (defcard global-state
   (dc/edn-card @app-state))
 
-(def state {:friends [user1 user2 user3]
+(def users [user1 user2 user3])
+(def state {:ids (mapv :id users)
+            :people (zipmap (mapv :id users) users)
             :on-select (fn [s] (pr "Selected:" s))})
 
 (defcard found-friends-box-component

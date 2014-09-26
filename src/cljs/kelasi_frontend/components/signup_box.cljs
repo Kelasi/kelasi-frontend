@@ -16,7 +16,7 @@
 
 (omtool/defcomponentk signup-box
   "First page's signup box"
-  [[:data friends] owner state]
+  [[:data [:search people] [:users all-users]] owner state]
   (init-state
    [_]
    {:stage 1
@@ -32,7 +32,8 @@
                                                          :lastname lastname
                                                          :university university)
                                       (swap! state assoc :stage 2))})
-      2 (om/build found-friends-box {:friends friends
+      2 (om/build found-friends-box {:ids people
+                                     :people all-users
                                      :on-select (fn [introducer]
                                                   (swap! state
                                                          assoc

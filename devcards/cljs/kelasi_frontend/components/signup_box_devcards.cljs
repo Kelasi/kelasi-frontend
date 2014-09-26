@@ -9,4 +9,6 @@
   (dc/edn-card @app-state))
 
 (defcard signup-box-component
-  (dc/om-root-card signup-box {:friends [user1]}))
+  (dc/om-root-card signup-box {:users {:all-users
+                                       {(:id user1) user1}}
+                               :search {:people [(:id user1)]}}))
