@@ -92,10 +92,11 @@
     (.stub js/sinon kelasi-frontend.backend.users "create")
     (tap users/done done-ch)
     (action/signup :source ::signup-test
-                   :username "johndoe"
+                   :introducer-id "1"
                    :firstname "John"
                    :lastname "Doe"
                    :university "Taashkand"
+                   :email "john@doe.com"
                    :password "123")
     (take! done-ch #(done)))
 
@@ -105,5 +106,7 @@
 
   (it "should call backend.users/create with appropriate parameters"
     (expect (.-calledOnce create) :to-be-true)
-    (expect (.calledWithExactly create "johndoe" "John" "Doe" "Taashkand" "123")
+    (expect (.calledWithExactly create
+                                "John" "Doe" "Taashkand"
+                                "john@doe.com" "123" "1")
             :to-be-true)))
