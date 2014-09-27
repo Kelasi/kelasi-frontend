@@ -105,3 +105,15 @@
   [& {:as params}]
   (s/validate signup-schema params)
   (dispatch/dispatch (assoc params :action :signup)))
+
+
+
+(def search-all-schema
+  {:source s/Keyword
+   :q s/Str})
+
+(defn search-all
+  "View - When user searches in the first page"
+  [& {:as params}]
+  (s/validate search-all-schema params)
+  (dispatch/dispatch (assoc params :action :search-all)))
