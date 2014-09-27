@@ -3,8 +3,7 @@
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
             [kelasi-frontend.components.login-box :refer (login-box)]
-            [kelasi-frontend.components.signup-box :refer (signup-box)]
-            [kelasi-frontend.actions :refer (try-login)]))
+            [kelasi-frontend.components.signup-box :refer (signup-box)]))
 
 
 
