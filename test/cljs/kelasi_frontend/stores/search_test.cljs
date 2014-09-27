@@ -4,7 +4,7 @@
                    [cljs.core.async.macros :refer (go)])
   (:require [kelasi-frontend.stores.search :as search]
             [kelasi-frontend.actions :as action]
-            [kelasi-frontend.backend.search :refer (people)]
+            [kelasi-frontend.backend.search :refer (people all)]
             [kelasi-frontend.state :refer (app-state)]
             [cljs.core.async :refer (chan tap untap take!)]))
 
@@ -52,3 +52,23 @@
   (it "should put search results in app-state"
     (expect (get-in @app-state [:search :people])
             :to-eql '("2" "3" "4"))))
+
+
+
+(describe "search-all action"
+  (before [done]
+    (.stub js/sinon kelasi-frontend.backend.search "all")
+
+    (tap search/done done-ch)
+    (action/search-all :source ::search-all-test
+                       :q "testing")
+
+    (take! done-ch (fn [_] (done))))
+
+  (after
+    (.restore all)
+    (untap search/done done-ch))
+
+  (it "should call backend.search/all with query string"
+    (expect (.-calledOnce all) :to-be-true)
+    (expect (.calledWithExactly all "testing") :to-be-true)))

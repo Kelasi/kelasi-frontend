@@ -29,3 +29,10 @@
                              :orig   `(people ~firstname
                                               ~lastname
                                               ~university))))))
+
+
+
+(defn all
+  "Search through all data"
+  [query]
+  )

@@ -30,6 +30,11 @@
   (set-in! search [category] result)
   (go nil))
 
+(defmethod response :search-all
+  [{:keys [q]}]
+  (search/all q)
+  (go nil))
+
 
 
 ;; The main loop to listen to actions
