@@ -117,3 +117,14 @@
   [& {:as params}]
   (s/validate search-all-schema params)
   (dispatch/dispatch (assoc params :action :search-all)))
+
+
+
+(def show-self-profile-schema
+  {:source s/Keyword})
+
+(defn show-self-profile
+  "View - When user clicks on his own name"
+  [& {:as params}]
+  (s/validate show-self-profile-schema params)
+  (dispatch/dispatch (assoc params :action :show-self-profile)))
