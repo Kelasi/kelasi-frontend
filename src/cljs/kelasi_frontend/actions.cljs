@@ -88,3 +88,28 @@
   [& {:as params}]
   (s/validate load-search-result-schema params)
   (dispatch/dispatch (assoc params :action :load-search-result)))
+
+
+
+(def go-to-timeline-schema
+  {:source s/Keyword
+   :timeline-id s/Int})
+
+(defn go-to-timeline
+  "View - When a user click on a timeline link"
+  [& {:as params}]
+  (s/validate go-to-timeline-schema params)
+  (dispatch/dispatch (assoc params :action :go-to-timeline)))
+
+
+
+
+(def load-timeline-schema
+  {:source s/Keyword
+   :timeline {s/Any s/Any}})
+
+(defn load-timeline
+  "Backend - When the server send a timeline"
+  [& {:as params}]
+  (s/validate load-timeline-schema params)
+  (dispatch/dispatch (assoc params :action :load-timeline)))
