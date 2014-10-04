@@ -3,7 +3,7 @@
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
             [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]
-            #_[kelasi-frontend.actions :refer (select-introducer)]))
+            [kelasi-frontend.components.user-list-box :refer (user-list-box)]))
 
 
 
@@ -18,11 +18,10 @@
     (dom/div
       (dom/p "Select your friend:")
 
-      (for [fid ids
-            :let [f (get people fid)]]
-        (om/build mini-user-card {:selected (= f (:selected @state))
-                                  :user f
-                                  :on-click #(swap! state assoc :selected f)}))
+      (om/build user-list-box {:ids ids
+                               :people people
+                               :selected (:selected @state)
+                               :on-select #(swap! state assoc :selected %)})
 
       (when (:selected @state)
         (dom/button
