@@ -8,5 +8,5 @@
 (defcard global-state
   (dc/edn-card @app-state))
 
-(defcard found-friends-box-component
+(defcard signup-final-box-component
   (dc/om-root-card signup-final-box {:introducer user1}))
