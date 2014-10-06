@@ -22,6 +22,7 @@
             [kelasi-frontend.components.found-friends-box-devcards]
             [kelasi-frontend.components.user-list-box-devcards]
             [kelasi-frontend.components.signup-final-box-devcards]
+            [kelasi-frontend.components.post-box-devcards]
 
             ; Stores
             [kelasi-frontend.stores.users]
