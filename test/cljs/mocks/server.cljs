@@ -1,5 +1,6 @@
 (ns mocks.server
-  (:require [mocks.user :as user]))
+  (:require [mocks.user :as user]
+            [mocks.post :as post]))
 
 
 (def ^:private server
@@ -49,6 +50,7 @@
   {(POST "session") (response-json user/user1)
    (POST "search/people") (response-json [user/user1])
    (POST "users") (response-json user/user1)
+   (POST "timelines/1/posts") (response-json post/post1)
    })
 
 (defn fake

@@ -6,5 +6,5 @@
 
 
 (defcard new-post-box-component
-  (dc/om-root-card new-post-box {:timeline-id "2"
+  (dc/om-root-card new-post-box {:timeline-id "1"
                                  :parent-id "0"}))

@@ -142,3 +142,15 @@
   [& {:as params}]
   (s/validate new-post-schema params)
   (dispatch/dispatch (assoc params :action :new-post)))
+
+
+
+(def load-post-schema
+  {:source s/Keyword
+   :post {s/Any s/Any}})
+
+(defn load-post
+  "Backend - When a new post arrives from server"
+  [& {:as params}]
+  (s/validate load-post-schema params)
+  (dispatch/dispatch (assoc params :action :load-post)))
