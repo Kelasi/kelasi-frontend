@@ -5,6 +5,7 @@
    [kelasi-frontend.routes-test]
    [kelasi-frontend.utilities-test]
    [kelasi-frontend.stores.users-test]
+   [kelasi-frontend.stores.posts-test]
    [kelasi-frontend.stores.search-test]
    [kelasi-frontend.stores.routes-test]
    [kelasi-frontend.stores.errors-test]
