@@ -23,6 +23,7 @@
             [kelasi-frontend.components.user-list-box-devcards]
             [kelasi-frontend.components.signup-final-box-devcards]
             [kelasi-frontend.components.post-box-devcards]
+            [kelasi-frontend.components.coverphoto-box-devcards]
 
             ; Stores
             [kelasi-frontend.stores.users]
