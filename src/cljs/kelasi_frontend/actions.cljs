@@ -128,3 +128,17 @@
   [& {:as params}]
   (s/validate show-self-profile-schema params)
   (dispatch/dispatch (assoc params :action :show-self-profile)))
+
+
+
+(def new-post-schema
+  {:source s/Keyword
+   :timeline-id s/Str
+   :parent-id s/Str
+   :body s/Str})
+
+(defn new-post
+  "View - When a user posts on a timeline"
+  [& {:as params}]
+  (s/validate new-post-schema params)
+  (dispatch/dispatch (assoc params :action :new-post)))

@@ -26,6 +26,7 @@
             [kelasi-frontend.components.coverphoto-box-devcards]
             [kelasi-frontend.components.profile-about-box-devcards]
             [kelasi-frontend.components.timeline-about-box-devcards]
+            [kelasi-frontend.components.new-post-box-devcards]
 
             ; Stores
             [kelasi-frontend.stores.users]
