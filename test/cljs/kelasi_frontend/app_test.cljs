@@ -22,5 +22,5 @@
     (utils/after 500
       (fn []
         (let [comp-text (.. js/document (querySelector "#test") -innerHTML)]
-          (expect comp-text :to-equal "{:test 123}"))
+          (expect comp-text :to-equal "{\n  \"test\": 123\n}"))
         (done)))))

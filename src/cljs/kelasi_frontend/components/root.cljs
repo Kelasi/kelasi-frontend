@@ -7,4 +7,4 @@
 
 (ot/defcomponentk root [data :- s/Any]
   (render [_]
-          (dom/h1 {:id "test"} (pr-str data))))
+          (dom/pre {:id "test"} (.stringify js/JSON (clj->js data) nil 2))))
