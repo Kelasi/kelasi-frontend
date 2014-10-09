@@ -18,5 +18,12 @@
   {:id "4"
    :user-id "2"
    :timeline-id "1"
-   :parent-id "0"
+   :parent-id "2"
    :body "Test post 3"})
+
+(def post4
+  {:id "5"
+   :user-id "2"
+   :timeline-id "1"
+   :parent-id "2"
+   :body "Test post 4"})

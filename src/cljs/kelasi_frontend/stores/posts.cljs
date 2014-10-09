@@ -26,6 +26,23 @@
   (posts-be/create timeline-id parent-id body)
   (go nil))
 
+(defmethod response :load-post
+  [{{:keys [timeline-id parent-id] :as post} :post}]
+  (let [timeline-posts (get @posts timeline-id ())
+        timeline-posts (if (= "0" parent-id)
+                         (cons post timeline-posts)
+                         (let [;Split timeline-posts at parent-id
+                               [head-posts [parent-post & tail-posts]]
+                               (split-with #(not= parent-id (:id %))
+                                           timeline-posts)
+
+                               parent-post (->> (get parent-post :replies ())
+                                                (cons post)
+                                                (assoc parent-post :replies))]
+                           (concat head-posts (list parent-post) tail-posts)))]
+    (swap! posts assoc timeline-id timeline-posts))
+  (go nil))
+
 
 
 ;; The main loop to listen to actions
