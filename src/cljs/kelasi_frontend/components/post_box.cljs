@@ -1,8 +1,7 @@
 (ns kelasi-frontend.components.post-box
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
-            [om.core       :as om     :include-macros true]
-            [kelasi-frontend.components.post-list :refer (post-list)]))
+            [om.core       :as om     :include-macros true]))
 
 
 
@@ -17,5 +16,6 @@
           (dom/img {:src (:img user)})
           (:full-name user)))
       (dom/div (:body post))
-      (om/build post-list {:posts (:replies post)
-                           :all-users all-users}))))
+      (for [reply (:replies post)]
+        (om/build post-box {:post reply
+                            :all-users all-users})))))
