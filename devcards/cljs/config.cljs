@@ -22,6 +22,7 @@
             [kelasi-frontend.components.signup-progress-breadcrumb-devcards]
             [kelasi-frontend.components.found-friends-box-devcards]
             [kelasi-frontend.components.user-list-box-devcards]
+            [kelasi-frontend.components.timeline-list-box-devcards]
             [kelasi-frontend.components.signup-final-box-devcards]
             [kelasi-frontend.components.post-box-devcards]
             [kelasi-frontend.components.coverphoto-box-devcards]
