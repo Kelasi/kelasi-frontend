@@ -13,6 +13,7 @@
             [kelasi-frontend.components.navbar-devcards]
             [kelasi-frontend.components.entrance-page-devcards]
             [kelasi-frontend.components.timeline-page-devcards]
+            [kelasi-frontend.components.search-page-devcards]
             [kelasi-frontend.components.login-box-devcards]
             [kelasi-frontend.components.search-box-devcards]
             [kelasi-frontend.components.signup-box-devcards]
