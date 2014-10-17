@@ -29,7 +29,7 @@
   [_]
   (go nil))
 
-(defmethod action-response :go-to-timeline
+(defmethod action-response :show-timeline
   [{:keys [timeline-id]}]
   (when-not (get-in @timelines [:all-timelines timeline-id])
     (get-one))

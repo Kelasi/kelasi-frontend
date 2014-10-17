@@ -14,7 +14,7 @@
 
 (def ch (chan))
 
-(describe "go-to-timeline action"
+(describe "show-timeline action"
   (before
     (.stub js/sinon kelasi-frontend.backend.timelines "get_one")
     (tap timelines/done ch))
@@ -25,12 +25,12 @@
 
   (it "should not call backend.timeline/get-one when the timeline is already loaded" [done]
     (go
-      (action/load-timeline :source ::go-to-timeline-test
+      (action/load-timeline :source ::show-timeline-test
                             :timeline timeline-data)
 
       (<! ch)
 
-      (action/go-to-timeline :source ::go-to-timeline-test
+      (action/show-timeline :source ::show-timeline-test
                              :timeline-id (:id timeline-data))
       (<! ch)
 
@@ -42,7 +42,7 @@
     (go
       (swap! app-state assoc-in [:timelines :all-timelines (:id timeline-data)] nil)
 
-      (action/go-to-timeline :source ::go-to-timeline-test
+      (action/show-timeline :source ::show-timeline-test
                              :timeline-id (:id timeline-data))
       (<! ch)
 

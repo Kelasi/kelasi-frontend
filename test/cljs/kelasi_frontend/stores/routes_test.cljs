@@ -32,11 +32,11 @@
     (expect (get-in @app-state [:routes :current])
             :to-equal "/profile/johnGalt")))
 
-(describe "go-to-timeline action"
+(describe "show-timeline action"
   (before [done]
     (tap routes/done done-ch)
 
-    (action/go-to-timeline :source ::go-to-timeline-test
+    (action/show-timeline :source ::show-timeline-test
                            :timeline-id 123)
 
     (take! done-ch (fn [_] (done))))
