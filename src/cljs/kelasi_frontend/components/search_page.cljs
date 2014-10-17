@@ -6,7 +6,9 @@
             [kelasi-frontend.components.timeline-list-box
              :refer (timeline-list-box)]
             [kelasi-frontend.components.user-list-box
-             :refer (user-list-box)]))
+             :refer (user-list-box)]
+            [kelasi-frontend.actions
+             :refer (show-timeline show-user-profile)]))
 
 
 
@@ -25,10 +27,12 @@
       (om/build timeline-list-box {:ids timelines
                                    :timelines all-timelines
                                    :people all-users
-                                   :on-select #(pr "timeline" %)})
+                                   :on-select #(show-timeline :source ::search-page
+                                                              :timeline-id (:id @%))})
 
       (dom/h2 "Found users")
       (om/build user-list-box {:ids people
                                :people all-users
                                :selected nil
-                               :on-select #(pr "user" @%)}))))
+                               :on-select #(show-user-profile :source ::search-page
+                                                              :user-id (:id @%))}))))

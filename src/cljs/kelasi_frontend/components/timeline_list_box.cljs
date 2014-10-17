@@ -18,4 +18,4 @@
                   a (get people (:admin-id t))]]
         (om/build mini-timeline-card {:timeline t
                                       :admin a
-                                      :on-click #(on-select @t)})))))
+                                      :on-click #(on-select t)})))))

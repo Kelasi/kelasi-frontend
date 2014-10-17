@@ -159,13 +159,24 @@
 
 (def show-timeline-schema
   {:source s/Keyword
-   :timeline-id s/Int})
+   :timeline-id s/Str})
 
 (defn show-timeline
   "View - When a user click on a timeline link"
   [& {:as params}]
   (s/validate show-timeline-schema params)
   (dispatch/dispatch (assoc params :action :show-timeline)))
+
+
+
+(def show-user-profile-schema
+  {:source s/Keyword
+   :user-id s/Str})
+
+(defn show-user-profile
+  [& {:as params}]
+  (s/validate show-user-profile params)
+  (dispatch/dispatch (assoc params :action :show-user-profile)))
 
 
 
