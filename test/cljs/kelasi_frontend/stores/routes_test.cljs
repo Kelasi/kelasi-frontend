@@ -37,7 +37,7 @@
     (tap routes/done done-ch)
 
     (action/show-timeline :source ::show-timeline-test
-                           :timeline-id 123)
+                           :timeline-id "123")
 
     (take! done-ch (fn [_] (done))))
 

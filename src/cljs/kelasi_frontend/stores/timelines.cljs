@@ -32,7 +32,7 @@
 (defmethod action-response :show-timeline
   [{:keys [timeline-id]}]
   (when-not (get-in @timelines [:all-timelines timeline-id])
-    (get-one))
+    (get-one timeline-id))
   (go nil))
 
 (defmethod action-response :load-timeline

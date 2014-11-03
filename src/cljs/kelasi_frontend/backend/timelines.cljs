@@ -2,4 +2,4 @@
 
 (defn get-one
   "Try to get a timeline from server"
-  [])
+  [timeline-id])

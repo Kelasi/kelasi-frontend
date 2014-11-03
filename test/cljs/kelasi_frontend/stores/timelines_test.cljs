@@ -10,7 +10,7 @@
 
 
 
-(def timeline-data {:id 123})
+(def timeline-data {:id "123"})
 
 (def ch (chan))
 
@@ -31,22 +31,23 @@
       (<! ch)
 
       (action/show-timeline :source ::show-timeline-test
-                             :timeline-id (:id timeline-data))
+                            :timeline-id (:id timeline-data))
       (<! ch)
 
       (expect (.-called get-one) :to-be-false)
 
       (done)))
 
-  (it "should call backend.timeline/get-one when the timeline is not loaded" [done]
+  (it "should call backend.timeline/get-one with proper parameter when the timeline is not loaded" [done]
     (go
       (swap! app-state assoc-in [:timelines :all-timelines (:id timeline-data)] nil)
 
       (action/show-timeline :source ::show-timeline-test
-                             :timeline-id (:id timeline-data))
+                            :timeline-id (:id timeline-data))
       (<! ch)
 
       (expect (.-calledOnce get-one) :to-be-true)
+      (expect (.calledWithExactly get-one (:id timeline-data)) :to-be-true)
 
       (done))))
 
