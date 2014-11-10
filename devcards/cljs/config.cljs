@@ -38,7 +38,7 @@
             [kelasi-frontend.stores.search]
             [kelasi-frontend.stores.routes]
             [kelasi-frontend.stores.errors]
-            ))
+            [kelasi-frontend.stores.timelines]))
 
 (enable-console-print!)
 
