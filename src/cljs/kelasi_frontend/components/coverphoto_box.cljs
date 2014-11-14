@@ -10,6 +10,7 @@
   (render
     [_]
     (dom/div
-      (dom/img {:style {:width "100%"}
+      (dom/img {:style {:width "100%"
+                        :height "240px"}
                 :src img})
       (dom/h2 {:style {:margin "-50px 0 0 20px"}} text))))
