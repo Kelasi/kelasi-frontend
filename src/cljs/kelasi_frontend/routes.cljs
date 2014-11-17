@@ -1,10 +1,15 @@
 (ns kelasi-frontend.routes
   (:require-macros [secretary.core :refer (defroute)])
   (:require [secretary.core]
-            #_[kelasi-frontend.actions :refer (change-page)]))
+            [kelasi-frontend.actions :refer (change-page)]
+            [kelasi-frontend.components.entrance-page :refer (entrance-page)]))
+
+
 
 (defroute home-path "/" []
-  (js/console.log "We are at home!"))
+  (change-page :source ::router
+               :page entrance-page
+               :params []))
 
-(defroute sub-path "/:path" [path]
+(defroute sub-path "*" {path :*}
   (js/console.log "We are at " path))
