@@ -1,6 +1,6 @@
 (ns kelasi-frontend.all-tests
   (:require
-   [kelasi-frontend.app-test]
+   ;; [kelasi-frontend.app-test]
    [kelasi-frontend.dispatcher-test]
    [kelasi-frontend.location-test]
    [kelasi-frontend.utilities-test]

@@ -21,8 +21,7 @@
                                     [:script {:src "/vendor/react/react.js"}]
                                     [:script {:src "/vendor/sinon-1.10.3.js"}]
                                     [:script {:src "/js_test/kelasi_frontend.js"}]
-                                    [:script "goog.require('kelasi_frontend.app');
-                                              goog.require('kelasi_frontend.all_tests');"])))
+                                    [:script "goog.require('kelasi_frontend.all_tests');"])))
 
 (defroutes site
   (resources "/")
