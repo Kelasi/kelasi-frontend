@@ -7,7 +7,7 @@
 
 
 
-(describe "index page"
+#_(describe "index page"
   (def state (atom nil))
 
   (before

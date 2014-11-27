@@ -4,6 +4,7 @@
   (:require [kelasi-frontend.stores.routes :as routes]
             [kelasi-frontend.actions :as action]
             [kelasi-frontend.state :refer (app-state)]
+            [kelasi-frontend.location :as location]
             [cljs.core.async :refer (chan tap untap take!)]
             [mocks.location :as loc]))
 
@@ -31,8 +32,8 @@
     (untap routes/done done-ch)
     (loc/restore))
 
-  (it "should put profile_name into routes/current"
-    (expect (get-in @app-state [:routes :current])
+  (it "should go to /profile/:profile_name"
+    (expect (location/current-route)
             :to-equal "/profile/johnGalt")))
 
 (describe "show-timeline action"
@@ -49,6 +50,6 @@
     (untap routes/done done-ch)
     (loc/restore))
 
-  (it "should put timeline_id under routes/current"
-    (expect (get-in @app-state [:routes :current])
+  (it "should go to /timeline/:timeline_id"
+    (expect (location/current-route)
             :to-equal "/timeline/123")))
