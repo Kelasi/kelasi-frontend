@@ -30,6 +30,13 @@
 
 
 
+(defn current-route
+  "Get the current route"
+  []
+  (.getToken history))
+
+
+
 (defn change-route
   "Change route token of current url"
   [path]
