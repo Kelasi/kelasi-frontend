@@ -1,7 +1,6 @@
 (ns kelasi-frontend.location
   (:require-macros [cljs.core.async.macros :refer (go go-loop)])
-  (:require [secretary.core :as secretary]
-            [kelasi-frontend.utilities :refer (listen)]
+  (:require [kelasi-frontend.utilities :refer (listen)]
             [cljs.core.async :refer (<!)]
             [goog.history.EventType :as EventType])
   (:import [goog.history Html5History]
@@ -23,7 +22,7 @@
 
 
 ;; Listen for navigation events and dispatch to router
-(go (-> (listen history EventType/NAVIGATE)
+#_(go (-> (listen history EventType/NAVIGATE)
         <!
         .-token
         secretary/dispatch!))

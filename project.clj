@@ -24,9 +24,7 @@
                  [org.clojars.mkhoeini/chaiify "0.1.0-SNAPSHOT"]
                  [devcards "0.1.2-SNAPSHOT"
                    :exclusions [org.clojure/clojurescript]]
-                 [figwheel "0.1.4-SNAPSHOT"]
-                 [secretary  "1.2.1"
-                   :exclusions [org.clojure/clojurescript]]]
+                 [figwheel "0.1.4-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [jarohen/lein-frodo "0.4.1"]
