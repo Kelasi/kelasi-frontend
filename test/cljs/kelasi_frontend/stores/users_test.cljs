@@ -7,7 +7,8 @@
             [kelasi-frontend.backend.session :refer (login)]
             [kelasi-frontend.backend.users   :refer (create)]
             [kelasi-frontend.state :refer (app-state)]
-            [cljs.core.async :refer (chan tap untap take!)]))
+            [cljs.core.async :refer (chan tap untap take!)]
+            [mocks.location :as loc]))
 
 
 
@@ -54,6 +55,7 @@
 
 (describe "login action"
   (before [done]
+    (loc/save)
     (tap users/done done-ch)
     (action/load-user :source ::login-test
                       :user   user-data)
@@ -63,7 +65,8 @@
     (take! done-ch #(done)))
 
   (after
-    (untap users/done done-ch))
+    (untap users/done done-ch)
+    (loc/restore))
 
   (it "should put the user under users/current-user"
     (expect (get-in @app-state [:users :current-user])

@@ -6,7 +6,8 @@
             [kelasi-frontend.actions :as action]
             [kelasi-frontend.backend.timelines :refer (get-one)]
             [kelasi-frontend.state :refer (app-state)]
-            [cljs.core.async :refer (chan tap untap <!)]))
+            [cljs.core.async :refer (chan tap untap <!)]
+            [mocks.location :as loc]))
 
 
 
@@ -16,12 +17,14 @@
 
 (describe "show-timeline action"
   (before
+    (loc/save)
     (.stub js/sinon kelasi-frontend.backend.timelines "get_one")
     (tap timelines/done ch))
 
   (after
     (.restore get-one)
-    (untap timelines/done ch))
+    (untap timelines/done ch)
+    (loc/restore))
 
   (it "should not call backend.timeline/get-one when the timeline is already loaded" [done]
     (go
