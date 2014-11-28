@@ -17,14 +17,14 @@
 
 (describe "show-timeline action"
   (before
-    (loc/save)
+    (loc/stub)
     (.stub js/sinon kelasi-frontend.backend.timelines "get_one")
     (tap timelines/done ch))
 
   (after
     (.restore get-one)
     (untap timelines/done ch)
-    (loc/restore))
+    (loc/unstub))
 
   (it "should not call backend.timeline/get-one when the timeline is already loaded" [done]
     (go

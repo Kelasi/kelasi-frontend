@@ -20,7 +20,7 @@
     (let [link (.createElement js/document "a")
           click-evt (.createEvent js/document "MouseEvent")
           clicks (u/listen link "click")]
-      (aset link "href" "#")
+      #_(aset link "href" "#")
       (.initEvent click-evt "click" true true)
       (.dispatchEvent link click-evt)
       (go (let [e (<! clicks)]

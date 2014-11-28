@@ -2,6 +2,7 @@
   (:require-macros [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)])
   (:require [kelasi-frontend.location :as location]
+            [kelasi-frontend.utilities :as util]
             [mocks.location :as loc]))
 
 
@@ -15,11 +16,16 @@
 
 (describe "change-route"
   (before
+    (location/stop-dispatch!)
     (loc/save)
     (location/change-route "/some-path/test"))
 
-  (after
-    (loc/restore))
+  (after [done]
+    (loc/restore)
+    (util/after 1500
+                (fn []
+                  (location/resume-dispatch!)
+                  (done))))
 
   (it "should change the location bar of browser"
     (expect (location/current-route) :to-equal  "/some-path/test")))

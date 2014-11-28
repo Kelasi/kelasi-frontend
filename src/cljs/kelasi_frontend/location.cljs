@@ -1,6 +1,8 @@
 (ns kelasi-frontend.location
   (:require-macros [cljs.core.async.macros :refer (go go-loop)])
-  (:require [kelasi-frontend.utilities :refer (listen)]
+  (:require [secretary.core :as secretary]
+            [kelasi-frontend.utilities :refer (listen)]
+            [kelasi-frontend.actions :refer (change-page)]
             [cljs.core.async :refer (<!)]
             [goog.history.EventType :as EventType])
   (:import [goog.history Html5History]
@@ -22,10 +24,26 @@
 
 
 ;; Listen for navigation events and dispatch to router
-#_(go (-> (listen history EventType/NAVIGATE)
-        <!
-        .-token
-        secretary/dispatch!))
+(def ^:dynamic *dispatch-navigations* true)
+(let [nav-chan (listen history EventType/NAVIGATE)]
+  (go-loop []
+           (let [nav (.-token (<! nav-chan))
+                 page (secretary/dispatch! nav)]
+             (when *dispatch-navigations*
+               (change-page :source ::location
+                            :page (first page)
+                            :params (second page))))
+           (recur)))
+
+(defn stop-dispatch!
+  "Stop the navigation event listener from dispatching change-page"
+  []
+  (set! *dispatch-navigations* false))
+
+(defn resume-dispatch!
+  "Resume dispatchin change-page on navigation events"
+  []
+  (set! *dispatch-navigations* true))
 
 
 

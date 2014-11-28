@@ -4,7 +4,6 @@
   (:require [kelasi-frontend.stores.routes :as routes]
             [kelasi-frontend.actions :as action]
             [kelasi-frontend.state :refer (app-state)]
-            [kelasi-frontend.location :as location]
             [cljs.core.async :refer (chan tap untap take!)]
             [mocks.location :as loc]))
 
@@ -17,7 +16,7 @@
 
 (describe "login action"
   (before [done]
-    (loc/save)
+    (loc/stub)
     (tap routes/done done-ch)
 
     (action/load-user :source ::login-test
@@ -30,15 +29,14 @@
 
   (after
     (untap routes/done done-ch)
-    (loc/restore))
+    (loc/unstub))
 
   (it "should go to /profile/:profile_name"
-    (expect (location/current-route)
-            :to-equal "/profile/johnGalt")))
+    (expect (loc/went-to? "/profile/johnGalt") :to-be-true)))
 
 (describe "show-timeline action"
   (before [done]
-    (loc/save)
+    (loc/stub)
     (tap routes/done done-ch)
 
     (action/show-timeline :source ::show-timeline-test
@@ -48,8 +46,7 @@
 
   (after
     (untap routes/done done-ch)
-    (loc/restore))
+    (loc/unstub))
 
   (it "should go to /timeline/:timeline_id"
-    (expect (location/current-route)
-            :to-equal "/timeline/123")))
+    (expect (loc/went-to? "/timeline/123") :to-be-true)))

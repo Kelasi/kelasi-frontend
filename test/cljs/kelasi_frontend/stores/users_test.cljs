@@ -55,7 +55,7 @@
 
 (describe "login action"
   (before [done]
-    (loc/save)
+    (loc/stub)
     (tap users/done done-ch)
     (action/load-user :source ::login-test
                       :user   user-data)
@@ -66,7 +66,7 @@
 
   (after
     (untap users/done done-ch)
-    (loc/restore))
+    (loc/unstub))
 
   (it "should put the user under users/current-user"
     (expect (get-in @app-state [:users :current-user])
