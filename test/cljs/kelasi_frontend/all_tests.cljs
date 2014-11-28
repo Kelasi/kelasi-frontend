@@ -12,3 +12,5 @@
    [kelasi-frontend.stores.errors-test]
    [kelasi-frontend.stores.timelines-test]
    ))
+
+(enable-console-print!)
