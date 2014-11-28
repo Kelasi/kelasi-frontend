@@ -189,3 +189,16 @@
   [& {:as params}]
   (s/validate load-timeline-schema params)
   (dispatch/dispatch (assoc params :action :load-timeline)))
+
+
+
+(def change-page-schema
+  {:source s/Keyword
+   :page s/Func
+   :params []})
+
+(defn change-page
+  "Router - When router tries to change the page"
+  [& {:as params}]
+  (s/validate change-page-schema params)
+  (dispatch/dispatch (assoc params :action :change-page)))
