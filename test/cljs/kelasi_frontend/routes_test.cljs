@@ -11,6 +11,6 @@
 
 
 
-(describe "sub-path"
+(describe "notfound-path"
   (it "should be available"
-    (expect (routes/sub-path {:* "/test"}) :to-equal "/test")))
+    (expect (routes/notfound-path {:path "test"}) :to-equal "/test")))

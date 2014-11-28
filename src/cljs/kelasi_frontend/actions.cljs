@@ -1,6 +1,6 @@
 (ns kelasi-frontend.actions
   (:require [kelasi-frontend.dispatcher :as dispatch]
-            [schema.core :as s]))
+            [schema.core :as s :include-macros true]))
 
 
 
@@ -194,7 +194,7 @@
 
 (def change-page-schema
   {:source s/Keyword
-   :page s/Func
+   :page (s/pred ifn?)
    :params []})
 
 (defn change-page

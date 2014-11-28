@@ -11,5 +11,7 @@
                :page entrance-page
                :params []))
 
-(defroute sub-path "*" {path :*}
+
+
+(defroute notfound-path "/*path" [path]
   (js/console.log "We are at " path))
