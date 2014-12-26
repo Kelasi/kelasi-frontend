@@ -1,15 +1,9 @@
 (ns kelasi-frontend.routes
-  (:require-macros [secretary.core :refer (defroute)])
-  (:require [secretary.core]
+  (:require [router.core :as router :include-macros true]
             [kelasi-frontend.components.entrance-page :refer (entrance-page)]
             [kelasi-frontend.components.notfound-page :refer (notfound-page)]))
 
 
 
-(defroute home-path "/" {:as params}
-  [entrance-page params])
-
-
-
-(defroute notfound-path "/*path" {:as params}
-  [notfound-page params])
+;; (router/match "/" entrance-page)
+;; (router/match "/*path" notfound-page)

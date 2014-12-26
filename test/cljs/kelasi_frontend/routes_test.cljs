@@ -3,12 +3,11 @@
                    [chaiify.core :refer (expect)])
   (:require [kelasi-frontend.routes :as routes]
             [kelasi-frontend.components.entrance-page :refer (entrance-page)]
-            [kelasi-frontend.components.notfound-page :refer (notfound-page)]
-            [secretary.core :as secretary]))
+            [kelasi-frontend.components.notfound-page :refer (notfound-page)]))
 
 
 
-(describe "home-path"
+#_(describe "home-path"
   (it "should point to '/'"
     (expect (routes/home-path) :to-equal "/"))
 
@@ -17,7 +16,7 @@
 
 
 
-(describe "notfound-path"
+#_(describe "notfound-path"
   (it "should be available"
     (expect (routes/notfound-path {:path "test"}) :to-equal "/test"))
 

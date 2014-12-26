@@ -1,5 +1,5 @@
 (ns mocks.location
-  (:require [kelasi-frontend.location :refer (current-route change-route)]))
+  (:require [router.core :refer (current-route navigate!)]))
 
 
 
@@ -15,19 +15,19 @@
   []
   (when-let [loc (first @mem)]
     (swap! mem next)
-    (change-route loc)))
+    (navigate! loc)))
 
 (defn stub
-  "Stub out the change-route"
+  "Stub out the navigate!"
   []
-  (.stub js/sinon kelasi-frontend.location "change_route"))
+  (.stub js/sinon router.core "navigate_BANG_"))
 
 (defn unstub
-  "Restore the change-route"
+  "Restore the navigate!"
   []
-  (.restore change-route))
+  (.restore navigate!))
 
 (defn went-to?
   "Return whether or not went to a specified path"
   [path]
-  (.calledWith change-route path))
+  (.calledWith navigate! path))

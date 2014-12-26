@@ -3,7 +3,7 @@
   (:require [kelasi-frontend.state :refer (app-state)]
             [kelasi-frontend.stores.core :refer (process store set-in!)]
             [kelasi-frontend.stores.users :as users]
-            [kelasi-frontend.location :refer (change-route)]
+            [router.core :refer (navigate!)]
             [cljs.core.async :refer (<! >! chan tap mult)]))
 
 
@@ -49,13 +49,13 @@
           (.error js/console (str "Users and routes stores are out of sync:"
                                   "Users action:" action
                                   "Routes action:" wait-for-user)))
-        (change-route (str "/profile/" profile-name)))
+        (navigate! (str "/profile/" profile-name)))
       nil))
 
 (defmethod response :show-timeline
   [action]
   (go (let [timeline-id (:timeline-id action)]
-        (change-route (str "/timeline/" timeline-id)))
+        (navigate! (str "/timeline/" timeline-id)))
       nil))
 
 
