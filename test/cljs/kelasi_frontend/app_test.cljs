@@ -2,8 +2,7 @@
   (:require-macros [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)])
   (:require [kelasi-frontend.app :as k]
-            [kelasi-frontend.state :refer (app-state)]
-            [kelasi-frontend.utilities :as utils]))
+            [kelasi-frontend.state :refer (app-state)]))
 
 
 
@@ -19,8 +18,8 @@
   (it "should render state to screen" [done]
     (reset! app-state {:test 123})
 
-    (utils/after 500
-      (fn []
-        (let [comp-text (.. js/document (querySelector "#test") -innerHTML)]
-          (expect comp-text :to-equal "{\n  \"test\": 123\n}"))
-        (done)))))
+    (let [cb (fn []
+               (let [comp-text (.. js/document (querySelector "#test") -innerHTML)]
+                 (expect comp-text :to-equal "{\n  \"test\": 123\n}"))
+               (done))]
+      (js/setTimeout cb 500))))

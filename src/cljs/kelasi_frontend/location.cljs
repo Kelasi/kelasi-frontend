@@ -1,7 +1,6 @@
 (ns kelasi-frontend.location
   (:require-macros [cljs.core.async.macros :refer (go go-loop)])
   (:require [secretary.core :as secretary]
-            [kelasi-frontend.utilities :refer (listen)]
             [kelasi-frontend.actions :refer (change-page)]
             [cljs.core.async :refer (<!)]
             [goog.history.EventType :as EventType])
@@ -25,7 +24,7 @@
 
 ;; Listen for navigation events and dispatch to router
 (def ^:dynamic *dispatch-navigations* true)
-(let [nav-chan (listen history EventType/NAVIGATE)]
+#_(let [nav-chan (listen history EventType/NAVIGATE)]
   (go-loop []
            (let [nav (.-token (<! nav-chan))
                  page (secretary/dispatch! nav)]
