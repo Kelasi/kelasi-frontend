@@ -18,8 +18,8 @@
                      :on-change #(swap! state assoc
                                         :body (.. % -target -value))})
       (dom/button {:type "button"
-                   :on-click #(new-post :source ::new-post-box
-                                        :timeline-id timeline-id
-                                        :parent-id parent-id
-                                        :body (:body @state))}
+                   :on-click #(new-post {:source ::new-post-box
+                                         :timeline-id timeline-id
+                                         :parent-id parent-id
+                                         :body (:body @state)})}
                   "Send"))))

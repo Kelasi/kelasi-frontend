@@ -1,6 +1,7 @@
 (ns kelasi-frontend.stores.errors
   (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.core :refer (process store set-in!)]
+  (:require [kelasi-frontend.stores.core :refer (store set-in!)]
+            [dispatcher.core :refer (process)]
             [cljs.core.async :refer (mult)]))
 
 
@@ -13,19 +14,19 @@
 
 ;; Responces
 
-(defmulti responce :action)
+(defmulti <response (fn [action _] action))
 
-(defmethod responce :default
-  [_]
+(defmethod <response :default
+  [_ _]
   (go nil))
 
-(defmethod responce :wrong-login
-  [_]
+(defmethod <response :wrong-login
+  [_ _]
   (set-in! errors [:login] :wrong-login)
   (go nil))
 
-(defmethod responce :net-error
-  [{:keys [orig]}]
+(defmethod <response :net-error
+  [_ {:keys [orig]}]
   (set-in! errors [:net-error] orig)
   (go nil))
 
@@ -35,4 +36,4 @@
 
 (def done
   "Done processing these actions"
-  (mult (process responce)))
+  (mult (process <response)))

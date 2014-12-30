@@ -1,24 +1,5 @@
 (ns kelasi-frontend.stores.core
-  (:require-macros [cljs.core.async.macros :refer (go-loop)])
-  (:require [cljs.core.async :refer (chan <! >! tap)]
-            [kelasi-frontend.dispatcher :as dispatcher]
-            [kelasi-frontend.state :refer (app-state)]))
-
-
-
-(defn process
-  "Gets a function, which will be called with the recieved actions.
-  The function should return a channel with the result of process.
-  Returns a channel, which will be filled with the processed actions."
-  [responder]
-  (let [actions-ch (chan)
-        done-ch    (chan)]
-    (tap dispatcher/actions actions-ch)
-    (go-loop [action (<! actions-ch)]
-      (let [result (<! (responder action))]
-        (>! done-ch (merge action {:result result})))
-      (recur (<! actions-ch)))
-    done-ch))
+  (:require [kelasi-frontend.state :refer (app-state)]))
 
 
 

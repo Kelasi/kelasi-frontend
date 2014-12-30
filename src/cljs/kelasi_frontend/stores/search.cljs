@@ -1,6 +1,7 @@
 (ns kelasi-frontend.stores.search
   (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.core :refer (process store set-in!)]
+  (:require [kelasi-frontend.stores.core :refer (store set-in!)]
+            [dispatcher.core :refer (process )]
             [kelasi-frontend.backend.search :as search]
             [cljs.core.async :refer (mult)]))
 
@@ -14,24 +15,24 @@
 
 ;; Action response functions
 
-(defmulti response :action)
+(defmulti <response (fn [action _] action))
 
-(defmethod response :default
-  [_]
+(defmethod <response :default
+  [_ _]
   (go nil))
 
-(defmethod response :search-introducer
-  [{:keys [firstname lastname university]}]
+(defmethod <response :search-introducer
+  [_ {:keys [firstname lastname university]}]
   (search/people firstname lastname university)
   (go nil))
 
-(defmethod response :load-search-result
-  [{:keys [category result]}]
+(defmethod <response :load-search-result
+  [_ {:keys [category result]}]
   (set-in! search [category] result)
   (go nil))
 
-(defmethod response :search-all
-  [{:keys [q]}]
+(defmethod <response :search-all
+  [_ {:keys [q]}]
   (search/all q)
   (go nil))
 
@@ -41,4 +42,4 @@
 
 (def done
   "The mult of processed actions"
-  (mult (process response)))
+  (mult (process <response)))

@@ -27,12 +27,12 @@
       (om/build timeline-list-box {:ids timelines
                                    :timelines all-timelines
                                    :people all-users
-                                   :on-select #(show-timeline :source ::search-page
-                                                              :timeline-id (:id @%))})
+                                   :on-select #(show-timeline {:source ::search-page
+                                                               :timeline-id (:id @%)})})
 
       (dom/h2 "Found users")
       (om/build user-list-box {:ids people
                                :people all-users
                                :selected nil
-                               :on-select #(show-user-profile :source ::search-page
-                                                              :user-id (:id @%))}))))
+                               :on-select #(show-user-profile {:source ::search-page
+                                                               :user-id (:id @%)})}))))

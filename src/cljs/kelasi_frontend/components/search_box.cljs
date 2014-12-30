@@ -20,5 +20,5 @@
                 :value (:search @state)
                 :on-change #(swap! state assoc :search (.. % -target -value))
                 :on-key-press #(when (= 13 (.-charCode %))
-                                 (search-all :source ::search-box
-                                             :q (:search @state)))})))))
+                                 (search-all {:source ::search-box
+                                              :q (:search @state)}))})))))

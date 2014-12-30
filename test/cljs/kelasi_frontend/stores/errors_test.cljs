@@ -15,7 +15,7 @@
   (before [done]
     (tap errors/done done-ch)
 
-    (actions/wrong-login :source ::wrong-login-test)
+    (actions/wrong-login {:source ::wrong-login-test})
     (take! done-ch (fn [_] (done))))
 
   (after (untap errors/done done-ch))
@@ -30,8 +30,8 @@
   (before [done]
     (tap errors/done done-ch)
 
-    (actions/net-error :source ::net-error-test
-                       :orig   {:some-test 1})
+    (actions/net-error {:source ::net-error-test
+                        :orig   {:some-test 1}})
     (take! done-ch (fn [_] (done))))
 
   (after (untap errors/done done-ch))

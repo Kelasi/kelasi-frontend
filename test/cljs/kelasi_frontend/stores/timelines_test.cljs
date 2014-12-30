@@ -28,13 +28,13 @@
 
   (it "should not call backend.timeline/get-one when the timeline is already loaded" [done]
     (go
-      (action/load-timeline :source ::show-timeline-test
-                            :timeline timeline-data)
+      (action/load-timeline {:source ::show-timeline-test
+                             :timeline timeline-data})
 
       (<! ch)
 
-      (action/show-timeline :source ::show-timeline-test
-                            :timeline-id (:id timeline-data))
+      (action/show-timeline {:source ::show-timeline-test
+                             :timeline-id (:id timeline-data)})
       (<! ch)
 
       (expect (.-called get-one) :to-be-false)
@@ -45,8 +45,8 @@
     (go
       (swap! app-state assoc-in [:timelines :all-timelines (:id timeline-data)] nil)
 
-      (action/show-timeline :source ::show-timeline-test
-                            :timeline-id (:id timeline-data))
+      (action/show-timeline {:source ::show-timeline-test
+                             :timeline-id (:id timeline-data)})
       (<! ch)
 
       (expect (.-calledOnce get-one) :to-be-true)
@@ -61,8 +61,8 @@
     (go
       (tap timelines/done ch)
 
-      (action/load-timeline :source ::load-timeline-test
-                            :timeline timeline-data)
+      (action/load-timeline {:source ::load-timeline-test
+                             :timeline timeline-data})
 
       (<! ch)
 

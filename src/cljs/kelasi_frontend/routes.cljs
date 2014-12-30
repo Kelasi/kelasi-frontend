@@ -14,6 +14,6 @@
 (router/config!)
 (router/set-callback!
   (fn [arg]
-    (change-page :source ::location
-                 :page (:value arg)
-                 :params (:params arg))))
+    (change-page {:source ::location
+                  :page (:value arg)
+                  :params (:params arg)})))

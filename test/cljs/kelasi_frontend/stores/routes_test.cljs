@@ -19,12 +19,12 @@
     (loc/stub)
     (tap routes/done done-ch)
 
-    (action/load-user :source ::login-test
-                      :user   user)
+    (action/load-user {:source ::login-test
+                       :user   user})
     (take! done-ch identity)
 
-    (action/login :source  ::login-test
-                  :user-id (:id user))
+    (action/login {:source  ::login-test
+                   :user-id (:id user)})
     (take! done-ch (fn [_] (done))))
 
   (after
@@ -39,8 +39,8 @@
     (loc/stub)
     (tap routes/done done-ch)
 
-    (action/show-timeline :source ::show-timeline-test
-                          :timeline-id "123")
+    (action/show-timeline {:source ::show-timeline-test
+                           :timeline-id "123"})
 
     (take! done-ch (fn [_] (done))))
 

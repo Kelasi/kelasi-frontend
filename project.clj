@@ -25,7 +25,8 @@
                  [devcards "0.1.2-SNAPSHOT"
                    :exclusions [org.clojure/clojurescript]]
                  [figwheel "0.1.4-SNAPSHOT"]
-                 [org.clojars.mkhoeini/router "0.1.0-SNAPSHOT"]]
+                 [org.clojars.mkhoeini/router "0.1.0-SNAPSHOT"]
+                 [org.clojars.mkhoeini/dispatcher "0.1.0-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [jarohen/lein-frodo "0.4.1"]

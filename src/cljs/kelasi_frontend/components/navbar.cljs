@@ -23,13 +23,13 @@
       (dom/input {:type "text"
                   :value (:search @state)
                   :on-change #(swap! state assoc :search (.. % -target -value))
-                  :on-key-press #(search-all :source ::navbar
-                                             :q (:search @state))})
+                  :on-key-press #(search-all {:source ::navbar
+                                              :q (:search @state)})})
 
       (when current-user
         (dom/a {:href ""
                 :style {:float "right"}
                 :on-click (fn [ev]
                             (.preventDefault ev)
-                            (show-self-profile :source ::navbar))}
+                            (show-self-profile {:source ::navbar}))}
                (:full-name current-user))))))

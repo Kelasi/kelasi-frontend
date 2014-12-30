@@ -1,6 +1,7 @@
 (ns kelasi-frontend.stores.users
   (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.core :refer (process store set-in!)]
+  (:require [kelasi-frontend.stores.core :refer (store set-in!)]
+            [dispatcher.core :refer (process )]
             [kelasi-frontend.backend.session :as session]
             [kelasi-frontend.backend.users   :as users-be]
             [cljs.core.async :refer (mult)]))
@@ -33,35 +34,35 @@
 
 ;; Action response functions
 
-(defmulti action-response :action)
+(defmulti <response (fn [action _] action))
 
-(defmethod action-response :default
-  [_]
+(defmethod <response :default
+  [_ _]
   (go nil))
 
-(defmethod action-response :try-login
-  [{:keys [username password]}]
+(defmethod <response :try-login
+  [_ {:keys [username password]}]
   (set-in! users [:current-user] :loading)
   (session/login username password)
   (go nil))
 
-(defmethod action-response :load-user
-  [{:keys [user]}]
+(defmethod <response :load-user
+  [_ {:keys [user]}]
   (set-user user)
   (go nil))
 
-(defmethod action-response :login
-  [{:keys [user-id]}]
+(defmethod <response :login
+  [_ {:keys [user-id]}]
   (set-in! users [:current-user] (get-user user-id))
   (go nil))
 
-(defmethod action-response :wrong-login
-  [_]
+(defmethod <response :wrong-login
+  [_ _]
   (set-in! users [:current-user] nil)
   (go nil))
 
-(defmethod action-response :signup
-  [{:keys [firstname
+(defmethod <response :signup
+  [_ {:keys [firstname
            lastname
            university
            email
@@ -76,4 +77,4 @@
 
 (def done
   "The mult of processed actions"
-  (mult (process action-response)))
+  (mult (process <response)))

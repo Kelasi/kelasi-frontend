@@ -1,6 +1,6 @@
 (ns mocks.echo-store
   (:require-macros [cljs.core.async.macros :refer (go go-loop)])
-  (:require [kelasi-frontend.stores.core :refer (process)]
+  (:require [dispatcher.core :refer (process)]
             [cljs.core.async :refer (<!)]))
 
 

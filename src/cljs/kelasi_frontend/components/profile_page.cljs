@@ -37,8 +37,8 @@
                (om/build timeline-list-box {:ids (:timelines user)
                                             :timelines all-timelines
                                             :people (:all-users users)
-                                            :on-select #(show-timeline :source ::profile-page
-                                                                       :timeline-id (:id @%))}))
+                                            :on-select #(show-timeline {:source ::profile-page
+                                                                        :timeline-id (:id @%)})}))
 
       (dom/div {:style {:width "33%"
                         :float "left"}}
@@ -46,5 +46,5 @@
                (om/build timeline-list-box {:ids (:followed-timelines user)
                                             :timelines all-timelines
                                             :people (:all-users users)
-                                            :on-select #(show-timeline :source ::profile-page
-                                                                       :timeline-id (:id @%))})))))
+                                            :on-select #(show-timeline {:source ::profile-page
+                                                                        :timeline-id (:id @%)})})))))

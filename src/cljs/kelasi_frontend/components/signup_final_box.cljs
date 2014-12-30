@@ -69,11 +69,11 @@
                                   (.. % -target -value))}))
      (dom/button
        {:type "button"
-        :on-click #(apply signup (-> @state
-                                     (select-keys [:firstname :lastname
-                                                   :university :email
-                                                   :password])
-                                     (assoc :source ::signup-final-box
-                                            :introducer-id (:id @introducer))
-                                     ((partial mapcat identity))))}
+        :on-click #(signup (-> @state
+                               (select-keys [:firstname :lastname
+                                             :university :email
+                                             :password])
+                               (assoc :source ::signup-final-box
+                                      :introducer-id (:id @introducer))
+                               ((partial mapcat identity))))}
        "Singup!"))))

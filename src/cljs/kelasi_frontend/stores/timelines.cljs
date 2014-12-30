@@ -1,6 +1,7 @@
 (ns kelasi-frontend.stores.timelines
   (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.core :refer (process store set-in!)]
+  (:require [kelasi-frontend.stores.core :refer (store set-in!)]
+            [dispatcher.core :refer (process )]
             [kelasi-frontend.backend.timelines :refer (get-one)]
             [cljs.core.async :refer (mult)]))
 
@@ -23,20 +24,20 @@
 
 ;; Action response functions
 
-(defmulti action-response :action)
+(defmulti <respons (fn [action _] action))
 
-(defmethod action-response :default
-  [_]
+(defmethod <respons :default
+  [_ _]
   (go nil))
 
-(defmethod action-response :show-timeline
-  [{:keys [timeline-id]}]
+(defmethod <respons :show-timeline
+  [_ {:keys [timeline-id]}]
   (when-not (get-in @timelines [:all-timelines timeline-id])
     (get-one timeline-id))
   (go nil))
 
-(defmethod action-response :load-timeline
-  [{:keys [timeline]}]
+(defmethod <respons :load-timeline
+  [_ {:keys [timeline]}]
   (set-timeline timeline)
   (go nil))
 
@@ -46,4 +47,4 @@
 
 (def done
   "The mult of processed actions"
-  (mult (process action-response)))
+  (mult (process <respons)))

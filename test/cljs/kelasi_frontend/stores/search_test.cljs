@@ -22,10 +22,10 @@
     (.stub js/sinon kelasi-frontend.backend.search "people")
 
     (tap search/done done-ch)
-    (action/search-introducer :source     ::search-introducer-test
-                              :firstname  (:firstname  search-data)
-                              :lastname   (:lastname   search-data)
-                              :university (:university search-data))
+    (action/search-introducer {:source     ::search-introducer-test
+                               :firstname  (:firstname  search-data)
+                               :lastname   (:lastname   search-data)
+                               :university (:university search-data)})
 
     (take! done-ch (fn [_] (done))))
 
@@ -42,9 +42,9 @@
 (describe "load-search-result action"
   (before [done]
     (tap search/done done-ch)
-    (action/load-search-result :source ::load-search-result-test
+    (action/load-search-result {:source ::load-search-result-test
                                 :category :people
-                                :result '("2" "3" "4"))
+                                :result '("2" "3" "4")})
     (take! done-ch (fn [_] (done))))
 
   (after (untap search/done done-ch))
@@ -60,8 +60,8 @@
     (.stub js/sinon kelasi-frontend.backend.search "all")
 
     (tap search/done done-ch)
-    (action/search-all :source ::search-all-test
-                       :q "testing")
+    (action/search-all {:source ::search-all-test
+                        :q "testing"})
 
     (take! done-ch (fn [_] (done))))
 

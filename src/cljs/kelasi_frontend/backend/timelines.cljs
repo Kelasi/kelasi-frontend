@@ -15,7 +15,7 @@
             respond (<! request)]
         (condp = ((juxt first second) respond)
           [:success 200] (let [timeline (respond 2)]
-                           (actions/load-timeline :source ::get-one
-                                                  :timeline timeline))
-          (actions/net-error :source ::get-one
-                             :orig `(get-one ~timeline-id))))))
+                           (actions/load-timeline {:source ::get-one
+                                                   :timeline timeline}))
+          (actions/net-error {:source ::get-one
+                              :orig `(get-one ~timeline-id)})))))

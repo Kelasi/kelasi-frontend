@@ -17,10 +17,10 @@
   (before [done]
     (.stub js/sinon kelasi-frontend.backend.posts "create")
     (tap posts/done done-ch)
-    (action/new-post :source ::new-post-test
-                     :timeline-id "1"
-                     :parent-id "0"
-                     :body "test")
+    (action/new-post {:source ::new-post-test
+                      :timeline-id "1"
+                      :parent-id "0"
+                      :body "test"})
     (take! done-ch #(done)))
 
   (after
@@ -36,14 +36,14 @@
 (describe "load-post action"
   (before [done]
     (tap posts/done done-ch)
-    (action/load-post :source ::load-post-test
-                      :post post1)
-    (action/load-post :source ::load-post-test
-                      :post post2)
-    (action/load-post :source ::load-post-test
-                      :post post3)
-    (action/load-post :source ::load-post-test
-                      :post post4)
+    (action/load-post {:source ::load-post-test
+                       :post post1})
+    (action/load-post {:source ::load-post-test
+                       :post post2})
+    (action/load-post {:source ::load-post-test
+                       :post post3})
+    (action/load-post {:source ::load-post-test
+                       :post post4})
     (dotimes [i 3] (take! done-ch identity))
     (take! done-ch #(done)))
 

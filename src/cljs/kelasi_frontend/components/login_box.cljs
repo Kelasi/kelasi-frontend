@@ -44,7 +44,7 @@
     (dom/p "Remember me!")
     (dom/button
      {:type "button"
-      :on-click #(try-login :source   ::login-box
-                            :username (:username @state)
-                            :password (:password @state))}
+      :on-click #(try-login {:source   ::login-box
+                             :username (:username @state)
+                             :password (:password @state)})}
      "Login"))))

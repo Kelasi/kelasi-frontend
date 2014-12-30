@@ -16,9 +16,9 @@
             respond (<! request)]
         (case ((juxt first second) respond)
           [:success 200] (let [post (respond 2)]
-                           (actions/load-post :source ::create
-                                              :post   post))
-          (actions/net-error :source ::create
-                             :orig   `(create ~timeline-id
-                                              ~parent-id
-                                              ~body))))))
+                           (actions/load-post {:source ::create
+                                               :post   post}))
+          (actions/net-error {:source ::create
+                              :orig   `(create ~timeline-id
+                                               ~parent-id
+                                               ~body)})))))

@@ -16,10 +16,10 @@
             respond (<! request)]
         (condp = ((juxt first second) respond)
           [:success 200] (let [user (respond 2)]
-                     (actions/load-user :source ::login
-                                        :user   user)
-                     (actions/login :source  ::login
-                                    :user-id (:id user)))
-          [:error 401] (actions/wrong-login :source ::login)
-          (actions/net-error :source ::login
-                             :orig   `(login ~username ~password))))))
+                           (actions/load-user {:source ::login
+                                               :user   user})
+                           (actions/login {:source  ::login
+                                           :user-id (:id user)}))
+          [:error 401] (actions/wrong-login {:source ::login})
+          (actions/net-error {:source ::login
+                              :orig   `(login ~username ~password)})))))

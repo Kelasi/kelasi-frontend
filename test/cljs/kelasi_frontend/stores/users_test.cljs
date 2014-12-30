@@ -20,9 +20,9 @@
   (before [done]
     (.stub js/sinon kelasi-frontend.backend.session "login")
     (tap users/done done-ch)
-    (action/try-login :source ::try-login-test
-                      :username (:username login-data)
-                      :password (:password login-data))
+    (action/try-login {:source ::try-login-test
+                       :username (:username login-data)
+                       :password (:password login-data)})
     (take! done-ch #(done)))
 
   (after
@@ -40,8 +40,8 @@
 (describe "load-user action"
   (before [done]
     (tap users/done done-ch)
-    (action/load-user :source ::load-user-test
-                      :user   user-data)
+    (action/load-user {:source ::load-user-test
+                       :user   user-data})
     (take! done-ch #(done)))
 
   (after
@@ -57,11 +57,11 @@
   (before [done]
     (loc/stub)
     (tap users/done done-ch)
-    (action/load-user :source ::login-test
-                      :user   user-data)
+    (action/load-user {:source ::login-test
+                       :user   user-data})
     (take! done-ch identity)
-    (action/login :source  ::login-test
-                  :user-id (:id user-data))
+    (action/login {:source  ::login-test
+                   :user-id (:id user-data)})
     (take! done-ch #(done)))
 
   (after
@@ -78,7 +78,7 @@
   (before [done]
     (swap! app-state assoc-in [:users :current-user] :some-value)
     (tap users/done done-ch)
-    (action/wrong-login :source ::wrong-login-test)
+    (action/wrong-login {:source ::wrong-login-test})
     (take! done-ch #(done)))
 
   (after
@@ -94,13 +94,13 @@
   (before [done]
     (.stub js/sinon kelasi-frontend.backend.users "create")
     (tap users/done done-ch)
-    (action/signup :source ::signup-test
-                   :introducer-id "1"
-                   :firstname "John"
-                   :lastname "Doe"
-                   :university "Taashkand"
-                   :email "john@doe.com"
-                   :password "123")
+    (action/signup {:source ::signup-test
+                    :introducer-id "1"
+                    :firstname "John"
+                    :lastname "Doe"
+                    :university "Taashkand"
+                    :email "john@doe.com"
+                    :password "123"})
     (take! done-ch #(done)))
 
   (after

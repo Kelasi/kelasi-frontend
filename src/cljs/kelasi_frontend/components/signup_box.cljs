@@ -27,10 +27,10 @@
     (condp = (:stage @state)
       1 (om/build find-friends-box {:on-search
                                     (fn [firstname lastname university]
-                                      (search-introducer :source ::signup-box
-                                                         :firstname firstname
-                                                         :lastname lastname
-                                                         :university university)
+                                      (search-introducer {:source ::signup-box
+                                                          :firstname firstname
+                                                          :lastname lastname
+                                                          :university university})
                                       (swap! state assoc :stage 2))})
       2 (om/build found-friends-box {:ids people
                                      :people all-users

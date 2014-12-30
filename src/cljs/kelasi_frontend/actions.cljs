@@ -1,97 +1,50 @@
 (ns kelasi-frontend.actions
-  (:require [kelasi-frontend.dispatcher :as dispatch]
+  (:require [dispatcher.core :include-macros true
+             :refer-macros (defaction)]
             [schema.core :as s :include-macros true]))
 
 
 
-(def try-login-schema
+(defaction try-login
+  "View - When user submits login box"
   {:source   s/Keyword
    :username s/Str
    :password s/Str})
 
-(defn try-login
-  "View - When user submits login box"
-  [& {:as params}]
-  (s/validate try-login-schema params)
-  (dispatch/dispatch (assoc params :action :try-login)))
-
-
-
-(def load-user-schema
+(defaction load-user
+  "Backend - When the server send user"
   {:source s/Keyword
    :user   {s/Any s/Any}})
 
-(defn load-user
-  "Backend - When the server send user"
-  [& {:as params}]
-  (s/validate load-user-schema params)
-  (dispatch/dispatch (assoc params :action :load-user)))
-
-
-
-(def login-schema
+(defaction login
+  "Backend - When user logs in with the backend"
   {:source  s/Keyword
    :user-id s/Str})
 
-(defn login
-  "Backend - When user logs in with the backend"
-  [& {:as params}]
-  (s/validate login-schema params)
-  (dispatch/dispatch (assoc params :action :login)))
-
-
-
-(def wrong-login-schema
+(defaction wrong-login
+  "Backend - When username/password is wrong"
   {:source s/Keyword})
 
-(defn wrong-login
-  "Backend - When username/password is wrong"
-  [& {:as params}]
-  (s/validate wrong-login-schema params)
-  (dispatch/dispatch (assoc params :action :wrong-login)))
-
-
-
-(def net-error-schema
+(defaction net-error
+  "Backend - Whenever something goes wrong with a request"
   {:source s/Keyword
    :orig   s/Any})
 
-(defn net-error
-  "Backend - Whenever something goes wrong with a request"
-  [& {:as params}]
-  (s/validate net-error-schema params)
-  (dispatch/dispatch (assoc params :action :net-error)))
-
-
-
-(def search-introducer-schema
+(defaction search-introducer
+  "View - When during registration user searches for somebody familiar"
   {:source     s/Keyword
    :firstname  s/Str
    :lastname   s/Str
    :university s/Str})
 
-(defn search-introducer
-  "View - When during registration user searches for somebody familiar"
-  [& {:as params}]
-  (s/validate search-introducer-schema params)
-  (dispatch/dispatch (assoc params :action :search-introducer)))
-
-
-
-(def load-search-result-schema
+(defaction load-search-result
+  "Backend - When a search result comes in"
   {:source s/Keyword
    :category s/Keyword
    :result [s/Str]})
 
-(defn load-search-result
-  "Backend - When a search result comes in"
-  [& {:as params}]
-  (s/validate load-search-result-schema params)
-  (dispatch/dispatch (assoc params :action :load-search-result)))
-
-
-
-(def signup-schema
+(defaction signup
+  "View - When user tries to signup"
   {:source s/Keyword
    :firstname s/Str
    :lastname s/Str
@@ -100,105 +53,44 @@
    :password s/Str
    :introducer-id s/Str})
 
-(defn signup
-  "View - When user tries to signup"
-  [& {:as params}]
-  (s/validate signup-schema params)
-  (dispatch/dispatch (assoc params :action :signup)))
-
-
-
-(def search-all-schema
+(defaction search-all
+  "View - When user searches in the first page"
   {:source s/Keyword
    :q s/Str})
 
-(defn search-all
-  "View - When user searches in the first page"
-  [& {:as params}]
-  (s/validate search-all-schema params)
-  (dispatch/dispatch (assoc params :action :search-all)))
-
-
-
-(def show-self-profile-schema
+(defaction show-self-profile
+  "View - When user clicks on his own name"
   {:source s/Keyword})
 
-(defn show-self-profile
-  "View - When user clicks on his own name"
-  [& {:as params}]
-  (s/validate show-self-profile-schema params)
-  (dispatch/dispatch (assoc params :action :show-self-profile)))
-
-
-
-(def new-post-schema
+(defaction new-post
+  "View - When a user posts on a timeline"
   {:source s/Keyword
    :timeline-id s/Str
    :parent-id s/Str
    :body s/Str})
 
-(defn new-post
-  "View - When a user posts on a timeline"
-  [& {:as params}]
-  (s/validate new-post-schema params)
-  (dispatch/dispatch (assoc params :action :new-post)))
-
-
-
-(def load-post-schema
+(defaction load-post
+  "Backend - When a new post arrives from server"
   {:source s/Keyword
    :post {s/Any s/Any}})
 
-(defn load-post
-  "Backend - When a new post arrives from server"
-  [& {:as params}]
-  (s/validate load-post-schema params)
-  (dispatch/dispatch (assoc params :action :load-post)))
-
-
-
-(def show-timeline-schema
+(defaction show-timeline
+  "View - When a user click on a timeline link"
   {:source s/Keyword
    :timeline-id s/Str})
 
-(defn show-timeline
-  "View - When a user click on a timeline link"
+(defaction show-user-profile
   [& {:as params}]
-  (s/validate show-timeline-schema params)
-  (dispatch/dispatch (assoc params :action :show-timeline)))
-
-
-
-(def show-user-profile-schema
   {:source s/Keyword
    :user-id s/Str})
 
-(defn show-user-profile
-  [& {:as params}]
-  (s/validate show-user-profile params)
-  (dispatch/dispatch (assoc params :action :show-user-profile)))
-
-
-
-(def load-timeline-schema
+(defaction load-timeline
+  "Backend - When the server send a timeline"
   {:source s/Keyword
    :timeline {s/Any s/Any}})
 
-(defn load-timeline
-  "Backend - When the server send a timeline"
-  [& {:as params}]
-  (s/validate load-timeline-schema params)
-  (dispatch/dispatch (assoc params :action :load-timeline)))
-
-
-
-(def change-page-schema
+(defaction change-page
+  "Router - When router tries to change the page"
   {:source s/Keyword
    :page (s/pred ifn?)
    :params []})
-
-(defn change-page
-  "Router - When router tries to change the page"
-  [& {:as params}]
-  (s/validate change-page-schema params)
-  (dispatch/dispatch (assoc params :action :change-page)))
