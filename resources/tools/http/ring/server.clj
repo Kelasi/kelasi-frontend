@@ -2,23 +2,20 @@
   (:require [weasel.repl.websocket :as weasel]
             [cemerick.piggieback :as piggieback]
             [net.cgrand.enlive-html :as enlive]
-            [compojure.route :refer  (resources)]
+            [compojure.route :refer  (resources not-found)]
             [compojure.core :refer (GET defroutes)]
             [frodo.web :refer (App)]
             [mocha-tester.core :as mocha]
             [chaiify.core :as chai]
             [clojure.java.io :as io]))
 
-(enlive/deftemplate page
-  (io/resource "public/index.html")
-  [])
+
 
 (enlive/deftemplate test-page
   (io/resource "public/index.html")
   []
   [:body [:script (enlive/attr= :src "/js/kelasi_frontend.js")]]
     (enlive/substitute (enlive/html [:script {:src "/js_test/goog/base.js"}]
-                                    [:script {:src "/vendor/react/react.js"}]
                                     [:script {:src "/vendor/sinon-1.10.3.js"}]
                                     [:script {:src "/js_test/kelasi_frontend.js"}]
                                     [:script "goog.require('kelasi_frontend.all_tests');"])))
@@ -26,7 +23,7 @@
 (defroutes site
   (resources "/")
   (GET "/mocha-test" req (test-page))
-  (GET "/*" req (page)))
+  (not-found "<p>404 Not found!</p>"))
 
 
 (defn start-brepl
