@@ -1,10 +1,6 @@
 (defproject kelasi-frontend "0.0.1-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-
-  :min-lein-version "2.3.4"
-
-  :jvm-opts  ["-Xmx1g"]
+  :description "A clojurescript frontend for Kelasi site."
+  :url "https://github.com/Kelasi/kelasi-frontend"
 
   :source-paths ["src/clj" "src/cljs"]
   :resources-paths ["resources"]
