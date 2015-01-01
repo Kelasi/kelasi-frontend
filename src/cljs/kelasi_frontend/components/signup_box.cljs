@@ -43,7 +43,7 @@
       3 (r/as-element [signup-final-box (:introducer @state)])
       nil)
 
-    (om/build signup-progress-breadcrumb {:stage (:stage @state)
-                                          :on-click #(swap! state
-                                                            assoc :stage
-                                                            %)}))))
+    (r/as-element
+      [signup-progress-breadcrumb (:stage @state) #(swap! state
+                                                          assoc :stage
+                                                          %)]))))
