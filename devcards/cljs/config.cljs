@@ -27,6 +27,7 @@
             [kelasi-frontend.components.timeline-list-box-devcards]
             [kelasi-frontend.components.signup-final-box-devcards]
             [kelasi-frontend.components.post-box-devcards]
+            [kelasi-frontend.components.post-list-devcards]
             [kelasi-frontend.components.coverphoto-box-devcards]
             [kelasi-frontend.components.profile-about-box-devcards]
             [kelasi-frontend.components.timeline-about-box-devcards]
