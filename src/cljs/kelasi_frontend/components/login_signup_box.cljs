@@ -31,5 +31,4 @@
              "Swap login/signup")
 
       (when (= :down (:position @state))
-        (om/build signup-box {:search search
-                              :users users})))))
+        (r/as-element [signup-box (:people search) (:all-users users)])))))

@@ -1,8 +1,5 @@
 (ns kelasi-frontend.components.signup-box
-  (:require [om-tools.core :as omtool :include-macros true]
-            [om-tools.dom  :as dom    :include-macros true]
-            [om.core       :as om     :include-macros true]
-            [reagent.core :as r]
+  (:require [reagent.core :as r]
             [kelasi-frontend.components.find-friends-box
              :refer (find-friends-box)]
             [kelasi-frontend.components.found-friends-box
@@ -15,34 +12,30 @@
 
 
 
-(omtool/defcomponentk signup-box
+(defn signup-box
   "First page's signup box"
-  [[:data [:search people] [:users all-users]] owner state]
-  (init-state
-   [_]
-   {:stage 1
-    :introducer nil})
-  (render
-   [_]
-   (dom/div
-    (case (:stage @state)
-      1 (r/as-element [find-friends-box
-                       (fn [firstname lastname university]
-                         (search-introducer {:source ::signup-box
-                                             :firstname firstname
-                                             :lastname lastname
-                                             :university university})
-                         (swap! state assoc :stage 2))])
-      2 (r/as-element [found-friends-box people all-users
-                       (fn [introducer]
-                         (swap! state
-                                assoc
-                                :introducer introducer
-                                :stage 3))])
-      3 (r/as-element [signup-final-box (:introducer @state)])
-      nil)
+  [people all-users]
+  (let [stage (r/atom 1)
+        introducer (r/atom nil)]
+    (fn [_ _]
+      [:div
+       (case (:stage @state)
+         1 [find-friends-box
+            (fn [firstname lastname university]
+              (search-introducer {:source ::signup-box
+                                  :firstname firstname
+                                  :lastname lastname
+                                  :university university})
+              (swap! state assoc :stage 2))]
+         2 [found-friends-box people all-users
+            (fn [introducer]
+              (swap! state
+                     assoc
+                     :introducer introducer
+                     :stage 3))]
+         3 [signup-final-box (:introducer @state)]
+         nil)
 
-    (r/as-element
-      [signup-progress-breadcrumb (:stage @state) #(swap! state
-                                                          assoc :stage
-                                                          %)]))))
+       [signup-progress-breadcrumb (:stage @state) #(swap! state
+                                                           assoc :stage
+                                                           %)]])))
