@@ -2,6 +2,7 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
+            [reagent.core :as r]
             [kelasi-frontend.components.login-signup-box :refer (login-signup-box)]
             [kelasi-frontend.components.search-box :refer (search-box)]))
 
@@ -19,6 +20,6 @@
                                            :search search
                                            :users users}))
 
-      (om/build search-box {})
+      (r/as-element [search-box])
 
       (dom/br {:style {:clear "both"}}))))
