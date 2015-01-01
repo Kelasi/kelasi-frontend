@@ -33,13 +33,12 @@
                                              :lastname lastname
                                              :university university})
                          (swap! state assoc :stage 2))])
-      2 (om/build found-friends-box {:ids people
-                                     :people all-users
-                                     :on-select (fn [introducer]
-                                                  (swap! state
-                                                         assoc
-                                                         :introducer introducer
-                                                         :stage 3))})
+      2 (r/as-element [found-friends-box people all-users
+                       (fn [introducer]
+                         (swap! state
+                                assoc
+                                :introducer introducer
+                                :stage 3))])
       3 (r/as-element [signup-final-box (:introducer @state)])
       nil)
 
