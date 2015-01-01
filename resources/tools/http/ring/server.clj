@@ -22,6 +22,7 @@
 
 (defroutes site
   (resources "/")
+  (resources "/vendor" {:root ""})
   (GET "/mocha-test" req (test-page))
   (not-found "<p>404 Not found!</p>"))
 

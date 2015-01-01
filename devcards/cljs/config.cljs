@@ -1,6 +1,6 @@
 (ns config
   (:require [devcards.core :as dc :include-macros true]
-            [figwheel.client :as fw :include-macros true]
+            [figwheel.client :as fw]
 
             ; Fake server
             [mocks.server :as server]
@@ -48,4 +48,4 @@
 #_(fw/watch-and-reload
   :jsload-callback (fn [] (print "reloaded")))
 
-(dc/start-figwheel-reloader!)
+(dc/start-figwheel-reloader! {:websocket-url "ws://localhost:3449/figwheel-ws"})

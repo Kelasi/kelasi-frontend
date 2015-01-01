@@ -19,13 +19,13 @@
                  [org.clojars.mkhoeini/chaiify "0.1.0-SNAPSHOT"]
                  [devcards "0.1.2-SNAPSHOT"
                    :exclusions [org.clojure/clojurescript]]
-                 [figwheel "0.2.0-SNAPSHOT"]
+                 [figwheel "0.1.7-SNAPSHOT"]
                  [org.clojars.mkhoeini/router "0.1.0-SNAPSHOT"]
                  [org.clojars.mkhoeini/dispatcher "0.1.0-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
-            [jarohen/lein-frodo "0.4.1" :exclusions [org.clojure/tools.reader]]
-            [lein-figwheel "0.2.0-SNAPSHOT"]]
+            [jarohen/lein-frodo "0.4.1"]
+            [lein-figwheel "0.1.7-SNAPSHOT"]]
 
   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
