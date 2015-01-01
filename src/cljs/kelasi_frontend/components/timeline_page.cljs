@@ -2,6 +2,7 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
+            [reagent.core :as r]
             [kelasi-frontend.components.navbar :refer (navbar)]
             [kelasi-frontend.components.timeline-about-box
              :refer (timeline-about-box)]
@@ -24,5 +25,4 @@
       (om/build timeline-about-box (select-keys timeline [:title]))
       (om/build new-post-box {:timeline-id (:id timeline)
                               :parent-id "0"})
-      (om/build post-list {:posts posts
-                           :all-users (:all-users users)}))))
+      (r/as-element (post-list posts (:all-users users))))))
