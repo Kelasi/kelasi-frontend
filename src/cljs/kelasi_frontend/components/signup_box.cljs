@@ -40,7 +40,7 @@
                                                          assoc
                                                          :introducer introducer
                                                          :stage 3))})
-      3 (om/build signup-final-box {:introducer (atom (:introducer @state))})
+      3 (r/as-element [signup-final-box (:introducer @state)])
       nil)
 
     (om/build signup-progress-breadcrumb {:stage (:stage @state)

@@ -1,78 +1,60 @@
 (ns kelasi-frontend.components.signup-final-box
-  (:require [om-tools.core :as omtool :include-macros true]
-            [om-tools.dom  :as dom    :include-macros true]
-            [om.core       :as om     :include-macros true]
-            [reagent.core :as r]
+  (:require [reagent.core :as r]
             [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]
             [kelasi-frontend.actions :refer (signup)]))
 
 
 
-(omtool/defcomponentk signup-final-box
+(defn signup-final-box
   "Final step of registration."
-  [[:data introducer] owner state]
-  (init-state
-   [_]
-   {:firstname   ""
-    :lastname    ""
-    :university  ""
-    :email       ""
-    :password    ""
-    :re-password ""})
-  (render
-   [_]
-   (dom/div
-     (dom/p "You said you know:"
-            (r/as-element [mini-user-card false identity introducer]))
-     (dom/p "First name"
-            (dom/input
-              {:type "text"
-               :value (:firstname @state)
-               :on-change #(swap! state
-                                  assoc :firstname
-                                  (.. % -target -value))}))
-     (dom/p "Last name"
-            (dom/input
-              {:type "text"
-               :value (:lastname @state)
-               :on-change #(swap! state
-                                  assoc :lastname
-                                  (.. % -target -value))}))
-     (dom/p "University name"
-            (dom/input
-              {:type "text"
-               :value (:university @state)
-               :on-change #(swap! state
-                                  assoc :university
-                                  (.. % -target -value))}))
-     (dom/p "Email"
-            (dom/input
-              {:type "text"
-               :value (:email @state)
-               :on-change #(swap! state
-                                  assoc :email
-                                  (.. % -target -value))}))
-     (dom/p "Password"
-            (dom/input
-              {:type "password"
-               :value (:password @state)
-               :on-change #(swap! state
-                                  assoc :password
-                                  (.. % -target -value))}))
-     (dom/p "Retype password"
-            (dom/input
-              {:type "password"
-               :value (:re-password @state)
-               :on-change #(swap! state
-                                  assoc :re-password
-                                  (.. % -target -value))}))
-     (dom/button
-       {:type "button"
-        :on-click #(signup (-> @state
-                               (select-keys [:firstname :lastname
-                                             :university :email
-                                             :password])
-                               (assoc :source ::signup-final-box
-                                      :introducer-id (:id @introducer))
-                               ((partial mapcat identity))))}
-       "Singup!"))))
+  [introducer]
+  (let [firstname   (r/atom "")
+        lastname    (r/atom "")
+        university  (r/atom "")
+        email       (r/atom "")
+        password    (r/atom "")
+        re-password (r/atom "")]
+    (fn [_]
+      [:div
+       [:p "You said you know:"
+        [mini-user-card false identity introducer]]
+
+       [:p "First name"
+        [:input {:type "text"
+                 :value @firstname
+                 :on-change #(reset! firstname (.-target.value %))}]]
+
+       [:p "Last name"
+        [:input {:type "text"
+                 :value @lastname
+                 :on-change #(reset! lastname (.-target.value %))}]]
+
+       [:p "University name"
+        [:input {:type "text"
+                 :value @university
+                 :on-change #(reset! university (.-target.value %))}]]
+
+       [:p "Email"
+        [:input {:type "text"
+                 :value @email
+                 :on-change #(reset! email (.-target.value %))}]]
+
+       [:p "Password"
+        [:input {:type "password"
+                 :value @password
+                 :on-change #(reset! password (.-target.value %))}]]
+
+       [:p "Retype password"
+        [:input {:type "password"
+                 :value @re-password
+                 :on-change #(reset! re-password (.-target.value %))}]]
+
+       [:button {:type "button"
+                 :on-click #(signup {:source ::signup-final-box
+                                     :firstname @firstname
+                                     :lastname @lastname
+                                     :university @university
+                                     :email @email
+                                     :password @password
+                                     :introducer-id (:id @introducer)})}
+        "Singup!"]])))
