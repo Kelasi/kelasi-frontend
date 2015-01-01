@@ -25,11 +25,11 @@
 
       (r/as-element (coverphoto-box (:img user) (:profile-name user)))
 
-      (dom/div {:style {:width "33%"
-                        :float "left"}}
-               (om/build profile-about-box {:firstname (:profile-name user)
-                                            :lastname (:full-name user)
-                                            :email (:email user)}))
+      (dom/div
+        {:style {:width "33%"
+                 :float "left"}}
+        (r/as-element
+          [profile-about-box (:profile-name user) (:full-name user) (:email user)]))
 
       (dom/div {:style {:width "33%"
                         :float "left"}}
