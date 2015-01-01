@@ -14,5 +14,5 @@
    :search {:people [(:id user1)]}
    })
 
-(defcard login-box-component
+(defcard login-signup-box-component
   (dc/om-root-card login-signup-box mini-state))

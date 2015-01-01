@@ -2,6 +2,7 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
+            [reagent.core :as r]
             [kelasi-frontend.components.login-box :refer (login-box)]
             [kelasi-frontend.components.signup-box :refer (signup-box)]))
 
@@ -17,7 +18,7 @@
     [_]
     (dom/div
       (when (= :up (:position @state))
-        (om/build login-box {:errors errors}))
+        (r/as-element [login-box errors]))
 
       (dom/a {:href ""
               :on-click (fn [ev]

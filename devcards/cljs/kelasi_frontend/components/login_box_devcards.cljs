@@ -2,13 +2,12 @@
   (:require-macros [devcards.core :refer (defcard)])
   (:require [kelasi-frontend.components.login-box :refer (login-box)]
             [kelasi-frontend.state :refer (app-state)]
+            [reagent.core :as r]
             [devcards.core :as dc :include-macros true]))
 
-(defcard global-state
-  (dc/edn-card @app-state))
-
 (defcard login-box-component
-  (dc/om-root-card login-box {}))
+  (dc/react-card (r/as-element [login-box {}])))
 
-(defcard login-box-component-wrong-login-state
-  (dc/om-root-card login-box {:errors {:login :wrong-login}}))
+(defcard login-box-component--wrong-login-state
+  (dc/react-card (r/as-element
+                   [login-box {:login :wrong-login}])))
