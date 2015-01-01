@@ -2,7 +2,6 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
-            [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]
             [kelasi-frontend.components.user-list-box :refer (user-list-box)]))
 
 

@@ -2,8 +2,8 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
-            [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]
-            #_[kelasi-frontend.actions :refer (select-introducer)]))
+            [reagent.core :as r]
+            [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]))
 
 
 
@@ -15,6 +15,4 @@
     (dom/div
       (for [fid ids
             :let [f (get people fid)]]
-        (om/build mini-user-card {:selected (= f selected)
-                                  :user f
-                                  :on-click #(on-select f)})))))
+        (r/as-element [mini-user-card (= f selected) #(on-select f) f])))))

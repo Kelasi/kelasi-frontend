@@ -2,6 +2,7 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
+            [reagent.core :as r]
             [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]
             [kelasi-frontend.actions :refer (signup)]))
 
@@ -22,9 +23,7 @@
    [_]
    (dom/div
      (dom/p "You said you know:"
-            (om/build mini-user-card {:selected false
-                                      :user introducer
-                                      :on-click identity}))
+            (r/as-element [mini-user-card false identity introducer]))
      (dom/p "First name"
             (dom/input
               {:type "text"

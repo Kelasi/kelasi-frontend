@@ -2,18 +2,18 @@
   (:require-macros [devcards.core :refer (defcard)])
   (:require [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]
             [kelasi-frontend.state :refer (app-state)]
+            [reagent.core :as r]
             [mocks.user :refer (user1)]
             [devcards.core :as dc :include-macros true]))
 
-(defcard global-state
-  (dc/edn-card @app-state))
 
-(def mini-state (atom {:selected false
-                       :user user1
-                       :on-click (fn []
-                                   (swap! mini-state
-                                          update-in [:selected]
-                                          not))}))
 
-(defcard mini-user-card-component
-  (dc/om-root-card mini-user-card mini-state))
+(defcard mini-user-card-component--not-selected
+  (dc/react-card (r/as-element
+                   [mini-user-card false #(pr "clicked") user1])))
+
+
+
+(defcard mini-user-card-component--selected
+  (dc/react-card (r/as-element
+                   [mini-user-card true #(pr "clicked") user1])))

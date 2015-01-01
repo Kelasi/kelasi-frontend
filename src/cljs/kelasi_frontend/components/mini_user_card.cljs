@@ -1,20 +1,11 @@
-(ns kelasi-frontend.components.mini-user-card
-  (:require [om-tools.core :as omtool :include-macros true]
-            [om-tools.dom  :as dom    :include-macros true]))
+(ns kelasi-frontend.components.mini-user-card)
 
 
 
-(omtool/defcomponentk mini-user-card
+(defn mini-user-card
   "A mini card to display info of a single user."
-  [[:data selected on-click user] owner state]
-  (render
-   [_]
-   (dom/div
-     {style {:backgroundColor (if selected
-                                "#333"
-                                "#fff")}}
-     (dom/img {:src (:img user)})
-     (dom/a
-       {:href ""
-        :on-click (fn [ev] (.preventDefault ev) (on-click))}
-       (:full-name user)))))
+  [selected on-click user]
+  [:div {:style {:backgroundColor (if selected "#333" "#fff")}}
+   [:img {:src (:img user)}]
+   [:a {:href "" :on-click #(do (.preventDefault %) (on-click))}
+    (:full-name user)]])
