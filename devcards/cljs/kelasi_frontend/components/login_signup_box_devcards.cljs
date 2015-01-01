@@ -2,17 +2,16 @@
   (:require-macros [devcards.core :refer (defcard)])
   (:require [kelasi-frontend.components.login-signup-box :refer (login-signup-box)]
             [kelasi-frontend.state :refer (app-state)]
+            [reagent.core :as r]
             [mocks.user :refer (user1)]
             [devcards.core :as dc :include-macros true]))
 
-(defcard global-state
-  (dc/edn-card @app-state))
 
-(def mini-state
-  {:errors {}
-   :users {:all-users {(:id user1) user1}}
-   :search {:people [(:id user1)]}
-   })
+
+(def elem [login-signup-box
+           {:all-users {(:id user1) user1}} ;users
+           {:people [(:id user1)]} ;search
+           {}]) ;errors
 
 (defcard login-signup-box-component
-  (dc/om-root-card login-signup-box mini-state))
+  (dc/react-card (r/as-element elem)))

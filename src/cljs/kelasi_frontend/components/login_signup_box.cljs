@@ -1,34 +1,24 @@
 (ns kelasi-frontend.components.login-signup-box
-  (:require [om-tools.core :as omtool :include-macros true]
-            [om-tools.dom  :as dom    :include-macros true]
-            [om.core       :as om     :include-macros true]
-            [reagent.core :as r]
+  (:require [reagent.core :as r]
             [kelasi-frontend.components.login-box :refer (login-box)]
             [kelasi-frontend.components.signup-box :refer (signup-box)]))
 
 
 
-(omtool/defcomponentk login-signup-box
+(defn login-signup-box
   "First page's sidebar"
-  [[:data errors search users] owner state]
-  (init-state
-    [_]
-    {:position :up})
-  (render
-    [_]
-    (dom/div
-      (when (= :up (:position @state))
-        (r/as-element [login-box errors]))
+  [search users errors]
+  (let [position (r/atom :up)]
+    (fn [_ _ _]
+      [:div
+       (when (= :up @position)
+         [login-box errors])
 
-      (dom/a {:href ""
-              :on-click (fn [ev]
-                          (.preventDefault ev)
-                          (swap! state
-                                 update-in [:position]
-                                 #(if (= % :up)
-                                    :down
-                                    :up)))}
-             "Swap login/signup")
+       [:a {:href ""
+            :on-click (fn [ev]
+                        (.preventDefault ev)
+                        (reset! position (if (= % :up) :down :up)))}
+        "Swap login/signup"]
 
-      (when (= :down (:position @state))
-        (r/as-element [signup-box (:people search) (:all-users users)])))))
+       (when (= :down @position)
+         [signup-box (:people search) (:all-users users)])])))

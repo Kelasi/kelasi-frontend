@@ -16,9 +16,7 @@
     (dom/div
       (dom/div {:style {:width "30%"
                         :float "left"}}
-               (om/build login-signup-box {:errors errors
-                                           :search search
-                                           :users users}))
+               (r/as-element [login-signup-box search users errors]))
 
       (r/as-element [search-box])
 
