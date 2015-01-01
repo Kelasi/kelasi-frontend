@@ -25,11 +25,11 @@
       (r/as-element [navbar current-user])
 
       (dom/h2 "Found timelines")
-      (om/build timeline-list-box {:ids timelines
-                                   :timelines all-timelines
-                                   :people all-users
-                                   :on-select #(show-timeline {:source ::search-page
-                                                               :timeline-id (:id @%)})})
+      (r/as-element
+        [timeline-list-box timelines
+         all-timelines all-users
+         #(show-timeline {:source ::search-page
+                          :timeline-id (:id @%)})])
 
       (dom/h2 "Found users")
       (om/build user-list-box {:ids people

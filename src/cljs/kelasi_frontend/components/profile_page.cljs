@@ -34,17 +34,17 @@
       (dom/div {:style {:width "33%"
                         :float "left"}}
                (dom/h2 "User's timelines:")
-               (om/build timeline-list-box {:ids (:timelines user)
-                                            :timelines all-timelines
-                                            :people (:all-users users)
-                                            :on-select #(show-timeline {:source ::profile-page
-                                                                        :timeline-id (:id @%)})}))
+               (r/as-element
+                 [timeline-list-box (:timelines user)
+                  all-timelines (:all-users users)
+                  #(show-timeline {:source ::profile-page
+                                   :timeline-id (:id @%)})]))
 
       (dom/div {:style {:width "33%"
                         :float "left"}}
                (dom/h2 "Followed timelines:")
-               (om/build timeline-list-box {:ids (:followed-timelines user)
-                                            :timelines all-timelines
-                                            :people (:all-users users)
-                                            :on-select #(show-timeline {:source ::profile-page
-                                                                        :timeline-id (:id @%)})})))))
+               (r/as-element
+                 [timeline-list-box (:followed-timelines user)
+                  all-timelines (:all-users users)
+                  #(show-timeline {:source ::profile-page
+                                   :timeline-id (:id @%)})])))))

@@ -1,20 +1,14 @@
 (ns kelasi-frontend.components.timeline-list-box
-  (:require [om-tools.core :as omtool :include-macros true]
-            [om-tools.dom  :as dom    :include-macros true]
-            [om.core       :as om     :include-macros true]
-            [reagent.core :as r]
-            [kelasi-frontend.components.mini-timeline-card
+  (:require [kelasi-frontend.components.mini-timeline-card
              :refer (mini-timeline-card)]))
 
 
 
-(omtool/defcomponentk timeline-list-box
+(defn timeline-list-box
   "A list of timelines"
-  [[:data ids timelines people on-select]]
-  (render
-    [_]
-    (dom/div
-      (for [tid ids
-            :let [t (get timelines tid)
-                  a (get people (:admin-id t))]]
-        (r/as-element [mini-timeline-card t a #(on-select t)])))))
+  [ids timelines people on-select]
+  [:div
+   (for [tid ids
+         :let [t (get timelines tid)
+               a (get people (:admin-id t))]]
+     [mini-timeline-card t a #(on-select t)])])
