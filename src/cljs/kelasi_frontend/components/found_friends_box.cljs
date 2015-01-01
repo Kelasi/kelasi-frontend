@@ -2,6 +2,7 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
+            [reagent.core :as r]
             [kelasi-frontend.components.user-list-box :refer (user-list-box)]))
 
 
@@ -17,10 +18,8 @@
     (dom/div
       (dom/p "Select your friend:")
 
-      (om/build user-list-box {:ids ids
-                               :people people
-                               :selected (:selected @state)
-                               :on-select #(swap! state assoc :selected %)})
+      (r/as-element [user-list-box ids people (:selected @state)
+                     #(swap! state assoc :selected %)])
 
       (when (:selected @state)
         (dom/button
