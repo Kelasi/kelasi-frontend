@@ -1,9 +1,5 @@
 (ns kelasi-frontend.components.profile-page
-  (:require [om-tools.core :as omtool :include-macros true]
-            [om-tools.dom  :as dom    :include-macros true]
-            [om.core       :as om     :include-macros true]
-            [reagent.core :as r]
-            [kelasi-frontend.components.navbar :refer (navbar)]
+  (:require [kelasi-frontend.components.navbar :refer (navbar)]
             [kelasi-frontend.components.coverphoto-box
              :refer (coverphoto-box)]
             [kelasi-frontend.components.profile-about-box
@@ -15,36 +11,30 @@
 
 
 
-(omtool/defcomponentk profile-page
+(defn profile-page
   "The profile page of a user"
-  [[:data user users all-timelines]]
-  (render
-    [_]
-    (dom/div
-      (r/as-element [navbar (:current-user users)])
+  [user users all-timelines]
+  [:div
+   [navbar (:current-user users)]
 
-      (r/as-element (coverphoto-box (:img user) (:profile-name user)))
+   [coverphoto-box (:img user) (:profile-name user)]
 
-      (dom/div
-        {:style {:width "33%"
-                 :float "left"}}
-        (r/as-element
-          [profile-about-box (:profile-name user) (:full-name user) (:email user)]))
+   [:div {:style {:width "33%"
+                  :float "left"}}
+    [profile-about-box (:profile-name user) (:full-name user) (:email user)]]
 
-      (dom/div {:style {:width "33%"
-                        :float "left"}}
-               (dom/h2 "User's timelines:")
-               (r/as-element
-                 [timeline-list-box (:timelines user)
-                  all-timelines (:all-users users)
-                  #(show-timeline {:source ::profile-page
-                                   :timeline-id (:id @%)})]))
+   [:div {:style {:width "33%"
+                  :float "left"}}
+    [:h2 "User's timelines:"]
+    [timeline-list-box (:timelines user)
+     all-timelines (:all-users users)
+     #(show-timeline {:source ::profile-page
+                      :timeline-id (:id @%)})]]
 
-      (dom/div {:style {:width "33%"
-                        :float "left"}}
-               (dom/h2 "Followed timelines:")
-               (r/as-element
-                 [timeline-list-box (:followed-timelines user)
-                  all-timelines (:all-users users)
-                  #(show-timeline {:source ::profile-page
-                                   :timeline-id (:id @%)})])))))
+   [:div {:style {:width "33%"
+                  :float "left"}}
+    [:h2 "Followed timelines:"]
+    [timeline-list-box (:followed-timelines user)
+     all-timelines (:all-users users)
+     #(show-timeline {:source ::profile-page
+                      :timeline-id (:id @%)})]]])
