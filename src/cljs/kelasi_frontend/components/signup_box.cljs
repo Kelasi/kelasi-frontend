@@ -2,6 +2,7 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
+            [reagent.core :as r]
             [kelasi-frontend.components.find-friends-box
              :refer (find-friends-box)]
             [kelasi-frontend.components.found-friends-box
@@ -24,14 +25,14 @@
   (render
    [_]
    (dom/div
-    (condp = (:stage @state)
-      1 (om/build find-friends-box {:on-search
-                                    (fn [firstname lastname university]
-                                      (search-introducer {:source ::signup-box
-                                                          :firstname firstname
-                                                          :lastname lastname
-                                                          :university university})
-                                      (swap! state assoc :stage 2))})
+    (case (:stage @state)
+      1 (r/as-element [find-friends-box
+                       (fn [firstname lastname university]
+                         (search-introducer {:source ::signup-box
+                                             :firstname firstname
+                                             :lastname lastname
+                                             :university university})
+                         (swap! state assoc :stage 2))])
       2 (om/build found-friends-box {:ids people
                                      :people all-users
                                      :on-select (fn [introducer]
@@ -39,7 +40,8 @@
                                                          assoc
                                                          :introducer introducer
                                                          :stage 3))})
-      3 (om/build signup-final-box {:introducer (atom (:introducer @state))}))
+      3 (om/build signup-final-box {:introducer (atom (:introducer @state))})
+      nil)
 
     (om/build signup-progress-breadcrumb {:stage (:stage @state)
                                           :on-click #(swap! state
