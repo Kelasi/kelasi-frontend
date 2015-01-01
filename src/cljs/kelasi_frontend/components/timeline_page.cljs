@@ -22,6 +22,6 @@
       (r/as-element [navbar (:current-user users)])
       (r/as-element
         (coverphoto-box (:cover-image timeline) (:title timeline)))
-      (om/build timeline-about-box (select-keys timeline [:title]))
+      (r/as-element [timeline-about-box (:title timeline)])
       (r/as-element [new-post-box (:id timeline) "0"])
       (r/as-element (post-list posts (:all-users users))))))
