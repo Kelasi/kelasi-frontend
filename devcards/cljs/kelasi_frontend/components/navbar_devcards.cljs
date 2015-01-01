@@ -2,14 +2,14 @@
   (:require-macros [devcards.core :refer (defcard)])
   (:require [kelasi-frontend.components.navbar :refer (navbar)]
             [kelasi-frontend.state :refer (app-state)]
+            [reagent.core :as r]
             [mocks.user :refer (user1)]
             [devcards.core :as dc :include-macros true]))
 
-(defcard global-state
-  (dc/edn-card @app-state))
+
 
 (defcard navbar-component
-  (dc/om-root-card navbar {:current-user nil}))
+  (dc/react-card (r/as-element [navbar nil])))
 
 (defcard navbar-logged-in-component
-  (dc/om-root-card navbar {:current-user user1}))
+  (dc/react-card (r/as-element [navbar user1])))

@@ -2,6 +2,7 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
+            [reagent.core :as r]
             [kelasi-frontend.components.navbar :refer (navbar)]
             [kelasi-frontend.components.timeline-list-box
              :refer (timeline-list-box)]
@@ -21,7 +22,7 @@
   (render
     [_]
     (dom/div
-      (om/build navbar {:current-user current-user})
+      (r/as-element [navbar current-user])
 
       (dom/h2 "Found timelines")
       (om/build timeline-list-box {:ids timelines

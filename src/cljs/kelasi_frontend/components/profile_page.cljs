@@ -21,7 +21,7 @@
   (render
     [_]
     (dom/div
-      (om/build navbar {:current-user (:current-user users)})
+      (r/as-element [navbar (:current-user users)])
 
       (r/as-element (coverphoto-box (:img user) (:profile-name user)))
 

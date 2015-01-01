@@ -19,7 +19,7 @@
   (render
     [_]
     (dom/div
-      (om/build navbar (select-keys users [:current-user]))
+      (r/as-element [navbar (:current-user users)])
       (r/as-element
         (coverphoto-box (:cover-image timeline) (:title timeline)))
       (om/build timeline-about-box (select-keys timeline [:title]))

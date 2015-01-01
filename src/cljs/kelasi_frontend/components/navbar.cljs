@@ -1,35 +1,31 @@
 (ns kelasi-frontend.components.navbar
-  (:require [om-tools.core :as omtool :include-macros true]
-            [om-tools.dom  :as dom    :include-macros true]
-            [kelasi-frontend.actions :refer (search-all
-                                              show-self-profile)]))
+  (:require [reagent.core :as r]
+            [kelasi-frontend.actions
+             :refer (search-all show-self-profile)]))
 
 
 
-(omtool/defcomponentk navbar
+(defn navbar
   "The main navbar at the top of all pages"
-  [[:data current-user] owner state]
-  (init-state
-    [_]
-    {:search ""})
-  (render
-    [_]
-    (dom/div
-      {:style {:width "100%"
-               :backgroundColor "#cc9"}}
+  [current-user]
+  (let [search (r/atom "")]
+    (fn
+      [_]
+      [:div {:style {:width "100%"
+                     :backgroundColor "#cc9"}}
 
-      (dom/span "Kelasi")
+       [:span "Kelasi"]
 
-      (dom/input {:type "text"
-                  :value (:search @state)
-                  :on-change #(swap! state assoc :search (.. % -target -value))
-                  :on-key-press #(search-all {:source ::navbar
-                                              :q (:search @state)})})
+       [:input {:type "text"
+                :value @search
+                :on-change #(reset! search (.-target.value %))
+                :on-key-press #(search-all {:source ::navbar
+                                            :q      @search})}]
 
-      (when current-user
-        (dom/a {:href ""
-                :style {:float "right"}
-                :on-click (fn [ev]
-                            (.preventDefault ev)
-                            (show-self-profile {:source ::navbar}))}
-               (:full-name current-user))))))
+       (when current-user
+         [:a {:href ""
+              :style {:float "right"}
+              :on-click (fn [ev]
+                          (.preventDefault ev)
+                          (show-self-profile {:source ::navbar}))}
+          (:full-name current-user)])])))
