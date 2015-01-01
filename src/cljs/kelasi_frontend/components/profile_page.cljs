@@ -2,6 +2,7 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
+            [reagent.core :as r]
             [kelasi-frontend.components.navbar :refer (navbar)]
             [kelasi-frontend.components.coverphoto-box
              :refer (coverphoto-box)]
@@ -22,8 +23,7 @@
     (dom/div
       (om/build navbar {:current-user (:current-user users)})
 
-      (om/build coverphoto-box {:img (:img user)
-                                :text (:profile-name user)})
+      (r/as-element (coverphoto-box (:img user) (:profile-name user)))
 
       (dom/div {:style {:width "33%"
                         :float "left"}}

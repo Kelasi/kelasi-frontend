@@ -20,8 +20,8 @@
     [_]
     (dom/div
       (om/build navbar (select-keys users [:current-user]))
-      (om/build coverphoto-box {:img (:cover-image timeline)
-                                :text (:title timeline)})
+      (r/as-element
+        (coverphoto-box (:cover-image timeline) (:title timeline)))
       (om/build timeline-about-box (select-keys timeline [:title]))
       (om/build new-post-box {:timeline-id (:id timeline)
                               :parent-id "0"})
