@@ -2,17 +2,17 @@
   (:require-macros [devcards.core :refer (defcard)])
   (:require [kelasi-frontend.components.entrance-page :refer (entrance-page)]
             [kelasi-frontend.state :refer (app-state)]
+            [reagent.core :as r]
             [mocks.user :refer (user1)]
             [devcards.core :as dc :include-macros true]))
 
-(defcard global-state
-  (dc/edn-card @app-state))
 
-(def mini-state
-  {:errors {}
-   :users {:all-users {(:id user1) user1}}
-   :search {:people [(:id user1)]}
-   })
+
+(def elem
+  [entrance-page
+   {:all-users {(:id user1) user1}} ;users
+   {:people [(:id user1)]} ;search
+   {}]) ;errors
 
 (defcard entrance-page-component
-  (dc/om-root-card entrance-page mini-state))
+  (dc/react-card (r/as-element elem)))
