@@ -23,6 +23,5 @@
       (r/as-element
         (coverphoto-box (:cover-image timeline) (:title timeline)))
       (om/build timeline-about-box (select-keys timeline [:title]))
-      (om/build new-post-box {:timeline-id (:id timeline)
-                              :parent-id "0"})
+      (r/as-element [new-post-box (:id timeline) "0"])
       (r/as-element (post-list posts (:all-users users))))))
