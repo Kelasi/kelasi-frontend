@@ -2,6 +2,7 @@
   (:require [om-tools.core :as omtool :include-macros true]
             [om-tools.dom  :as dom    :include-macros true]
             [om.core       :as om     :include-macros true]
+            [reagent.core :as r]
             [kelasi-frontend.components.mini-timeline-card
              :refer (mini-timeline-card)]))
 
@@ -16,6 +17,4 @@
       (for [tid ids
             :let [t (get timelines tid)
                   a (get people (:admin-id t))]]
-        (om/build mini-timeline-card {:timeline t
-                                      :admin a
-                                      :on-click #(on-select t)})))))
+        (r/as-element [mini-timeline-card t a #(on-select t)])))))

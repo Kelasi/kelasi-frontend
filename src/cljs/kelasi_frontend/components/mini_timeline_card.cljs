@@ -1,24 +1,16 @@
-(ns kelasi-frontend.components.mini-timeline-card
-  (:require [om-tools.core :as omtool :include-macros true]
-            [om-tools.dom  :as dom    :include-macros true]))
+(ns kelasi-frontend.components.mini-timeline-card)
 
 
 
-(omtool/defcomponentk mini-timeline-card
+(defn mini-timeline-card
   "Mini Timeline Card"
-  [[:data timeline admin on-click]]
-  (render
-    [_]
-    (dom/div {:class "mini-timeline"
-              :on-click on-click}
-      (dom/div {:class "cover"}
-        (dom/img {:class "cover-photo"
-                  :src (:cover-photo-mini timeline)})
+  [timeline admin on-click]
+  [:div.mini-timeline {:on-click on-click}
+   [:div.cover
+    [:img.cover-photo {:src (:cover-photo-mini timeline)}]
+    [:h4.timeline-title (:title timeline)]]
 
-        (dom/h4 {:class "timeline-title"} (:title timeline)))
-
-      (dom/div {:class "head"}
-        "Admin:"
-        (dom/img {:class "profile-photo"
-                  :src (:img admin)})
-        (:full-name admin)))))
+   [:div.head
+    "Admin:"
+    [:img.profile-photo {:src (:img admin)}]
+    (:full-name admin)]])
