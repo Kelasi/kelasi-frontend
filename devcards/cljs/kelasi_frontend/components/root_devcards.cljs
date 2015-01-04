@@ -3,15 +3,13 @@
   (:require [kelasi-frontend.components.root :refer (root)]
             [kelasi-frontend.state :refer (app-state)]
             [kelasi-frontend.components.entrance-page :refer (entrance-page)]
+            [reagent.core :as r]
             [devcards.core :as dc :include-macros true]))
-
-(defcard global-state
-  (dc/edn-card @app-state))
 
 
 
 (defcard root-component-with-no-page
-  (dc/om-root-card root {}))
+  (dc/react-card (r/as-element [root (atom {})])))
 
 
 
@@ -29,4 +27,4 @@
             :params {}}}}))
 
 (defcard root-component-with-entrance-page
-  (dc/om-root-card root mini-state-entrance))
+  (dc/react-card (r/as-element [root (atom mini-state-entrance)])))

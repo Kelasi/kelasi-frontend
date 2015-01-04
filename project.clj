@@ -12,9 +12,7 @@
                  [org.clojure/core.async  "0.1.346.0-17112a-alpha"]
                  [com.facebook/react "0.12.2.1"]
                  [reagent "0.5.0-alpha"]
-                 [om "0.8.0-beta5"]
                  [prismatic/schema  "0.3.3"]
-                 [prismatic/om-tools  "0.3.10"]
                  [org.clojars.mkhoeini/mocha-tester "0.1.0-SNAPSHOT"]
                  [org.clojars.mkhoeini/chaiify "0.1.0-SNAPSHOT"]
                  [devcards "0.1.2-SNAPSHOT"
