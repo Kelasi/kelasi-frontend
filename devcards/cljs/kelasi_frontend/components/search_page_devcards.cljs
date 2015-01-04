@@ -13,11 +13,11 @@
 (def users [user1 user2 user3])
 (def elem
   [search-page
+   {:people ["2" "3" "4"]
+    :timelines ["1" "2" "3"]} ;search
    {:all-users (zipmap (mapv :id users) users)
     :current-user user1} ;users
-   (zipmap (mapv :id timelines) timelines) ;all-timelines
-   {:people ["2" "3" "4"]
-    :timelines ["1" "2" "3"]}]) ;search
+   (zipmap (mapv :id timelines) timelines)]) ;all-timelines
 
 (defcard search-page-component
   (dc/react-card (r/as-element elem)))

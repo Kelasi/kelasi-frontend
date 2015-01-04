@@ -19,23 +19,19 @@
         introducer (r/atom nil)]
     (fn [_ _]
       [:div
-       (case (:stage @state)
+       (case @stage
          1 [find-friends-box
             (fn [firstname lastname university]
               (search-introducer {:source ::signup-box
                                   :firstname firstname
                                   :lastname lastname
                                   :university university})
-              (swap! state assoc :stage 2))]
+              (reset! stage 2))]
          2 [found-friends-box people all-users
-            (fn [introducer]
-              (swap! state
-                     assoc
-                     :introducer introducer
-                     :stage 3))]
-         3 [signup-final-box (:introducer @state)]
+            (fn [intr]
+              (reset! introducer intr)
+              (reset! stage 3))]
+         3 [signup-final-box @introducer]
          nil)
 
-       [signup-progress-breadcrumb (:stage @state) #(swap! state
-                                                           assoc :stage
-                                                           %)]])))
+       [signup-progress-breadcrumb @stage #(reset! stage %)]])))

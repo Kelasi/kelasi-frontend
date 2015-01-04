@@ -12,8 +12,8 @@
 (def elem [user-list-box
            (mapv :id users) ;ids
            (zipmap (mapv :id users) users) ;people
-           nil ;selected
-           (fn [s] (swap! state assoc :selected s))]) ;on-select
+           user1 ;selected
+           (fn [s] (pr "selected" s))]) ;on-select
 
 (defcard user-list-box-component
   (dc/react-card (r/as-element elem)))

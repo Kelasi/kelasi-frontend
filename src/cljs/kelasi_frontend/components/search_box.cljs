@@ -13,7 +13,7 @@
        [:p "Search:"
         [:input {:type "text"
                  :value @query
-                 :on-change #(do (js/console.log (.-target.value %)) (reset! query (.-target.value %)))
+                 :on-change #(reset! query (.-target.value %))
                  :on-key-press #(when (= 13 (.-charCode %))
                                   (search-all {:source ::search-box
                                                :q      @query}))}]]])))

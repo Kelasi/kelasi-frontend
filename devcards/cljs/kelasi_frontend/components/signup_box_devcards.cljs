@@ -9,4 +9,4 @@
 
 
 (defcard signup-box-component
-  (dc/react-card [signup-box [(:id user1)] {(:id user1) user1}]))
+  (dc/react-card (r/as-element [signup-box [(:id user1)] {(:id user1) user1}])))

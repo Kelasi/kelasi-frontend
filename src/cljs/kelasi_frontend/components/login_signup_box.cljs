@@ -17,7 +17,7 @@
        [:a {:href ""
             :on-click (fn [ev]
                         (.preventDefault ev)
-                        (reset! position (if (= % :up) :down :up)))}
+                        (reset! position (if (= @position :up) :down :up)))}
         "Swap login/signup"]
 
        (when (= :down @position)

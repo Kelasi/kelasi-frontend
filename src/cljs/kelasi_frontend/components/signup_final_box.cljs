@@ -56,5 +56,5 @@
                                      :university @university
                                      :email @email
                                      :password @password
-                                     :introducer-id (:id @introducer)})}
+                                     :introducer-id (:id introducer)})}
         "Singup!"]])))
