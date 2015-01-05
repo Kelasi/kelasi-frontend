@@ -9,7 +9,6 @@
             [mocks.echo-store]
 
             ; Component devcards
-            [kelasi-frontend.components.root-devcards]
             [kelasi-frontend.components.navbar-devcards]
             [kelasi-frontend.components.entrance-page-devcards]
             [kelasi-frontend.components.timeline-page-devcards]
