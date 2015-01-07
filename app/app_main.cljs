@@ -1,4 +1,4 @@
-(ns app
+(ns app-main
   (:require [router.core :as router]
             [router.react :as r-react]
             [state :refer (app-state)]
