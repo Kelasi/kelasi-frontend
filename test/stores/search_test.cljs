@@ -1,11 +1,11 @@
-(ns kelasi-frontend.stores.search-test
+(ns stores.search-test
   (:require-macros [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)]
                    [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.search :as search]
-            [kelasi-frontend.actions :as action]
-            [kelasi-frontend.backend.search :refer (people all)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [stores.search :as search]
+            [actions :as action]
+            [backend.search :refer (people all)]
+            [state :refer (app-state)]
             [cljs.core.async :refer (chan tap untap take!)]))
 
 
@@ -19,7 +19,7 @@
 
 (describe "search-introducer action"
   (before [done]
-    (.stub js/sinon kelasi-frontend.backend.search "people")
+    (.stub js/sinon backend.search "people")
 
     (tap search/done done-ch)
     (action/search-introducer {:source     ::search-introducer-test
@@ -57,7 +57,7 @@
 
 (describe "search-all action"
   (before [done]
-    (.stub js/sinon kelasi-frontend.backend.search "all")
+    (.stub js/sinon backend.search "all")
 
     (tap search/done done-ch)
     (action/search-all {:source ::search-all-test

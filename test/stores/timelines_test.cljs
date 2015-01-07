@@ -1,11 +1,11 @@
-(ns kelasi-frontend.stores.timelines-test
+(ns stores.timelines-test
   (:require-macros [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)]
                    [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.timelines :as timelines]
-            [kelasi-frontend.actions :as action]
-            [kelasi-frontend.backend.timelines :refer (get-one)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [stores.timelines :as timelines]
+            [actions :as action]
+            [backend.timelines :refer (get-one)]
+            [state :refer (app-state)]
             [cljs.core.async :refer (chan tap untap <!)]
             [mocks.location :as loc]))
 
@@ -18,7 +18,7 @@
 (describe "show-timeline action"
   (before
     (loc/stub)
-    (.stub js/sinon kelasi-frontend.backend.timelines "get_one")
+    (.stub js/sinon backend.timelines "get_one")
     (tap timelines/done ch))
 
   (after

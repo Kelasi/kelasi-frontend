@@ -1,11 +1,11 @@
-(ns kelasi-frontend.stores.posts-test
+(ns stores.posts-test
   (:require-macros [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)]
                    [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.posts :as posts]
-            [kelasi-frontend.actions :as action]
-            [kelasi-frontend.backend.posts   :refer (create)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [stores.posts :as posts]
+            [actions :as action]
+            [backend.posts   :refer (create)]
+            [state :refer (app-state)]
             [mocks.post :refer (post1 post2 post3 post4)]
             [cljs.core.async :refer (chan tap untap take!)]))
 
@@ -15,7 +15,7 @@
 
 (describe "new-post action"
   (before [done]
-    (.stub js/sinon kelasi-frontend.backend.posts "create")
+    (.stub js/sinon backend.posts "create")
     (tap posts/done done-ch)
     (action/new-post {:source ::new-post-test
                       :timeline-id "1"

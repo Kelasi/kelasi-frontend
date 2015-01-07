@@ -1,9 +1,9 @@
-(ns kelasi-frontend.stores.routes-test
+(ns stores.routes-test
   (:require-macros [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)])
-  (:require [kelasi-frontend.stores.routes :as routes]
-            [kelasi-frontend.actions :as action]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [stores.routes :as routes]
+            [actions :as action]
+            [state :refer (app-state)]
             [cljs.core.async :refer (chan tap untap take!)]
             [mocks.location :as loc]))
 

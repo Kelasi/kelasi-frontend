@@ -1,12 +1,12 @@
-(ns kelasi-frontend.stores.users-test
+(ns stores.users-test
   (:require-macros [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)]
                    [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.users :as users]
-            [kelasi-frontend.actions :as action]
-            [kelasi-frontend.backend.session :refer (login)]
-            [kelasi-frontend.backend.users   :refer (create)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [stores.users :as users]
+            [actions :as action]
+            [backend.session :refer (login)]
+            [backend.users   :refer (create)]
+            [state :refer (app-state)]
             [cljs.core.async :refer (chan tap untap take!)]
             [mocks.location :as loc]))
 
@@ -18,7 +18,7 @@
 
 (describe "try-login action"
   (before [done]
-    (.stub js/sinon kelasi-frontend.backend.session "login")
+    (.stub js/sinon backend.session "login")
     (tap users/done done-ch)
     (action/try-login {:source ::try-login-test
                        :username (:username login-data)
@@ -92,7 +92,7 @@
 
 (describe "signup action"
   (before [done]
-    (.stub js/sinon kelasi-frontend.backend.users "create")
+    (.stub js/sinon backend.users "create")
     (tap users/done done-ch)
     (action/signup {:source ::signup-test
                     :introducer-id "1"

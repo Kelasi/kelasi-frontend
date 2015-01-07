@@ -1,10 +1,10 @@
-(ns kelasi-frontend.stores.errors-test
+(ns stores.errors-test
   (:require-macros [mocha-tester.core :refer (describe it before after)]
                    [chaiify.core :refer (expect)]
                    [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.errors :as errors]
-            [kelasi-frontend.actions :as actions]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [stores.errors :as errors]
+            [actions :as actions]
+            [state :refer (app-state)]
             [cljs.core.async :refer (chan tap untap take!)]))
 
 

@@ -1,12 +1,11 @@
-(ns kelasi-frontend.all-tests
+(ns all-tests
   (:require
-   ;; [kelasi-frontend.app-test]
-   [kelasi-frontend.stores.users-test]
-   [kelasi-frontend.stores.posts-test]
-   [kelasi-frontend.stores.search-test]
-   [kelasi-frontend.stores.routes-test]
-   [kelasi-frontend.stores.errors-test]
-   [kelasi-frontend.stores.timelines-test]
+   [stores.users-test]
+   [stores.posts-test]
+   [stores.search-test]
+   [stores.routes-test]
+   [stores.errors-test]
+   [stores.timelines-test]
    ))
 
 (enable-console-print!)
