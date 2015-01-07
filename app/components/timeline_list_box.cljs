@@ -1,5 +1,5 @@
-(ns kelasi-frontend.components.timeline-list-box
-  (:require [kelasi-frontend.components.mini-timeline-card
+(ns components.timeline-list-box
+  (:require [components.mini-timeline-card
              :refer (mini-timeline-card)]))
 
 

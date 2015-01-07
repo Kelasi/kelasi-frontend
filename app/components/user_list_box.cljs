@@ -1,5 +1,5 @@
-(ns kelasi-frontend.components.user-list-box
-  (:require [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]))
+(ns components.user-list-box
+  (:require [components.mini-user-card :refer (mini-user-card)]))
 
 
 

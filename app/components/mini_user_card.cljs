@@ -1,4 +1,4 @@
-(ns kelasi-frontend.components.mini-user-card)
+(ns components.mini-user-card)
 
 
 

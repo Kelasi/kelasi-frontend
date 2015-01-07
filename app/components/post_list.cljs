@@ -1,5 +1,5 @@
-(ns kelasi-frontend.components.post-list
-  (:require [kelasi-frontend.components.post-box :refer (post-box)]))
+(ns components.post-list
+  (:require [components.post-box :refer (post-box)]))
 
 
 

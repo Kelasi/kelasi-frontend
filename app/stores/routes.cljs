@@ -1,9 +1,9 @@
-(ns kelasi-frontend.stores.routes
+(ns stores.routes
   (:require-macros [cljs.core.async.macros :refer (go-loop go)])
-  (:require [kelasi-frontend.state :refer (app-state)]
-            [kelasi-frontend.stores.core :refer (store set-in!)]
+  (:require [state :refer (app-state)]
+            [stores.core :refer (store set-in!)]
             [dispatcher.core :refer (process)]
-            [kelasi-frontend.stores.users :as users]
+            [stores.users :as users]
             [router.core :refer (navigate!)]
             [cljs.core.async :refer (<! >! chan tap mult)]))
 

@@ -1,9 +1,9 @@
-(ns kelasi-frontend.stores.posts
+(ns stores.posts
   (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.core :refer (store set-in!)]
+  (:require [stores.core :refer (store set-in!)]
             [dispatcher.core :refer (process )]
-            [kelasi-frontend.backend.session :as session]
-            [kelasi-frontend.backend.posts   :as posts-be]
+            [backend.session :as session]
+            [backend.posts   :as posts-be]
             [cljs.core.async :refer (mult)]))
 
 

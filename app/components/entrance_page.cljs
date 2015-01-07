@@ -1,6 +1,6 @@
-(ns kelasi-frontend.components.entrance-page
-  (:require [kelasi-frontend.components.login-signup-box :refer (login-signup-box)]
-            [kelasi-frontend.components.search-box :refer (search-box)]))
+(ns components.entrance-page
+  (:require [components.login-signup-box :refer (login-signup-box)]
+            [components.search-box :refer (search-box)]))
 
 
 

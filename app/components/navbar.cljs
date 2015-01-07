@@ -1,6 +1,6 @@
-(ns kelasi-frontend.components.navbar
+(ns components.navbar
   (:require [reagent.core :as r]
-            [kelasi-frontend.actions
+            [actions
              :refer (search-all show-self-profile)]))
 
 

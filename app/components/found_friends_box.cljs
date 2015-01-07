@@ -1,5 +1,5 @@
-(ns kelasi-frontend.components.found-friends-box
-  (:require [kelasi-frontend.components.user-list-box :refer (user-list-box)]
+(ns components.found-friends-box
+  (:require [components.user-list-box :refer (user-list-box)]
             [reagent.core :as r]))
 
 

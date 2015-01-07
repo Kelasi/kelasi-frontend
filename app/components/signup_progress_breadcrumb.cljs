@@ -1,4 +1,4 @@
-(ns kelasi-frontend.components.signup-progress-breadcrumb)
+(ns components.signup-progress-breadcrumb)
 
 
 

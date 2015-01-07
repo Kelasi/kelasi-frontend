@@ -1,4 +1,4 @@
-(ns kelasi-frontend.components.mini-timeline-card)
+(ns components.mini-timeline-card)
 
 
 

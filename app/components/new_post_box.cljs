@@ -1,6 +1,6 @@
-(ns kelasi-frontend.components.new-post-box
+(ns components.new-post-box
   (:require [reagent.core :as r]
-            [kelasi-frontend.actions :refer (new-post)]))
+            [actions :refer (new-post)]))
 
 
 

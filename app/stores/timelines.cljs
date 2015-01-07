@@ -1,8 +1,8 @@
-(ns kelasi-frontend.stores.timelines
+(ns stores.timelines
   (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.core :refer (store set-in!)]
+  (:require [stores.core :refer (store set-in!)]
             [dispatcher.core :refer (process )]
-            [kelasi-frontend.backend.timelines :refer (get-one)]
+            [backend.timelines :refer (get-one)]
             [cljs.core.async :refer (mult)]))
 
 

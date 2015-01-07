@@ -1,6 +1,6 @@
-(ns kelasi-frontend.components.login-box
+(ns components.login-box
   (:require [reagent.core :as r]
-            [kelasi-frontend.actions :refer (try-login)]))
+            [actions :refer (try-login)]))
 
 
 

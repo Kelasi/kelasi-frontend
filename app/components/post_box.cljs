@@ -1,4 +1,4 @@
-(ns kelasi-frontend.components.post-box)
+(ns components.post-box)
 
 
 

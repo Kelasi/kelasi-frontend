@@ -1,4 +1,4 @@
-(ns kelasi-frontend.components.find-friends-box
+(ns components.find-friends-box
   (:require [reagent.core :as r]))
 
 

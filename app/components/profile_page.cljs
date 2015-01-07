@@ -1,12 +1,12 @@
-(ns kelasi-frontend.components.profile-page
-  (:require [kelasi-frontend.components.navbar :refer (navbar)]
-            [kelasi-frontend.components.coverphoto-box
+(ns components.profile-page
+  (:require [components.navbar :refer (navbar)]
+            [components.coverphoto-box
              :refer (coverphoto-box)]
-            [kelasi-frontend.components.profile-about-box
+            [components.profile-about-box
              :refer (profile-about-box)]
-            [kelasi-frontend.components.timeline-list-box
+            [components.timeline-list-box
              :refer (timeline-list-box)]
-            [kelasi-frontend.actions
+            [actions
              :refer (show-timeline)]))
 
 

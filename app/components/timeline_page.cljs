@@ -1,10 +1,10 @@
-(ns kelasi-frontend.components.timeline-page
-  (:require [kelasi-frontend.components.navbar :refer (navbar)]
-            [kelasi-frontend.components.timeline-about-box
+(ns components.timeline-page
+  (:require [components.navbar :refer (navbar)]
+            [components.timeline-about-box
              :refer (timeline-about-box)]
-            [kelasi-frontend.components.new-post-box :refer (new-post-box)]
-            [kelasi-frontend.components.post-list :refer (post-list)]
-            [kelasi-frontend.components.coverphoto-box
+            [components.new-post-box :refer (new-post-box)]
+            [components.post-list :refer (post-list)]
+            [components.coverphoto-box
              :refer (coverphoto-box)]))
 
 

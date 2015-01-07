@@ -1,7 +1,7 @@
-(ns kelasi-frontend.components.signup-final-box
+(ns components.signup-final-box
   (:require [reagent.core :as r]
-            [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]
-            [kelasi-frontend.actions :refer (signup)]))
+            [components.mini-user-card :refer (mini-user-card)]
+            [actions :refer (signup)]))
 
 
 

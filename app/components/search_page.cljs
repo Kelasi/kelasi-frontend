@@ -1,10 +1,10 @@
-(ns kelasi-frontend.components.search-page
-  (:require [kelasi-frontend.components.navbar :refer (navbar)]
-            [kelasi-frontend.components.timeline-list-box
+(ns components.search-page
+  (:require [components.navbar :refer (navbar)]
+            [components.timeline-list-box
              :refer (timeline-list-box)]
-            [kelasi-frontend.components.user-list-box
+            [components.user-list-box
              :refer (user-list-box)]
-            [kelasi-frontend.actions
+            [actions
              :refer (show-timeline show-user-profile)]))
 
 

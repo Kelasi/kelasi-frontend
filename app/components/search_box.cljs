@@ -1,5 +1,5 @@
-(ns kelasi-frontend.components.search-box
-  (:require [kelasi-frontend.actions :refer (search-all)]
+(ns components.search-box
+  (:require [actions :refer (search-all)]
             [reagent.core :as r]))
 
 

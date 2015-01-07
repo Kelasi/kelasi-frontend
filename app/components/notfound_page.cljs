@@ -1,4 +1,4 @@
-(ns kelasi-frontend.components.notfound-page)
+(ns components.notfound-page)
 
 
 

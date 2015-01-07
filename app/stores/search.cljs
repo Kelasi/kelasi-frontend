@@ -1,8 +1,8 @@
-(ns kelasi-frontend.stores.search
+(ns stores.search
   (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.core :refer (store set-in!)]
+  (:require [stores.core :refer (store set-in!)]
             [dispatcher.core :refer (process )]
-            [kelasi-frontend.backend.search :as search]
+            [backend.search :as search]
             [cljs.core.async :refer (mult)]))
 
 

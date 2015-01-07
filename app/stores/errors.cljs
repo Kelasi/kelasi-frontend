@@ -1,6 +1,6 @@
-(ns kelasi-frontend.stores.errors
+(ns stores.errors
   (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.stores.core :refer (store set-in!)]
+  (:require [stores.core :refer (store set-in!)]
             [dispatcher.core :refer (process)]
             [cljs.core.async :refer (mult)]))
 

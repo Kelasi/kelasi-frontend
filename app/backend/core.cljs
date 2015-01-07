@@ -1,4 +1,4 @@
-(ns kelasi-frontend.backend.core
+(ns backend.core
   (:require [clojure.browser.event :as gevent]
             [clojure.browser.net   :as gnet]
             [cljs.core.async :refer (chan put! close!)]))

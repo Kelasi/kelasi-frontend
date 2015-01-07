@@ -1,7 +1,7 @@
-(ns kelasi-frontend.backend.posts
+(ns backend.posts
   (:require-macros [cljs.core.async.macros :refer (go)])
-  (:require [kelasi-frontend.backend.core :refer (send)]
-            [kelasi-frontend.actions :as actions]
+  (:require [backend.core :refer (send)]
+            [actions :as actions]
             [cljs.core.async :refer (<!)]))
 
 

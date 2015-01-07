@@ -1,4 +1,4 @@
-(ns kelasi-frontend.components.coverphoto-box)
+(ns components.coverphoto-box)
 
 
 

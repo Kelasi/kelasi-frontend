@@ -1,4 +1,4 @@
-(ns kelasi-frontend.components.profile-about-box)
+(ns components.profile-about-box)
 
 
 

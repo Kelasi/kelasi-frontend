@@ -1,5 +1,5 @@
-(ns kelasi-frontend.stores.core
-  (:require [kelasi-frontend.state :refer (app-state)]))
+(ns stores.core
+  (:require [state :refer (app-state)]))
 
 
 

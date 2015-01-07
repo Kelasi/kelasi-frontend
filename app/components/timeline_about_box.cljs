@@ -1,4 +1,4 @@
-(ns kelasi-frontend.components.timeline-about-box)
+(ns components.timeline-about-box)
 
 
 

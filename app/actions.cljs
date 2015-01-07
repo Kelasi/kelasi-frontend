@@ -1,4 +1,4 @@
-(ns kelasi-frontend.actions
+(ns actions
   (:require [dispatcher.core :include-macros true
              :refer-macros (defaction)]
             [schema.core :as s :include-macros true]))

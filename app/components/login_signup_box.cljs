@@ -1,7 +1,7 @@
-(ns kelasi-frontend.components.login-signup-box
+(ns components.login-signup-box
   (:require [reagent.core :as r]
-            [kelasi-frontend.components.login-box :refer (login-box)]
-            [kelasi-frontend.components.signup-box :refer (signup-box)]))
+            [components.login-box :refer (login-box)]
+            [components.signup-box :refer (signup-box)]))
 
 
 

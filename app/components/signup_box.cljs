@@ -1,14 +1,14 @@
-(ns kelasi-frontend.components.signup-box
+(ns components.signup-box
   (:require [reagent.core :as r]
-            [kelasi-frontend.components.find-friends-box
+            [components.find-friends-box
              :refer (find-friends-box)]
-            [kelasi-frontend.components.found-friends-box
+            [components.found-friends-box
              :refer (found-friends-box)]
-            [kelasi-frontend.components.signup-final-box
+            [components.signup-final-box
              :refer (signup-final-box)]
-            [kelasi-frontend.components.signup-progress-breadcrumb
+            [components.signup-progress-breadcrumb
              :refer (signup-progress-breadcrumb)]
-            [kelasi-frontend.actions :refer (search-introducer)]))
+            [actions :refer (search-introducer)]))
 
 
 

@@ -1,13 +1,13 @@
-(ns kelasi-frontend.app
+(ns app
   (:require [router.core :as router]
             [router.react :as r-react]
-            [kelasi-frontend.state :refer (app-state)]
-            [kelasi-frontend.actions :refer (change-page)]
-            [kelasi-frontend.components.entrance-page :refer (entrance-page)]
-            [kelasi-frontend.components.profile-page :refer (profile-page)]
-            [kelasi-frontend.components.timeline-page :refer (timeline-page)]
-            [kelasi-frontend.components.search-page :refer (search-page)]
-            [kelasi-frontend.components.notfound-page :refer (notfound-page)])
+            [state :refer (app-state)]
+            [actions :refer (change-page)]
+            [components.entrance-page :refer (entrance-page)]
+            [components.profile-page :refer (profile-page)]
+            [components.timeline-page :refer (timeline-page)]
+            [components.search-page :refer (search-page)]
+            [components.notfound-page :refer (notfound-page)])
   (:require-macros [router.reagent :refer (match)]))
 
 
