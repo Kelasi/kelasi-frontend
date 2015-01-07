@@ -2,7 +2,7 @@
   :description "A clojurescript frontend for Kelasi site."
   :url "https://github.com/Kelasi/kelasi-frontend"
 
-  :source-paths ["src/clj" "src/cljs"]
+  :source-paths ["app"]
   :resources-paths ["resources"]
 
   :dependencies [[org.clojure/clojure "1.7.0-alpha4"]
@@ -30,13 +30,13 @@
   :frodo/config-resource "config/nomad.edn"
 
   :cljsbuild
-  {:builds [{:id "kelasi-frontend"
-             :source-paths ["src/cljs" "resources/tools/repl"]
+  {:builds [{:id "app"
+             :source-paths ["app" "resources/tools/repl"]
              :compiler
              {:output-to "resources/public/js/kelasi_frontend.js"
               :output-dir "resources/public/js"
               :source-map "resources/public/js/kelasi_frontend.js.map"
-              :externs ["resources/public/vendor/react/react.js"]
+              ;; :externs ["resources/public/vendor/react/react.js"]
               :preamble ["react/react.js"]
               :closure-warnings {:externs-validation :off
                                  :non-standard-jsdoc :off}
@@ -44,12 +44,12 @@
               :pretty-print true}}
 
             {:id "mocha-tests"
-             :source-paths ["src/cljs" "test/cljs"]
+             :source-paths ["app" "test"]
              :compiler
              {:output-to "resources/public/js_test/kelasi_frontend.js"
               :output-dir "resources/public/js_test"
               :source-map "resources/public/js_test/kelasi_frontend.js.map"
-              :externs ["resources/public/vendor/react/react.js"]
+              ;; :externs ["resources/public/vendor/react/react.js"]
               :preamble ["react/react.js"]
               :closure-warnings {:externs-validation :off
                                  :non-standard-jsdoc :off}
@@ -57,12 +57,12 @@
               :pretty-print true}}
 
             {:id "devcards"
-             :source-paths ["src/cljs" "devcards/cljs" "test/cljs"]
+             :source-paths ["app" "devcards" "test"]
              :compiler
              {:output-to "resources/public/devcards/js/kelasi_frontend.js"
               :output-dir "resources/public/devcards/js"
               :source-map "resources/public/devcards/js/kelasi_frontend.js.map"
-              :externs ["resources/public/vendor/react/react.js"]
+              ;; :externs ["resources/public/vendor/react/react.js"]
               :preamble ["react/react.js"]
               :closure-warnings {:externs-validation :off
                                  :non-standard-jsdoc :off}

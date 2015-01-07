@@ -6,11 +6,11 @@
                        [enlive "1.1.5"]]}
 
  :production {:cljsbuild
-              {:builds [{:id "kelasi-frontend-production"
-                         :source-paths ["src/cljs"]
+              {:builds [{:id "production"
+                         :source-paths ["app"]
                          :compiler
                          {:output-to "public/js/app.js"
-                          :externs ["resources/public/vendor/react/react.js"]
+                          ;; :externs ["resources/public/vendor/react/react.js"]
                           :preamble ["react/react.min.js"]
                           :closure-warnings {:externs-validation :off
                                              :non-standard-jsdoc :off}
