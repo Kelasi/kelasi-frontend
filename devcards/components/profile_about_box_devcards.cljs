@@ -1,6 +1,6 @@
-(ns kelasi-frontend.components.profile-about-box-devcards
+(ns components.profile-about-box-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.profile-about-box :refer (profile-about-box)]
+  (:require [components.profile-about-box :refer (profile-about-box)]
             [reagent.core :as r]
             [devcards.core :as dc :include-macros true]))
 

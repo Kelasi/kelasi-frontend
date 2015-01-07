@@ -1,7 +1,7 @@
-(ns kelasi-frontend.components.profile-page-devcards
+(ns components.profile-page-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.profile-page :refer (profile-page)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [components.profile-page :refer (profile-page)]
+            [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.user :refer (user1 user2 user3 user4)]
             [mocks.timeline :refer (timeline1 timeline2 timeline3 timeline4)]

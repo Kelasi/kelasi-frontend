@@ -1,6 +1,6 @@
-(ns kelasi-frontend.components.coverphoto-box-devcards
+(ns components.coverphoto-box-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.coverphoto-box :refer (coverphoto-box)]
+  (:require [components.coverphoto-box :refer (coverphoto-box)]
             [reagent.core :as r]
             [devcards.core :as dc :include-macros true]))
 

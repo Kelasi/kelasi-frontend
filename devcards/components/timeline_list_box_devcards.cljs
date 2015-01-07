@@ -1,8 +1,8 @@
-(ns kelasi-frontend.components.timeline-list-box-devcards
+(ns components.timeline-list-box-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.timeline-list-box
+  (:require [components.timeline-list-box
              :refer (timeline-list-box)]
-            [kelasi-frontend.state :refer (app-state)]
+            [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.user :refer (user1 user2 user3)]
             [mocks.timeline :refer (timeline1 timeline2 timeline3)]

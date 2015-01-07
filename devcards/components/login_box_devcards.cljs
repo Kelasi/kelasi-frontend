@@ -1,7 +1,7 @@
-(ns kelasi-frontend.components.login-box-devcards
+(ns components.login-box-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.login-box :refer (login-box)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [components.login-box :refer (login-box)]
+            [state :refer (app-state)]
             [reagent.core :as r]
             [devcards.core :as dc :include-macros true]))
 

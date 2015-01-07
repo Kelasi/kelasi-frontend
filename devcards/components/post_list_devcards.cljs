@@ -1,7 +1,7 @@
-(ns kelasi-frontend.components.post-list-devcards
+(ns components.post-list-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.post-list :refer (post-list)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [components.post-list :refer (post-list)]
+            [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.post :refer (post1 post2 post3)]
             [mocks.user :refer (user1)]

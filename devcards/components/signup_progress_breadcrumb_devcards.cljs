@@ -1,8 +1,8 @@
-(ns kelasi-frontend.components.signup-progress-breadcrumb-devcards
+(ns components.signup-progress-breadcrumb-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.signup-progress-breadcrumb
+  (:require [components.signup-progress-breadcrumb
              :refer (signup-progress-breadcrumb)]
-            [kelasi-frontend.state :refer (app-state)]
+            [state :refer (app-state)]
             [reagent.core :as r]
             [devcards.core :as dc :include-macros true]))
 

@@ -1,7 +1,7 @@
-(ns kelasi-frontend.components.entrance-page-devcards
+(ns components.entrance-page-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.entrance-page :refer (entrance-page)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [components.entrance-page :refer (entrance-page)]
+            [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.user :refer (user1)]
             [devcards.core :as dc :include-macros true]))

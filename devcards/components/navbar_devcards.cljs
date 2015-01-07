@@ -1,7 +1,7 @@
-(ns kelasi-frontend.components.navbar-devcards
+(ns components.navbar-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.navbar :refer (navbar)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [components.navbar :refer (navbar)]
+            [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.user :refer (user1)]
             [devcards.core :as dc :include-macros true]))

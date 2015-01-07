@@ -1,6 +1,6 @@
-(ns kelasi-frontend.components.new-post-box-devcards
+(ns components.new-post-box-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.new-post-box :refer (new-post-box)]
+  (:require [components.new-post-box :refer (new-post-box)]
             [reagent.core :as r]
             [devcards.core :as dc :include-macros true]))
 

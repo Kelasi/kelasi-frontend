@@ -1,7 +1,7 @@
-(ns kelasi-frontend.components.found-friends-box-devcards
+(ns components.found-friends-box-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.found-friends-box :refer (found-friends-box)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [components.found-friends-box :refer (found-friends-box)]
+            [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.user :refer (user1 user2 user3)]
             [devcards.core :as dc :include-macros true]))

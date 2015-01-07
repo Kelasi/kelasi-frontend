@@ -1,7 +1,7 @@
-(ns kelasi-frontend.components.signup-box-devcards
+(ns components.signup-box-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.signup-box :refer (signup-box)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [components.signup-box :refer (signup-box)]
+            [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.user :refer (user1)]
             [devcards.core :as dc :include-macros true]))

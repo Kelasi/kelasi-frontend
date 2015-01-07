@@ -1,7 +1,7 @@
-(ns kelasi-frontend.components.mini-user-card-devcards
+(ns components.mini-user-card-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.mini-user-card :refer (mini-user-card)]
-            [kelasi-frontend.state :refer (app-state)]
+  (:require [components.mini-user-card :refer (mini-user-card)]
+            [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.user :refer (user1)]
             [devcards.core :as dc :include-macros true]))

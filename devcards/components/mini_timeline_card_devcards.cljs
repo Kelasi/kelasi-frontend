@@ -1,6 +1,6 @@
-(ns kelasi-frontend.components.mini-timeline-card-devcards
+(ns components.mini-timeline-card-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [kelasi-frontend.components.mini-timeline-card
+  (:require [components.mini-timeline-card
              :refer (mini-timeline-card)]
             [mocks.user :refer (user1)]
             [mocks.timeline :refer (timeline1)]
