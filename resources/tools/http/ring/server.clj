@@ -18,7 +18,7 @@
     (enlive/substitute (enlive/html [:script {:src "/js_test/goog/base.js"}]
                                     [:script {:src "/vendor/sinon-1.10.3.js"}]
                                     [:script {:src "/js_test/kelasi_frontend.js"}]
-                                    [:script "goog.require('kelasi_frontend.all_tests');"])))
+                                    [:script "goog.require('all_tests');"])))
 
 (defroutes site
   (resources "/")
