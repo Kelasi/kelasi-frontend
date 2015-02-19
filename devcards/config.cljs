@@ -12,10 +12,10 @@
             [pages.entrance-devcards]
             [pages.search-devcards]
             [pages.timeline-devcards]
+            [pages.profile-devcards]
 
             ; Component devcards
             [components.navbar-devcards]
-            [components.profile-page-devcards]
             [components.login-box-devcards]
             [components.search-box-devcards]
             [components.signup-box-devcards]

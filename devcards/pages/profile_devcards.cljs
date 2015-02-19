@@ -1,6 +1,6 @@
-(ns components.profile-page-devcards
+(ns pages.profile-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [components.profile-page :refer (profile-page)]
+  (:require [pages.profile :refer (profile)]
             [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.user :refer (user1 user2 user3 user4)]
@@ -18,5 +18,5 @@
     :current-user user1} ;all-users
    (zipmap (mapv :id timelines) timelines)]) ;all-timelines
 
-(defcard profile-page-component
+(defcard profile-page
   (dc/react-card (r/as-element elem)))

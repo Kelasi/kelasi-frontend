@@ -1,4 +1,4 @@
-(ns components.profile-page
+(ns pages.profile
   (:require [components.navbar :refer (navbar)]
             [components.coverphoto-box
              :refer (coverphoto-box)]
@@ -11,7 +11,7 @@
 
 
 
-(defn profile-page
+(defn profile
   "The profile page of a user"
   [user users all-timelines]
   [:div
@@ -28,7 +28,7 @@
     [:h2 "User's timelines:"]
     [timeline-list-box (:timelines user)
      all-timelines (:all-users users)
-     #(show-timeline {:source ::profile-page
+     #(show-timeline {:source ::profile
                       :timeline-id (:id @%)})]]
 
    [:div {:style {:width "33%"
@@ -36,5 +36,5 @@
     [:h2 "Followed timelines:"]
     [timeline-list-box (:followed-timelines user)
      all-timelines (:all-users users)
-     #(show-timeline {:source ::profile-page
+     #(show-timeline {:source ::profile
                       :timeline-id (:id @%)})]]])

@@ -4,7 +4,7 @@
             [state :refer (app-state)]
             [actions :refer (change-page)]
             [pages.entrance :refer (entrance)]
-            [components.profile-page :refer (profile-page)]
+            [pages.profile :refer (profile)]
             [pages.timeline :refer (timeline)]
             [pages.search :refer (search)]
             [pages.notfound :refer (notfound)])
@@ -17,7 +17,7 @@
 
 
 (match "/" p [entrance @app-state p])
-(match "/profile/:name" p [profile-page @app-state p])
+(match "/profile/:name" p [profile @app-state p])
 (match "/timeline/:name" p [timeline @app-state p])
 (match "/search/:q" p [search @app-state p])
 (match "/*path" p [notfound @app-state p])
