@@ -29,7 +29,7 @@
     [timeline-list-box (:timelines user)
      all-timelines (:all-users users)
      #(show-timeline {:source ::profile
-                      :timeline-id (:id @%)})]]
+                      :timeline-id (:id %)})]]
 
    [:div {:style {:width "33%"
                   :float "left"}}
@@ -37,4 +37,4 @@
     [timeline-list-box (:followed-timelines user)
      all-timelines (:all-users users)
      #(show-timeline {:source ::profile
-                      :timeline-id (:id @%)})]]])
+                      :timeline-id (:id %)})]]])
