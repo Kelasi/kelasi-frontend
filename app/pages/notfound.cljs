@@ -1,8 +1,8 @@
-(ns components.notfound-page)
+(ns pages.notfound)
 
 
 
-(defn notfound-page
+(defn notfound
   "404 page"
   [opts]
   [:div

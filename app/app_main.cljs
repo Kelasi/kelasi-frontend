@@ -7,7 +7,7 @@
             [components.profile-page :refer (profile-page)]
             [components.timeline-page :refer (timeline-page)]
             [pages.search :refer (search)]
-            [components.notfound-page :refer (notfound-page)])
+            [pages.notfound :refer (notfound)])
   (:require-macros [router.reagent :refer (match)]))
 
 
@@ -20,7 +20,7 @@
 (match "/profile/:name" p [profile-page @app-state p])
 (match "/timeline/:name" p [timeline-page @app-state p])
 (match "/search/:q" p [search @app-state p])
-(match "/*path" p [notfound-page @app-state p])
+(match "/*path" p [notfound @app-state p])
 
 
 
