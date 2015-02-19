@@ -1,4 +1,4 @@
-(ns components.search-page
+(ns pages.search
   (:require [components.navbar :refer (navbar)]
             [components.timeline-list-box
              :refer (timeline-list-box)]
@@ -9,7 +9,7 @@
 
 
 
-(defn search-page
+(defn search
   "Search results page"
   [search users all-timelines]
   (let [people (:people search)
@@ -22,10 +22,10 @@
      [:h2 "Found timelines"]
      [timeline-list-box timelines
       all-timelines all-users
-      #(show-timeline {:source ::search-page
+      #(show-timeline {:source ::search
                        :timeline-id (:id @%)})]
 
      [:h2 "Found users"]
      [user-list-box people all-users nil
-      #(show-user-profile {:source ::search-page
+      #(show-user-profile {:source ::search
                            :user-id (:id @%)})]]))

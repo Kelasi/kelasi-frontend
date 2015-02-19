@@ -10,11 +10,11 @@
 
             ; Page devcards
             [pages.entrance-devcards]
+            [pages.search-devcards]
 
             ; Component devcards
             [components.navbar-devcards]
             [components.timeline-page-devcards]
-            [components.search-page-devcards]
             [components.profile-page-devcards]
             [components.login-box-devcards]
             [components.search-box-devcards]
