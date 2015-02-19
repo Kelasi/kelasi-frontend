@@ -23,9 +23,9 @@
      [timeline-list-box timelines
       all-timelines all-users
       #(show-timeline {:source ::search
-                       :timeline-id (:id @%)})]
+                       :timeline-id (:id %)})]
 
      [:h2 "Found users"]
      [user-list-box people all-users nil
       #(show-user-profile {:source ::search
-                           :user-id (:id @%)})]]))
+                           :user-id (:id %)})]]))
