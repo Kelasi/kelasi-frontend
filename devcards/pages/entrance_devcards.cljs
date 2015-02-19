@@ -1,6 +1,6 @@
-(ns components.entrance-page-devcards
+(ns pages.entrance-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [components.entrance-page :refer (entrance-page)]
+  (:require [pages.entrance :refer (entrance)]
             [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.user :refer (user1)]
@@ -9,10 +9,10 @@
 
 
 (def elem
-  [entrance-page
+  [entrance
    {:all-users {(:id user1) user1}} ;users
    {:people [(:id user1)]} ;search
    {}]) ;errors
 
-(defcard entrance-page-component
+(defcard entrance-page
   (dc/react-card (r/as-element elem)))

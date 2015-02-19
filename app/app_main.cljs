@@ -3,7 +3,7 @@
             [router.react :as r-react]
             [state :refer (app-state)]
             [actions :refer (change-page)]
-            [components.entrance-page :refer (entrance-page)]
+            [pages.entrance :refer (entrance)]
             [components.profile-page :refer (profile-page)]
             [components.timeline-page :refer (timeline-page)]
             [components.search-page :refer (search-page)]
@@ -16,7 +16,7 @@
 
 
 
-(match "/" p [entrance-page @app-state p])
+(match "/" p [entrance @app-state p])
 (match "/profile/:name" p [profile-page @app-state p])
 (match "/timeline/:name" p [timeline-page @app-state p])
 (match "/search/:q" p [search-page @app-state p])

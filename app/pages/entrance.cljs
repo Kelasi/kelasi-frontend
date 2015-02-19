@@ -1,10 +1,10 @@
-(ns components.entrance-page
+(ns pages.entrance
   (:require [components.login-signup-box :refer (login-signup-box)]
             [components.search-box :refer (search-box)]))
 
 
 
-(defn entrance-page
+(defn entrance
   "Entrance page"
   [search users errors]
   [:div

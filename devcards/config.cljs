@@ -8,9 +8,11 @@
             ; Echo store
             [mocks.echo-store]
 
+            ; Page devcards
+            [pages.entrance-devcards]
+
             ; Component devcards
             [components.navbar-devcards]
-            [components.entrance-page-devcards]
             [components.timeline-page-devcards]
             [components.search-page-devcards]
             [components.profile-page-devcards]
