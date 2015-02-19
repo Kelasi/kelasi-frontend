@@ -1,6 +1,6 @@
-(ns components.timeline-page-devcards
+(ns pages.timeline-devcards
   (:require-macros [devcards.core :refer (defcard)])
-  (:require [components.timeline-page :refer (timeline-page)]
+  (:require [pages.timeline :refer (timeline)]
             [state :refer (app-state)]
             [reagent.core :as r]
             [mocks.user :refer (user1)]
@@ -19,5 +19,5 @@
    (list post2 (assoc post1 :replies
                       (list post4 post3)))]) ;posts
 
-(defcard timeline-page-component
+(defcard timeline-page
   (dc/react-card (r/as-element elem)))

@@ -5,7 +5,7 @@
             [actions :refer (change-page)]
             [pages.entrance :refer (entrance)]
             [components.profile-page :refer (profile-page)]
-            [components.timeline-page :refer (timeline-page)]
+            [pages.timeline :refer (timeline)]
             [pages.search :refer (search)]
             [pages.notfound :refer (notfound)])
   (:require-macros [router.reagent :refer (match)]))
@@ -18,7 +18,7 @@
 
 (match "/" p [entrance @app-state p])
 (match "/profile/:name" p [profile-page @app-state p])
-(match "/timeline/:name" p [timeline-page @app-state p])
+(match "/timeline/:name" p [timeline @app-state p])
 (match "/search/:q" p [search @app-state p])
 (match "/*path" p [notfound @app-state p])
 

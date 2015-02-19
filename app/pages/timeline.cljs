@@ -1,4 +1,4 @@
-(ns components.timeline-page
+(ns pages.timeline
   (:require [components.navbar :refer (navbar)]
             [components.timeline-about-box
              :refer (timeline-about-box)]
@@ -9,7 +9,7 @@
 
 
 
-(defn timeline-page
+(defn timeline
   "Timeline page"
   [users timeline posts]
   [:div
