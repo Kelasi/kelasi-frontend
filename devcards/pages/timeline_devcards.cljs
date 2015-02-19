@@ -10,7 +10,7 @@
 
 
 (def elem
-  [timeline-page
+  [timeline
    {:all-users {(:id user1) user1}
     :current-user user1} ;users
    {:id "1"

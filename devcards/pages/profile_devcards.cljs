@@ -12,7 +12,7 @@
 (def timelines [timeline1 timeline2 timeline3 timeline4])
 (def users [user1 user2 user3 user4])
 (def elem
-  [profile-page
+  [profile
    user1 ;user
    {:all-users (zipmap (mapv :id users) users)
     :current-user user1} ;all-users
