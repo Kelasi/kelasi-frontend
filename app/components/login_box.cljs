@@ -1,5 +1,6 @@
 (ns components.login-box
   (:require [reagent.core :as r]
+            [widgets.input :refer (input)]
             [actions :refer (try-login)]))
 
 
@@ -19,18 +20,15 @@
          (get errors :network)
          [:p {:style {:color "red"}} "Request failed. retry!"])
 
-       [:p "User name"
-        [:input {:type "text"
-                 :value @username
-                 :on-change #(reset! username (.-target.value %))}]]
-       [:p "Password"
-        [:input {:type "password"
-                 :value @password
-                 :on-change #(reset! password (.-target.value %))}]]
-       [:input {:type "checkbox"
-                :checked @remember-me
-                :on-change #(swap! remember-me not)}]
+       [:div "User name"
+        [input :text username]]
+
+       [:div "Password"
+        [input :password password]]
+
+       [input :checkbox remember-me]
        [:p "Remember me!"]
+
        [:button {:type "button"
                  :on-click #(try-login {:source   ::login-box
                                         :username @username

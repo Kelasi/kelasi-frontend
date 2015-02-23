@@ -1,6 +1,6 @@
 (ns components.find-friends-box
   (:require [reagent.core :as r]
-            [widgets.labeled-input :refer (labeled-input)]))
+            [widgets.input :refer (input)]))
 
 
 
@@ -14,11 +14,14 @@
       [:div
        [:p "Enter your friend's data:"]
 
-       [labeled-input "First name:" firstname]
+       [:div "First name:"
+        [input :text firstname]]
 
-       [labeled-input "Last name:" lastname]
+       [:div "Last name:"
+        [input :text lastname]]
 
-       [labeled-input "University name:" university]
+       [:div "University name:"
+        [input :text university]]
 
        [:button {:type "button"
                  :on-click #(on-search @firstname @lastname @university)}
