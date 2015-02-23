@@ -2,8 +2,8 @@
   (:require [components.navbar :refer (navbar)]
             [components.timeline-list-box
              :refer (timeline-list-box)]
-            [components.user-list-box
-             :refer (user-list-box)]
+            [widgets.list :as wlst]
+            [widgets.media :refer (media)]
             [actions
              :refer (show-timeline show-user-profile)]))
 
@@ -26,6 +26,9 @@
                        :timeline-id (:id %)})]
 
      [:h2 "Found users"]
-     [user-list-box people all-users nil
-      #(show-user-profile {:source ::search
-                           :user-id (:id %)})]]))
+     (let [ppl (map #(get all-users %) people)
+           wfn (fn [usr]
+                 [media (:img usr) (:full-name usr)
+                  #(show-user-profile {:source ::search
+                                       :user-id (:id usr)})])]
+       [wlst/list ppl wfn])]))

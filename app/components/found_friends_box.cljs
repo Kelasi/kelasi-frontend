@@ -1,5 +1,6 @@
 (ns components.found-friends-box
-  (:require [components.user-list-box :refer (user-list-box)]
+  (:require [widgets.list :as wlst]
+            [widgets.media :refer (media)]
             [reagent.core :as r]))
 
 
@@ -12,7 +13,13 @@
       [:div
        [:p "Select your friend:"]
 
-       [user-list-box ids people @selected #(reset! selected %)]
+       (let [ppl (map #(get people %) ids)
+             sel (fn [usr]
+                   [:div {:style {:backgroundColor (if (= @selected usr)
+                                                     "#333" "#fff")}}
+                    [media (:img usr) (:full-name usr)
+                     #(reset! selected usr)]])]
+         [wlst/list ppl sel])
 
        (when @selected
          [:button {:type "button"

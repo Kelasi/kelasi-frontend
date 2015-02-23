@@ -23,7 +23,6 @@
             [components.find-friends-box-devcards]
             [components.signup-progress-breadcrumb-devcards]
             [components.found-friends-box-devcards]
-            [components.user-list-box-devcards]
             [components.timeline-list-box-devcards]
             [components.signup-final-box-devcards]
             [components.post-box-devcards]
