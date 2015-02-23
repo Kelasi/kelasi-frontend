@@ -4,8 +4,8 @@
              :refer (timeline-about-box)]
             [components.new-post-box :refer (new-post-box)]
             [components.post-list :refer (post-list)]
-            [components.coverphoto-box
-             :refer (coverphoto-box)]))
+            [components.timeline-coverphoto
+             :refer (timeline-coverphoto)]))
 
 
 
@@ -14,7 +14,7 @@
   [users timeline posts]
   [:div
    [navbar (:current-user users)]
-   [coverphoto-box (:cover-image timeline) (:title timeline)]
+   [timeline-coverphoto timeline]
    [timeline-about-box (:title timeline)]
    [new-post-box (:id timeline) "0"]
    [post-list posts (:all-users users)]])

@@ -1,7 +1,7 @@
 (ns pages.profile
   (:require [components.navbar :refer (navbar)]
-            [components.coverphoto-box
-             :refer (coverphoto-box)]
+            [components.profile-coverphoto
+             :refer (profile-coverphoto)]
             [components.profile-about-box
              :refer (profile-about-box)]
             [components.timeline-list-box
@@ -17,7 +17,7 @@
   [:div
    [navbar (:current-user users)]
 
-   [coverphoto-box (:img user) (:profile-name user)]
+   [profile-coverphoto user]
 
    [:div {:style {:width "33%"
                   :float "left"}}
