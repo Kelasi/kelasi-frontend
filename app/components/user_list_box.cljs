@@ -1,5 +1,5 @@
 (ns components.user-list-box
-  (:require [components.mini-user-card :refer (mini-user-card)]))
+  (:require [widgets.media :refer (media)]))
 
 
 
@@ -9,4 +9,7 @@
   [:div
    (for [fid ids
          :let [f (get people fid)]]
-     [mini-user-card (= f selected) #(on-select f) f])])
+     [:div {:style {:backgroundColor (if (= f selected)
+                                       "#333"
+                                       "#fff")}}
+      [media (:img f) (:full-name f) #(on-select f)]])])

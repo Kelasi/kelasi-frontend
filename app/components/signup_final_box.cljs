@@ -1,6 +1,6 @@
 (ns components.signup-final-box
   (:require [reagent.core :as r]
-            [components.mini-user-card :refer (mini-user-card)]
+            [widgets.media :refer (media)]
             [actions :refer (signup)]))
 
 
@@ -17,7 +17,7 @@
     (fn [_]
       [:div
        [:p "You said you know:"
-        [mini-user-card false identity introducer]]
+        [media (:img introducer) (:full-name introducer) identity]]
 
        [:p "First name"
         [:input {:type "text"

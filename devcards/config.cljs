@@ -21,7 +21,6 @@
             [components.signup-box-devcards]
             [components.login-signup-box-devcards]
             [components.find-friends-box-devcards]
-            [components.mini-user-card-devcards]
             [components.signup-progress-breadcrumb-devcards]
             [components.found-friends-box-devcards]
             [components.user-list-box-devcards]
