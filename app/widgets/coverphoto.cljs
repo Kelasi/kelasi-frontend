@@ -3,7 +3,7 @@
 
 
 (defn coverphoto
-  "A cover photo component"
+  "A general cover photo widget"
   [img text]
   [:div {:style {:position "relative"}}
    [:img {:style {:width "100%"
