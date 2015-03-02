@@ -2,6 +2,7 @@
   (:require [reagent.core :as r]
             [widgets.media :refer (media)]
             [widgets.button :refer (button)]
+            [widgets.input :refer (input)]
             [actions :refer (signup)]))
 
 
@@ -21,34 +22,22 @@
         [media (:img introducer) (:full-name introducer) identity]]
 
        [:p "First name"
-        [:input {:type "text"
-                 :value @firstname
-                 :on-change #(reset! firstname (.-target.value %))}]]
+        [input :text firstname]]
 
        [:p "Last name"
-        [:input {:type "text"
-                 :value @lastname
-                 :on-change #(reset! lastname (.-target.value %))}]]
+        [input :text lastname]]
 
        [:p "University name"
-        [:input {:type "text"
-                 :value @university
-                 :on-change #(reset! university (.-target.value %))}]]
+        [input :text university]]
 
        [:p "Email"
-        [:input {:type "text"
-                 :value @email
-                 :on-change #(reset! email (.-target.value %))}]]
+        [input :text email]]
 
        [:p "Password"
-        [:input {:type "password"
-                 :value @password
-                 :on-change #(reset! password (.-target.value %))}]]
+        [input :password password]]
 
        [:p "Retype password"
-        [:input {:type "password"
-                 :value @re-password
-                 :on-change #(reset! re-password (.-target.value %))}]]
+        [input :password re-password]]
 
        [button "Singup!" #(signup {:source ::signup-final-box
                                    :firstname @firstname
