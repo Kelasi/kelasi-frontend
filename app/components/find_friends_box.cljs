@@ -1,6 +1,7 @@
 (ns components.find-friends-box
   (:require [reagent.core :as r]
-            [widgets.input :refer (input)]))
+            [widgets.input :refer (input)]
+            [widgets.button :refer (button)]))
 
 
 
@@ -23,6 +24,4 @@
        [:div "University name:"
         [input :text university]]
 
-       [:button {:type "button"
-                 :on-click #(on-search @firstname @lastname @university)}
-        "Search"]])))
+       [button "Search" #(on-search @firstname @lastname @university)]])))

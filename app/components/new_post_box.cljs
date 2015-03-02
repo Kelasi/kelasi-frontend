@@ -1,5 +1,6 @@
 (ns components.new-post-box
   (:require [reagent.core :as r]
+            [widgets.button :refer (button)]
             [actions :refer (new-post)]))
 
 
@@ -12,9 +13,7 @@
       [:div
        [:textarea {:value @body
                    :on-change #(reset! body (.-target.value %))}]
-       [:button {:type "button"
-                 :on-click #(new-post {:source ::new-post-box
-                                       :timeline-id timeline-id
-                                       :parent-id parent-id
-                                       :body @body})}
-        "Send"]])))
+       [button "Send" #(new-post {:source      ::new-post-box
+                                  :timeline-id timeline-id
+                                  :parent-id   parent-id
+                                  :body        @body})]])))

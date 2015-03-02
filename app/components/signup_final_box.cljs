@@ -1,6 +1,7 @@
 (ns components.signup-final-box
   (:require [reagent.core :as r]
             [widgets.media :refer (media)]
+            [widgets.button :refer (button)]
             [actions :refer (signup)]))
 
 
@@ -49,12 +50,10 @@
                  :value @re-password
                  :on-change #(reset! re-password (.-target.value %))}]]
 
-       [:button {:type "button"
-                 :on-click #(signup {:source ::signup-final-box
-                                     :firstname @firstname
-                                     :lastname @lastname
-                                     :university @university
-                                     :email @email
-                                     :password @password
-                                     :introducer-id (:id introducer)})}
-        "Singup!"]])))
+       [button "Singup!" #(signup {:source ::signup-final-box
+                                   :firstname @firstname
+                                   :lastname @lastname
+                                   :university @university
+                                   :email @email
+                                   :password @password
+                                   :introducer-id (:id introducer)})]])))

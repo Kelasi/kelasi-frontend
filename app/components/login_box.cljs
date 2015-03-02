@@ -1,6 +1,7 @@
 (ns components.login-box
   (:require [reagent.core :as r]
             [widgets.input :refer (input)]
+            [widgets.button :refer (button)]
             [actions :refer (try-login)]))
 
 
@@ -29,8 +30,6 @@
        [input :checkbox remember-me]
        [:p "Remember me!"]
 
-       [:button {:type "button"
-                 :on-click #(try-login {:source   ::login-box
-                                        :username @username
-                                        :password @password})}
-        "Login"]])))
+       [button "Login" #(try-login {:source   ::login-box
+                                    :username @username
+                                    :password @password})]])))

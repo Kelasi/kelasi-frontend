@@ -1,6 +1,7 @@
 (ns components.found-friends-box
   (:require [widgets.list :as wlst]
             [widgets.media :refer (media)]
+            [widgets.button :refer (button)]
             [reagent.core :as r]))
 
 
@@ -22,6 +23,4 @@
          [wlst/list ppl sel])
 
        (when @selected
-         [:button {:type "button"
-                   :on-click #(on-select @selected)}
-          "Select"])])))
+         [button "Select" #(on-select @selected)])])))
