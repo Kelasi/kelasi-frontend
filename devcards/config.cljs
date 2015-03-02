@@ -25,7 +25,6 @@
             [components.found-friends-box-devcards]
             [components.timeline-list-box-devcards]
             [components.signup-final-box-devcards]
-            [components.post-box-devcards]
             [components.post-list-devcards]
             [components.profile-about-box-devcards]
             [components.timeline-about-box-devcards]
