@@ -30,7 +30,6 @@
             [components.profile-about-box-devcards]
             [components.timeline-about-box-devcards]
             [components.new-post-box-devcards]
-            [components.mini-timeline-card-devcards]
 
             ; Widgets
             [widgets.coverphoto-devcards]

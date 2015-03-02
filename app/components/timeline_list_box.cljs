@@ -1,6 +1,6 @@
 (ns components.timeline-list-box
-  (:require [components.mini-timeline-card
-             :refer (mini-timeline-card)]))
+  (:require [widgets.media :refer (media)]
+            [widgets.media2 :refer (media2)]))
 
 
 
@@ -11,4 +11,7 @@
    (for [tid ids
          :let [t (get timelines tid)
                a (get people (:admin-id t))]]
-     [mini-timeline-card t a #(on-select t)])])
+     [media2 (:cover-photo-mini t)
+             (:title t)
+             [media (:img a) (:full-name a) #(on-select t)]
+             #(on-select t)])])
